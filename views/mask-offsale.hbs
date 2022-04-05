@@ -1,1 +1,21 @@
-
+<h4 id='img-model-h4'>MASK MOLD - OFF SALE</h4>
+<div class='row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4'>
+  {{#each products2}}
+    <div class='col'>
+      <div class='card h-100'>
+        <a href='{{this.url}}'>
+          <img src='{{this.url}}' class='card-img-top' alt='...' /></a>
+        <div class='card-body'>
+          <h5 class='card-title'>{{this.model}}</h5>
+          <p lass='card-text'> {{this.forPlayer}}</p>
+        </div>
+        <div
+          class='card-footer d-flex justify-content-around align-items-center'
+        >
+          <span class='fw-bolder'>{{production}}</span>
+          <a href='/offsale-img' class='btn btn-info'>More</a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

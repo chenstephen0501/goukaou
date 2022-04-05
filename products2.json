@@ -1,0 +1,42 @@
+[
+  {
+    "model": "Mask GPM-02",
+    "production": "OFF SALE",
+    "forPlayer": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
+    "url": "https://static.wixstatic.com/media/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg/v1/fill/w_800,h_534,al_c,q_85,enc_auto/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg",
+    "imgUrl": [
+      {
+        "name": "saber",
+        "url": "https://static.wixstatic.com/media/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg/v1/fill/w_800,h_534,al_c,q_85,enc_auto/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg"
+      },
+      {
+        "name": "saber",
+        "url": "https://static.wixstatic.com/media/648814_8b61dc785a5341dea8afd7bf16f3c8ad.jpg/v1/fill/w_800,h_533,al_c,q_85,enc_auto/648814_8b61dc785a5341dea8afd7bf16f3c8ad.jpg"
+      },
+      {
+        "name": "acher",
+        "url": "https://static.wixstatic.com/media/648814_434d1b5b80df42498add545f06da6e58~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_434d1b5b80df42498add545f06da6e58~mv2.jpg"
+      },
+      {
+        "name": "assion",
+        "url": "https://static.wixstatic.com/media/648814_4c5785b123e94e71a9a4d1fde1d3a507~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_4c5785b123e94e71a9a4d1fde1d3a507~mv2.jpg"
+      },
+      {
+        "name": "caster",
+        "url": "https://static.wixstatic.com/media/648814_b881153d64b748f4a70f2cc5cc6cf628~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_b881153d64b748f4a70f2cc5cc6cf628~mv2.jpg"
+      },
+      {
+        "name": "lancer",
+        "url": "https://static.wixstatic.com/media/648814_c6f546d9002b45a48826528d2ee29e8c~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_c6f546d9002b45a48826528d2ee29e8c~mv2.jpg"
+      },
+      {
+        "name": "lancer",
+        "url": "https://static.wixstatic.com/media/648814_dc7b659546eb4afc82302beafbc3b0f2~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_dc7b659546eb4afc82302beafbc3b0f2~mv2.jpg"
+      },
+      {
+        "name": "lancer",
+        "url": "https://static.wixstatic.com/media/648814_24db504868b349c08473956ae09d744d~mv2.jpg/v1/fill/w_712,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_24db504868b349c08473956ae09d744d~mv2.jpg"
+      }
+    ]
+  }
+]

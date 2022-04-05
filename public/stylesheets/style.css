@@ -183,12 +183,15 @@ body {
   max-height: 240px;
 }
 
-/* onsale-img-page */
-.onsale-img-h1 {
+/* onsale-img-page oFFsale-img-page*/
+.onsale-img, .offsale-img {
   text-align: center;
   color: #F7931E;
   margin-top: 20px;
 }
-#onsale-img-h1-2 {
+#production-on {
   color: #30f71e;
+}
+#production-off {
+  color: #f50000;
 }

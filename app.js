@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-
+const products2 = require('./products2.json')
 const app = express()
 const port = 3000
 
@@ -91,10 +91,13 @@ app.get('/mask-onsale', (req, res) => {
   res.render('mask-onsale', { products })
 })
 app.get('/mask-offsale', (req, res) => {
-  res.render('mask-offsale')
+  res.render('mask-offsale', { products2 })
 })
 app.get('/onsale-img', (req, res) => {
   res.render('onsale-img', { products: products[0] })
+})
+app.get('/offsale-img', (req, res) => {
+  res.render('offsale-img', { products: products2[0] })
 })
 
 app.listen(port, () => {

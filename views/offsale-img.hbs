@@ -1,0 +1,18 @@
+<div class='offsale-img'>
+  <h1 id='offsale-img-model'>{{products.model}} </h1>
+  <h1 id="production-off"> {{products.production}}</h1>
+  {{!-- <p id='production-off' class="text-danger">{{products2.production}}</p> --}}
+</div>
+<div class='row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4'>
+  {{#each products.imgUrl}}
+    <div class='col'>
+      <div class='card h-100'>
+        <a href='{{this.url}}'>
+          <img src='{{this.url}}' class='card-img-top' alt='...' /></a>
+        <div class='card-body'>
+          <p class='fw-bolder fs-1 text-center'>{{this.name}}</p>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
