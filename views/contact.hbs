@@ -22,24 +22,38 @@
         </div>
         <div class="col-8  right">
           {{!-- bootstrap 5 排版開始 --}}
-          <form action="/contact" method="post">
+          {{!-- <form action="/contact" method="post">
             <input class="form-control mb-2" type="text" name="name" placeholder="Name *"
               aria-label=".form-control-sm example">
             <input class="form-control  mb-2" type="email" name="email" placeholder="Email *"
               aria-label=".form-control-sm example">
             <input class="form-control  mb-2" type="text" name="subject" placeholder="Subject"
               aria-label=".form-control-sm example">
-            <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="2" name="message" placeholder="Message"></textarea>
+            <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="2" name="message"
+              placeholder="Message"></textarea>
             <div class="d-flex justify-content-end">
               <button type="submit" class="mt-1 "
                 style="background-color: #FFF4ED; border: none; color: #C66908; height: 30px ">send</button>
             </div>
-          </form>
+          </form> --}}
           {{!-- bootstrap 5 排版結束 --}}
-          
-          {{!-- <input type="text" name="nmae" class="block"> --}}
-          
-        
+          <form action="/contact" method="post">
+          {{!-- <div class="col"> --}}
+            <div class="row">
+
+            <input type="text" name="name" placeholder="name"  class="contact-page-input" >
+
+          {{!-- </div> --}}
+            <input type="email" name="email" placeholder="email" class="contact-page-input">
+            <input type="text" name="subject" class="contact-page-input" placeholder="subject">
+            <textarea name="message" id="" cols="30" rows="3" class="contact-page-input-message" placeholder="message"></textarea>
+            </div>
+             <div class="d-flex justify-content-end">
+              <button type="submit" class="mt-1 "
+                style="background-color: #FFF4ED; border: none; color: #C66908; height: 30px ">send</button>
+            </div>
+          </form>
+
         </div>
       </div>
     </div>
@@ -51,45 +65,18 @@
           <div class="borderBottom"></div>
         </div>
       </div>
-
-      {{!-- <div class="row ">
-        <div class="imgBack">
-          <a href="https://zh.photogenicmask.com/">
-            <img
-              src="https://static.wixstatic.com/media/648814_5578d825d82247beacf743bde4571b6b.png/v1/fill/w_569,h_90,al_c,enc_auto/648814_5578d825d82247beacf743bde4571b6b.png"
-              class="img-fluid" alt="...">
-          </a>
-          <a href="https://www.miraidouga.net/">
-            <img
-              src="https://static.wixstatic.com/media/648814_0ae537585c4c4f2492948345570b48a3.png/v1/fill/w_569,h_72,al_c,enc_auto/648814_0ae537585c4c4f2492948345570b48a3.png"
-              class="img-fluid" alt="...">
-          </a>
-        </div>
-      </div> --}}
-      {{!-- <div class="imgBack" style="border: 1px solid red; margin: none; ">
-            <a href="https://zh.photogenicmask.com/" style="border: 1px solid blue; ">
-            <img
-              src="https://static.wixstatic.com/media/648814_5578d825d82247beacf743bde4571b6b.png/v1/fill/w_569,h_90,al_c,enc_auto/648814_5578d825d82247beacf743bde4571b6b.png"
-              class="img-fluid" alt="...">
-          </a>
-          <a href="https://www.miraidouga.net/">
-            <img
-              src="https://static.wixstatic.com/media/648814_0ae537585c4c4f2492948345570b48a3.png/v1/fill/w_569,h_72,al_c,enc_auto/648814_0ae537585c4c4f2492948345570b48a3.png"
-              class="img-fluid" alt="...">
-          </a>
-      </div> --}}
     </div>
-     <div class="contact-page-imgBack" >
-            <a href="https://zh.photogenicmask.com/">
-            <img
-              src="https://static.wixstatic.com/media/648814_5578d825d82247beacf743bde4571b6b.png/v1/fill/w_569,h_90,al_c,enc_auto/648814_5578d825d82247beacf743bde4571b6b.png"
-              class="img-fluid" alt="...">
-          </a>
-          <a href="https://www.miraidouga.net/">
-            <img
-              src="https://static.wixstatic.com/media/648814_0ae537585c4c4f2492948345570b48a3.png/v1/fill/w_569,h_72,al_c,enc_auto/648814_0ae537585c4c4f2492948345570b48a3.png"
-              class="img-fluid" alt="..." id="img-2">
-          </a>
-      </div>
+    <div class="contact-page-imgBack">
+      <a href="https://zh.photogenicmask.com/">
+        <img
+          src="https://static.wixstatic.com/media/648814_5578d825d82247beacf743bde4571b6b.png/v1/fill/w_569,h_90,al_c,enc_auto/648814_5578d825d82247beacf743bde4571b6b.png"
+          class="img-fluid" alt="...">
+      </a>
+      <a href="https://www.miraidouga.net/">
+        <img
+          src="https://static.wixstatic.com/media/648814_0ae537585c4c4f2492948345570b48a3.png/v1/fill/w_569,h_72,al_c,enc_auto/648814_0ae537585c4c4f2492948345570b48a3.png"
+          class="img-fluid" alt="..." id="img-2">
+      </a>
+    </div>
   </div>
 </div>

@@ -247,9 +247,6 @@ body {
   border: 1px solid purple;
   max-width: 570px;
 }
-/* .contact-page-link > .row > .right > .form-control-sm {
-  
-} */
 .contact-page-friendLink {
   margin-top: 16px;
   font-size: 100px;
@@ -271,14 +268,25 @@ body {
  
 }
 .contact-page-imgBack {
-  /* border: 1px solid red; */
   max-width: 550px;
   margin-top: 21px;
   padding: 14px 14px 0;
   background-color: #FFE5D6;
 }
 .contact-page-imgBack > a > #img-2 {
-  /* border: 1px solid red; */
   margin-top: 12px;
   margin-bottom: 8px;
+}
+.contact-page-input {
+  border: 1px solid #FF8800;
+  margin-bottom: 4px;
+  /* max-width: 1000px; */
+  /* width: 1000px; */
+}
+.contact-page-input-message {
+  border: 1px solid #FF8800;
+  height: 130px;
+}
+.contact-page-input:focus , .contact-page-input-message:focus  {
+  outline:1px solid #8B0000;
 }
