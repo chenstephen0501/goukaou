@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="contact-page-link">
-      <div class="row d-flex justify-content-around">
+      <div class="row d-flex justify-content-between px-2">
         <div class="col-4 left">
           <p><a href="http://goukaou.blog131.fc2.com/">FC2 BLOG</a></p>
           <p><a href="https://www.youtube.com/user/sharkgogo">YOUTUBE</a></p>
@@ -21,26 +21,25 @@
           </p>
         </div>
         <div class="col-8  right">
-
+          {{!-- bootstrap 5 排版開始 --}}
           <form action="/contact" method="post">
-            <input class="form-control form-control-sm mb-1" type="text" placeholder="Name *"
+            <input class="form-control mb-2" type="text" name="name" placeholder="Name *"
               aria-label=".form-control-sm example">
-            <input class="form-control form-control-sm mb-1" type="text" placeholder="Email *"
+            <input class="form-control  mb-2" type="email" name="email" placeholder="Email *"
               aria-label=".form-control-sm example">
-            <input class="form-control form-control-sm mb-1" type="text" placeholder="Subject"
+            <input class="form-control  mb-2" type="text" name="subject" placeholder="Subject"
               aria-label=".form-control-sm example">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Message"></textarea>
+            <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="2" name="message" placeholder="Message"></textarea>
             <div class="d-flex justify-content-end">
               <button type="submit" class="mt-1 "
-                style="background-color: #FFF4ED; border: none; color: #C66908; ">send</button>
+                style="background-color: #FFF4ED; border: none; color: #C66908; height: 30px ">send</button>
             </div>
           </form>
-          {{!--
-          <hr> --}}
+          {{!-- bootstrap 5 排版結束 --}}
+          
           {{!-- <input type="text" name="nmae" class="block"> --}}
-          {{!--
-          <hr> --}}
-
+          
+        
         </div>
       </div>
     </div>
