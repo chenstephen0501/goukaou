@@ -195,3 +195,90 @@ body {
 #production-off {
   color: #f50000;
 }
+/* contact-page */
+.contact-page {
+  border: 1px solid rgb(152, 165, 92);
+  max-width: 896px;
+  margin: 30px auto 0;
+}
+.contact-page-title, .contact-page-friendLink  {
+  border: 1px solid rgb(72, 87, 5);
+  margin: 0 auto 0;
+  color: #FF8800;
+}
+.contact-page-title > .row > .col-4 > h6 {
+  margin: 8px 0 8px;
+  font-weight:500;
+  font-size: 18px;
+}
+.contact-page-friendLink > .row > .col-4 > h6 {
+  margin: 9px 0 9px;
+  font-weight:500;
+  font-size: 18px;
+}
+.borderTop, .borderBottom {
+  border-bottom: #FFCBAE 2px solid;
+}
+.contact-page-link {
+  border: 1px solid rgb(182, 23, 169);
+  margin-top: 27px;
+}
+.contact-page-link > .row > .left {
+  padding-top: 18px;
+  max-width: 285px;
+  height: 246px;
+  border: 1px solid orange;
+  background-color: #FFE5D6;
+}
+.contact-page-link > .row > .left > p > a {
+  font-size: 15px;
+  font-weight: bolder;
+  color: #FF650C;
+}
+.contact-page-link > .row > .left > #p5 {
+  border: 1px solid orange;
+  font-weight: 500;
+  line-height: normal;
+}
+.contact-page > .row > .right {
+  border: 1px solid orange;
+}
+.contact-page-link > .row > .right {
+  border: 1px solid purple;
+  max-width: 570px;
+}
+/* .contact-page-link > .row > .right > .form-control-sm {
+  
+} */
+.contact-page-friendLink {
+  margin-top: 16px;
+  font-size: 100px;
+}
+.contact-page-friendLink > .row > .imgBack  {
+  border: 1px solid rgb(2, 238, 255);
+  margin-top: 21px;
+  margin-left: 10px;
+  background-color: #FFE5D6;
+  max-width: 550px;
+}
+.contact-page-friendLink > .row > .imgBack > a {
+  border: 1px solid rgb(120, 2, 255);
+  height: 275px;
+  width: 50px;
+}
+.contact-page-friendLink > .row > .imgBack > a > img{
+  border: 1px solid rgb(255, 166, 2);
+ 
+}
+.contact-page-imgBack {
+  /* border: 1px solid red; */
+  max-width: 550px;
+  margin-top: 21px;
+  padding: 14px 14px 0;
+  background-color: #FFE5D6;
+}
+.contact-page-imgBack > a > #img-2 {
+  /* border: 1px solid red; */
+  margin-top: 12px;
+  margin-bottom: 8px;
+}

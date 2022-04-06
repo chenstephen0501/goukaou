@@ -99,6 +99,9 @@ app.get('/onsale-img', (req, res) => {
 app.get('/offsale-img', (req, res) => {
   res.render('offsale-img', { products: products2[0] })
 })
+app.get('/contact',  (req, res) => {
+  res.render('contact')
+})
 
 app.listen(port, () => {
   console.log(`The GOUKAOU web is running on http://localhost:${port}`)
