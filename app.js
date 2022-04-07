@@ -2,8 +2,12 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const products2 = require('./products2.json')
 const bodyParser = require('body-parser')
+const nodemailer = require('nodemailer')
 const app = express()
 const port = 3000
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
@@ -104,9 +108,78 @@ app.get('/offsale-img', (req, res) => {
 app.get('/contact',  (req, res) => {
   res.render('contact')
 })
-app.post('/contact', (req, res) => {
-  console.log(req.body)
-  res.render('contact')
+app.post('/contact', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body
+    let msg_error = ''
+    let msg_success
+    if (!name || !email || !subject || !message) {
+      msg_error = {
+        name: '訪問者',
+        message: '你沒有輸入訊息 !'
+      }
+      return res.render('contact', { msg_error })
+    }
+    console.log(req.body)
+    // let testAccount = await nodemailer.createTestAccount()
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'login',
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
+        // user: testAccount.user,
+        // pass: testAccount.pass,
+      },
+    })
+    //  var mailOptions = {
+    //    from: email,
+    //    to: process.env.EMAIL_USERNAME,
+    //    subject: `${subject} 型號`,
+    //    text: `${message} 角色描述`,
+    //  }
+
+    //     transporter.sendMail(mailOptions, function(error, info) {
+    //       if (error) {
+    //         console.log(error);
+    //       } else {
+    //         console.log('Email sent: ' + info.response);
+    //       }
+    //     });
+    const output = `
+      <p> You have a new contact request</p>
+      <h3>Contact Details</h3>
+      <ul>
+        <li>Name: ${req.body.name} </li>
+        <li>subject: ${req.body.subject} </li>
+        <li>Email: ${req.body.email} </li>
+        </ul>
+        <h3>Message</h3>
+        <p>${req.body.message}</p>
+    `
+    msg_success = {
+      name: `${req.body.name}`,
+      message: '詢問信件己送出。'
+    }
+    let info = await transporter.sendMail({
+      from: `Nodemailer Contact ${process.env.EMAIL_USERNAME}`,
+      // from: email,
+      to: 'tom9876555@gmail.com',
+      subject: 'Node Contact Request',
+      text: 'Hello world?',
+      html: output,
+      // to: 'tom9876555@gmail.com',
+      // subject: `${subject} 型號`,
+      // text: `${message} 角色描述`,
+      // html: `<b>Hello world</b> <br>寄信者名字: ${name}</br> ，<br>寄信者信箱: ${email}</br>`,
+    })
+    console.log('Message sent: %s', info.messageId)
+
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+    res.render('contact', { msg_success })
+  } catch (err) {
+    console.warn(err)
+  }
 })
 
 app.listen(port, () => {
