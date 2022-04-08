@@ -142,7 +142,7 @@ app.post('/contact', async (req, res) => {
     // let testAccount = await nodemailer.createTestAccount()
     let transporter = nodemailer.createTransport({
       service: 'gmail',
-      host: 'smtp.gmail.com', 
+      // host: 'smtp.gmail.com', 
       // port: 587,
       // secure: false,
       auth: {
