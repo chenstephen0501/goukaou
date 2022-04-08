@@ -144,8 +144,8 @@ app.post('/contact', async (req, res) => {
       return res.render('contact', { msg_error })
     }
     console.log(req.body)
-    console.log('EMAIL_USERNAME', EMAIL_USERNAME)
-    console.log('EMAIL_PASSWORD', EMAIL_PASSWORD)
+    console.log('EMAIL_USERNAME', process.env.EMAIL_USERNAME)
+    console.log('EMAIL_PASSWORD', process.env.EMAIL_PASSWORD)
     // let testAccount = await nodemailer.createTestAccount()
     let transporter = nodemailer.createTransport({
       service: 'gmail',
