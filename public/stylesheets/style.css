@@ -70,14 +70,14 @@ body {
   color: #FDD4C2;
   margin-bottom: 140px;
 }
-/* #carousel-item-2 {
+#carousel-item-2 {
   border: 1px solid red;
   background: rgb(236, 230, 230, 0.7);
   width: 270px;
   height: 138px;
   margin-left: 400px;
   margin-bottom: 180px;
-} */
+}
 #carousel-item-2 > h2 {
   color: black;
   font-family: 'Roboto', sans-serif;
