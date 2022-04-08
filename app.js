@@ -146,7 +146,7 @@ app.post('/contact', async (req, res) => {
       // port: 587,
       // secure: false,
       auth: {
-        type: 'login',
+        // type: 'login',
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
         // user: testAccount.user,
