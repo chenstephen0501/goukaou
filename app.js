@@ -8,8 +8,22 @@ const products3 = require('./products3.json')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const helpers = require('./tools/helpers.js')
+const mongoose = require('mongoose')
 const app = express()
 const PORT = process.env.PORT 
+
+mongoose.connect('mongodb://localhost/goukaou-test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+const db = mongoose.connection
+
+db.on('error', () => {
+    console.log('mongodb is error !')
+})
+db.once('open', () => {
+    console.log('mongodb is connected.')
+})
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: helpers }))
 app.set('view engine', 'hbs')
@@ -19,11 +33,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const products = [
   {
+    name: 'Alice',
+    category: 'mask',
     model: 'Mask GPM-05',
-    production: 'ON SALE',
-    forPlayer:
+    basePrice: 930,
+    highestPrice: 0,
+    production: 'false',
+    introduction:
       'For the roles of shoujo or older sister(onēsan) For player whose height is over 155cm',
-    url: 'https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg',
+    sampleImg:
+      'https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg',
     imgUrl: [
       {
         name: 'saber',
@@ -83,9 +102,9 @@ const products = [
       },
       {
         name: 'rider',
-        url: 'https://static.wixstatic.com/media/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg'
-      }
-    ]
+        url: 'https://static.wixstatic.com/media/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg',
+      },
+    ],
   },
 ]
 

@@ -83,16 +83,16 @@
   <div class="col">
     <div class="card h-100">
       <a
-        href="{{this.url}}">
+        href="{{this.sampleImg}}">
         <img
-          src="{{this.url}}"
+          src="{{this.sampleImg}}"
           class="card-img-top" alt="..."></a>
       <div class="card-body">
         <h5 class="card-title">{{this.model}}</h5>
-        <p lass="card-text"> {{this.forPlayer}}</p>
+        <p lass="card-text"> {{this.introduction}}</p>
       </div>
       <div class="card-footer d-flex justify-content-around align-items-center">
-        <span class="fw-bolder">{{production}}</span>
+        <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
         <a href="/onsale-img" class="btn btn-info">More</a>
       </div>
     </div>
