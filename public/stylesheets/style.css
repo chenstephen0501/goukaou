@@ -219,7 +219,7 @@ body {
   font-size: 18px;
 }
 .borderTop, .borderBottom {
-  /* border-bottom: #FFCBAE 2px solid; */
+  border-bottom: #FFCBAE 2px solid;
 }
 .contact-page-link {
   /* border: 1px solid rgb(182, 23, 169); */
@@ -252,6 +252,14 @@ body {
 .contact-page-friendLink {
   margin-top: 16px;
   font-size: 100px;
+}
+.contact-page .contact-page-input {
+  border: 1px solid #FF8800;
+  height: 1.9rem;
+}
+.contact-page .contact-page-input-message {
+  border: 1px solid #FF8800;
+  height: 7.5rem;
 }
 .contact-page-friendLink > .row > .imgBack  {
   /* border: 1px solid rgb(2, 238, 255); */
