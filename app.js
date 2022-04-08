@@ -121,10 +121,6 @@ app.get('/zentai-suit', (req, res) => {
   //   return productMap[item.id] = item
   // })
   // console.log(newProducts)
-  console.log('body',req.body)
-  console.log('puery',req.query)
-  console.log('params',req.params)
-  
   res.render('zentai-suit', { products: products3 })
 })
 
@@ -143,9 +139,6 @@ app.post('/contact', async (req, res) => {
       }
       return res.render('contact', { msg_error })
     }
-    console.log(req.body)
-    console.log('EMAIL_USERNAME', process.env.EMAIL_USERNAME)
-    console.log('EMAIL_PASSWORD', process.env.EMAIL_PASSWORD)
     // let testAccount = await nodemailer.createTestAccount()
     let transporter = nodemailer.createTransport({
       service: 'gmail',
