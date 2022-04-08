@@ -1,9 +1,5 @@
 body {
-  /* border: 1px solid red; */
   font-family: 'Roboto', sans-serif;
-  /* display: flex;
-  justify-content: center; */
-  /* max-width: 980px; */
 }
 .title-img {
   display: flex;
@@ -13,11 +9,7 @@ body {
 .title-img > a > img {
   max-width: 320px;
 }
-.title-nav {
-  /* border: 1px solid orange; */
-}
 .navbar-title {
-  /* border: 1px solid black; */
   max-width: 890px;
 }
 .nav-item > a {
@@ -44,25 +36,14 @@ body {
   transform: translateY(0px);
   pointer-events: auto;
 }
-.dropdown {
-  /* border: 1px solid rgb(11, 90, 180); */
-}
-.nav-item {
-  /* border: 1px solid yellow; */
-}
 #navbarDropdown {
   text-align: center;
   min-width: 160px;
 }
 
 .index-page {
-  /* border: 1px solid green; */
   display: flex;
   justify-content: center;
-}
-.carousel {
-  /* border: 1px solid red; */
-  /* max-width: 900px; */
 }
 #firstImg-font {
   font-family: 'Roboto', sans-serif;
@@ -91,7 +72,6 @@ body {
 .iconBtn {
   display: flex;
   justify-content: center;
-  /* border: 1px solid blue; */
   font-size: 30px;
 }
 .iconBtn > a {
@@ -107,14 +87,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid blue; */
   -webkit-filter:opacity(.6);
   max-width: 896px;
   max-height: 576px;
 }
 
 .card-img-overlay  {
-  /* border: 1px solid rgb(0, 255, 55); */
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -122,7 +100,6 @@ body {
  
 .card-text-group  {
   padding: 10px 5px 15px 5px;
-  /* border: 1px solid rgb(255, 0, 242); */
   background-color: rgba(95, 78, 61, 0.822);
   max-width: 320px;
 }
@@ -145,12 +122,9 @@ body {
 
 /* mask-onsale page */
 .onSale {
-  /* border: 1px solid red; */
   max-width: 896px;
 }
 .onSale-languageService {
-
-  /* border: 1px solid orange; */
   font-size: 0.8rem;
   font-weight: bolder;
   letter-spacing: none;
@@ -158,28 +132,23 @@ body {
   line-height: 0.38cm;
 }
 .onSale-orderIntroduction {
-  /* border: 1px solid green; */
   font-size: 0.5rem;
   letter-spacing: none;
   line-height: 0.38cm;
 }
 
 .img-model {
-  /* border: 1px solid rgb(0, 124, 128); */
   width: 800px;
   height: 800px;
 }
 #img-model-h4 {
   font-weight: bolder;
-  /* border: 1px solid rgb(0, 0, 0); */
   text-align: center;
 }
-
 .img-model-card > a >img {
   max-width: 280px;
   max-height: 240px;
 }
-
 .carousel-item > a >img {
   max-width: 320px;
   max-height: 240px;
@@ -197,14 +166,13 @@ body {
 #production-off {
   color: #f50000;
 }
+
 /* contact-page */
 .contact-page {
-  /* border: 1px solid rgb(152, 165, 92); */
   max-width: 896px;
   margin: 30px auto 0;
 }
 .contact-page-title, .contact-page-friendLink  {
-  /* border: 1px solid rgb(72, 87, 5); */
   margin: 0 auto 0;
   color: #FF8800;
 }
@@ -222,14 +190,12 @@ body {
   border-bottom: #FFCBAE 2px solid;
 }
 .contact-page-link {
-  /* border: 1px solid rgb(182, 23, 169); */
   margin-top: 27px;
 }
 .contact-page-link > .row > .left {
   padding-top: 18px;
   max-width: 285px;
   height: 246px;
-  /* border: 1px solid orange; */
   background-color: #FFE5D6;
 }
 .contact-page-link > .row > .left > p > a {
@@ -238,15 +204,10 @@ body {
   color: #FF650C;
 }
 .contact-page-link > .row > .left > #p5 {
-  /* border: 1px solid orange; */
   font-weight: 500;
   line-height: normal;
 }
-.contact-page > .row > .right {
-  /* border: 1px solid orange; */
-}
 .contact-page-link > .row > .right {
-  /* border: 1px solid purple; */
   max-width: 570px;
 }
 .contact-page-friendLink {
@@ -256,26 +217,24 @@ body {
 .contact-page .contact-page-input {
   border: 1px solid #FF8800;
   height: 1.9rem;
+  margin-bottom: 4px;
 }
 .contact-page .contact-page-input-message {
   border: 1px solid #FF8800;
   height: 7.5rem;
 }
+.contact-page-input:focus , .contact-page-input-message:focus  {
+  outline:1px solid #8B0000;
+}
 .contact-page-friendLink > .row > .imgBack  {
-  /* border: 1px solid rgb(2, 238, 255); */
   margin-top: 21px;
   margin-left: 10px;
   background-color: #FFE5D6;
   max-width: 550px;
 }
 .contact-page-friendLink > .row > .imgBack > a {
-  /* border: 1px solid rgb(120, 2, 255); */
   height: 275px;
   width: 50px;
-}
-.contact-page-friendLink > .row > .imgBack > a > img{
-  /* border: 1px solid rgb(255, 166, 2);
-  */
 }
 .contact-page-imgBack {
   max-width: 550px;
@@ -287,22 +246,8 @@ body {
   margin-top: 12px;
   margin-bottom: 8px;
 }
-.contact-page-input {
-  /* border: 1px solid #FF8800; */
-  margin-bottom: 4px;
-}
-.contact-page-input-message {
-  /* border: 1px solid #FF8800; */
-  height: 130px;
-}
-.contact-page-input:focus , .contact-page-input-message:focus  {
-  outline:1px solid #8B0000;
-}
 
 /* zentai-suit page */
-.zentai-suit-page {
-  /* border: 1px solid red; */
-}
 .zentai-suit-content {
   margin: 0 auto;
   max-width: 896px;
@@ -310,12 +255,11 @@ body {
   background-color: #EFE4D5;
 }
 .zentai-suit-image {
-  /* border: 2px solid #FFB285; */
+  border: 2px solid #FFB285;
   margin-top:  63px;
   padding: 20px;
 }
 .zentai-suit-text {
-  /* border: 1px solid blue; */
   margin-top: 16px;
   font-size: 14px;
   letter-spacing: -0.05em;
@@ -328,7 +272,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  
 }
 .zentai-suit-content > .zentai-suit-image > .row > .col-lg-4 > .col > p > span {
   font-size: 15px;
@@ -347,23 +290,15 @@ body {
   letter-spacing: -0.05em;
 }
 .carousel-indicators {
-  /* border: 1px solid rgb(141, 86, 86); */
   display: flex;
   justify-content: space-between;
   color: silver;
   align-items: flex-end;
 }
 .zentai-suit-image  #carouselExampleCaptions  .carousel-item-img {
-  /* border: 3px solid red; */
-  /* background-color: blue; */
-  /* background-image: cover; */
   object-fit: cover;
   max-width: 568px;
-  /* max-height: 368px;  */
-  /* width: 568px; */
   height: 368px; 
-  /* width: 100%;
-height: 368px; */
 }
 .carousel-caption > .imgContent > .imgName {
   font-size: 20px;
@@ -387,15 +322,6 @@ height: 368px; */
   color:#464548;
 }
 
-
-/* .carousel-control-prev-icon::selection {
-  background-color:rgb(182, 23, 169);
-  color:rgb(152, 165, 92);
-} */
-
-.carousel-caption:hover{
-  /* border: 1px solid rgb(155, 167, 105); */
-}
 #carouselExampleCaptions .carousel-control-prev {
  display: none;
 }
@@ -407,16 +333,4 @@ height: 368px; */
 }
 #carouselExampleCaptions:hover  .carousel-control-next {
   display: block;
-}
-
-#prevBtn {
-  /* display: flex; */
-  /* margin: 0 auto; */
-  /* align-items: center; */
-  /* text-align: center; */
-  /* justify-content: center; */
-  border: 1px solid red;
-  margin-left:40%;
-  max-width: 800px;
-  /* visibility: hidden; */
 }

@@ -1,11 +1,9 @@
 <div class='container zentai-suit-page'>
   <div class='zentai-suit-content'>
-
     <div class='zentai-suit-image'>
       <div class='row'>
         <div class='col-lg-8 border-1 border-danger'>
-          <div id='carouselExampleCaptions' class='carousel slide' data-bs-ride='carousel' data-bs-keyboard="true" {{!--
-            data-bs-touch='true' --}} {{!-- data-bs-touch='false' --}} data-bs-interval='false'>
+          <div id='carouselExampleCaptions' class='carousel slide' data-bs-ride='carousel' data-bs-keyboard="true"  data-bs-interval='false'>
             <div class='carousel-inner'>
               
               {{#each products}}
@@ -23,10 +21,7 @@
                 </div>
               </div>
               {{/each}}
- 
             </div>
-              {{!-- <a href="https://static.wixstatic.com/media/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg/v1/fill/w_568,h_368,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg"
-                role="button" class="carousel-control-prev col" id="prevBtn">123123123213</a> --}}
               <button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleCaptions'
                 data-bs-slide='prev' id="carousel-control-prev">
                 <span class='carousel-control-prev-icon' aria-hidden='true'></span>
@@ -114,28 +109,6 @@
 </div>
 
 <script>
-  var myCarousel = document.getElementById('carouselExampleCaptions')
-  var item = document.querySelectorAll('.carousel-item ')
-  item[0].classList.add('active')
-
-myCarousel.addEventListener('click', function (e) {
-  {{!-- console.log(myCarousel) --}}
-  console.log(item[0])
-  console.log(e)
-  {{!-- item[11].classList.remove('active') --}}
-  console.log(e.target.value)
-  console.log('e.from',e.from)
-  console.log('e.to',e.to)
-})
-
-  {{!-- var myCarousel = document.querySelector('#carouselExampleCaptions')
-var carousel = new bootstrap.Carousel(myCarousel, {
-  interval: 2000,
-  wrap: true
-})
-console.log(myCarousel) --}}
-
-
-
-
+  var items = document.querySelectorAll('.carousel-item ')
+  items[0].classList.add('active')
 </script>

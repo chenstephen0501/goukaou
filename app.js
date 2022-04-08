@@ -107,20 +107,7 @@ app.get('/onsale-img', (req, res) => {
 app.get('/offsale-img', (req, res) => {
   res.render('offsale-img', { products: products2[0] })
 })
-
-
-
 app.get('/zentai-suit', (req, res) => {
-  // let productMap = {}
-  // products3.forEach((item) => {
-  //   productMap[item.id] = item
-  // })
-  // console.log('productMap',productMap)
-  // console.log(products3)
-  // const newProducts = products3.map((item, index) => {
-  //   return productMap[item.id] = item
-  // })
-  // console.log(newProducts)
   res.render('zentai-suit', { products: products3 })
 })
 
