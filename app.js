@@ -1,15 +1,17 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const products2 = require('./products2.json')
+const products3 = require('./products3.json')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
+const helpers = require('./tools/helpers.js')
 const app = express()
 const port = 3000
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: helpers }))
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
@@ -105,6 +107,27 @@ app.get('/onsale-img', (req, res) => {
 app.get('/offsale-img', (req, res) => {
   res.render('offsale-img', { products: products2[0] })
 })
+
+
+
+app.get('/zentai-suit', (req, res) => {
+  // let productMap = {}
+  // products3.forEach((item) => {
+  //   productMap[item.id] = item
+  // })
+  // console.log('productMap',productMap)
+  // console.log(products3)
+  // const newProducts = products3.map((item, index) => {
+  //   return productMap[item.id] = item
+  // })
+  // console.log(newProducts)
+  console.log('body',req.body)
+  console.log('puery',req.query)
+  console.log('params',req.params)
+  
+  res.render('zentai-suit', { products: products3 })
+})
+
 app.get('/contact',  (req, res) => {
   res.render('contact')
 })

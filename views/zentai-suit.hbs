@@ -1,0 +1,141 @@
+<div class='container zentai-suit-page'>
+  <div class='zentai-suit-content'>
+
+    <div class='zentai-suit-image'>
+      <div class='row'>
+        <div class='col-lg-8 border-1 border-danger'>
+          <div id='carouselExampleCaptions' class='carousel slide' data-bs-ride='carousel' data-bs-keyboard="true" {{!--
+            data-bs-touch='true' --}} {{!-- data-bs-touch='false' --}} data-bs-interval='false'>
+            <div class='carousel-inner'>
+              
+              {{#each products}}
+              <div class='carousel-item  ' data-bs-keyboard="true" data-bs-touch="true">
+                <img src="{{this.imgUrl}}" class='d-block carousel-item-img ' alt='...' />
+                <div class='carousel-caption '>
+                  <div class="imgContent">
+                    <div class='imgName'>
+                      <p>{{this.imgName}}</p>
+                    </div>
+                    <div class='imgNumber'>
+                      <p>{{this.id}} / {{../products.length}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+ 
+            </div>
+              {{!-- <a href="https://static.wixstatic.com/media/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg/v1/fill/w_568,h_368,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg"
+                role="button" class="carousel-control-prev col" id="prevBtn">123123123213</a> --}}
+              <button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleCaptions'
+                data-bs-slide='prev' id="carousel-control-prev">
+                <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+                <span class='visually-hidden'>Previous</span>
+                <input type="hidden" name="prev" value="1" id="prev">
+              </button>
+              <button class='carousel-control-next' type='button' data-bs-target='#carouselExampleCaptions'
+                data-bs-slide='next' id="carousel-control-next">
+                <span class='carousel-control-next-icon' aria-hidden='true' value="0"></span>
+                <span class='visually-hidden'>Next</span>
+                <input type="hidden" name="next" value="1" id="next">
+              </button>
+          </div>
+        </div>
+        <div class='col-lg-4 border-1 border-danger'>
+          <div class='col'>
+            <p>
+              <span>ZENTAI SUIT GPZ-02</span>
+              <br />
+              --Price: 125USD
+              <br />
+              --Shipping fee: 20-25 USD
+            </p>
+            <a href='http://goukaou.blog131.fc2.com/blog-entry-424.html'>Buy it
+              by following this link.</a>
+          </div>
+          <div class='col'>
+            <p>
+              <span>ZENTAI SUIT GPZ-02-C</span>
+              <br />
+              --Price: 150-216 USD
+            </p>
+            <a href='http://goukaou.blog131.fc2.com/blog-entry-359.html'>Buy it
+              by following this link.</a>
+          </div>
+          <div class='col'>
+            <p>
+              <span>Super Thick Zentai Suit GPZ-03</span>
+              <br />
+              --Price: 200-266 USD
+            </p>
+            <a href='http://goukaou.blog131.fc2.com/blog-entry-449.html'>Buy it
+              by following this link.</a>
+          </div>
+          <div class='col'>
+            <p>
+              <span>Zentai Suit GPZ-04</span>
+              <br />
+              --Price: 135-216 USD
+            </p>
+            <a href='http://goukaou.blog131.fc2.com/blog-entry-511.html'>Buy it
+              by following this link.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='zentai-suit-text'>
+      <div class='row'>
+        <div class='col border'>
+          <p>Thank you to all of our friends who support our studio and our
+            zentai suits.
+            <br />
+            To give you more comfortable feelings of wearing experience, we
+            always work hard to develop new products.
+            <br />
+            We wish you have better feeling in touching and better experience
+            when playing.
+            <br />
+            <br />
+            Recently, we have tested all kinds of fabrics in skin colors for
+            Kigurumi, and finally decided to open a production line in factory.
+            Now we produce our own fabrics for professional use of Kigurumi.
+            <br />
+            <br />
+            Because the fabrics are developed for Kigurumi use, it not only
+            remains the perfect skin color, also we specially choose the fabrics
+            with better durability, comfort and elasticity. With the features of
+            softness and smoothness of our fabrics, we believe our players will
+            love it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var myCarousel = document.getElementById('carouselExampleCaptions')
+  var item = document.querySelectorAll('.carousel-item ')
+  item[0].classList.add('active')
+
+myCarousel.addEventListener('click', function (e) {
+  {{!-- console.log(myCarousel) --}}
+  console.log(item[0])
+  console.log(e)
+  {{!-- item[11].classList.remove('active') --}}
+  console.log(e.target.value)
+  console.log('e.from',e.from)
+  console.log('e.to',e.to)
+})
+
+  {{!-- var myCarousel = document.querySelector('#carouselExampleCaptions')
+var carousel = new bootstrap.Carousel(myCarousel, {
+  interval: 2000,
+  wrap: true
+})
+console.log(myCarousel) --}}
+
+
+
+
+</script>
