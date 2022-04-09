@@ -3,8 +3,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express')
 const exphbs = require('express-handlebars')
-const products2 = require('./products2.json')
-const products3 = require('./products3.json')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const helpers = require('./tools/helpers.js')
@@ -98,16 +96,34 @@ app.get('/zentai-suit', (req, res) => {
           url: 'http://goukaou.blog131.fc2.com/blog-entry-511.html',
         },
       ]
-      const newProducts = products.map((item, index) => {
-        linkData.forEach((j,jIndex) => {
+      let imgLength = 0
+      let newProducts = products.map((item, index) => {
+        linkData.forEach((j, jIndex) => {
           if (j.model === item.model) {
             // if (jIndex === index) {
-              item = { ...item, id: index + 1, url: j.url }
-            }
+            item = { ...item, url: j.url }
+          }
         })
         return item
       })
-      res.render('zentai-suit', { products: newProducts, linkData })
+      newProducts = newProducts.map((item, index) => {
+        item.imgUrl = item.imgUrl.map((j, indexJ) => {
+          j = { ...j, id: imgLength + indexJ + 1 }
+          return j
+        })
+        imgLength += item.imgUrl.length
+        return item 
+      })
+      // const newProducts = products.map((item, index) => {
+      //   linkData.forEach((j,jIndex) => {
+      //     if (j.model === item.model) {
+      //       // if (jIndex === index) {
+      //         item = { ...item, id: index + 1, url: j.url }
+      //       }
+      //   })
+      //   return item
+      // })
+      res.render('zentai-suit', { products: newProducts,  imgLength })
     })
     .catch(err => console.error(err))
 })
