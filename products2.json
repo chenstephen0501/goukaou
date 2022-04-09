@@ -5,7 +5,7 @@
     "model": "Mask GPM-02",
     "basePrice": 930,
     "highestPrice": 0,
-    "production": "true",
+    "production": "false",
     "introduction": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
     "sampleImg": "https://static.wixstatic.com/media/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg/v1/fill/w_800,h_534,al_c,q_85,enc_auto/648814_e1fa0b49eb4b44b3974283e5ec4fc51b.jpg",
     "imgUrl": [
@@ -44,12 +44,12 @@
     ]
   },
   {
-    "name": "Alice",
+    "name": "Luna",
     "category": "mask",
     "model": "Mask GPM-05",
     "basePrice": 930,
     "highestPrice": 0,
-    "production": "false",
+    "production": "true",
     "introduction": "For the roles of shoujo or older sister(onēsan) For player whose height is over 155cm",
     "sampleImg": "https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg",
     "imgUrl": [
@@ -112,6 +112,99 @@
       {
         "name": "rider",
         "url": "https://static.wixstatic.com/media/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg"
+      }
+    ]
+  },
+  {
+    "name": "",
+    "category": "zentai",
+    "model": "ZENTAI SUIT GPZ-02",
+    "basePrice": 125,
+    "highestPrice": 0,
+    "production": "true",
+    "introduction": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
+    "sampleImg": "https://static.wixstatic.com/media/648814_62fafe79de7845d3a2b8ef10e6b5513b~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_62fafe79de7845d3a2b8ef10e6b5513b~mv2.jpg",
+    "imgUrl": [
+      {
+        "name": "IMG_4702_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_62fafe79de7845d3a2b8ef10e6b5513b~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_62fafe79de7845d3a2b8ef10e6b5513b~mv2.jpg"
+      },
+      {
+        "name": "_MG_9917_R2JM",
+        "url": "https://static.wixstatic.com/media/648814_6b74571052e54d0688cbbef6e30e2002~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_6b74571052e54d0688cbbef6e30e2002~mv2.jpg"
+      }
+    ]
+  },
+
+  {
+    "name": "",
+    "category": "zentai",
+    "model": "ZENTAI SUIT GPZ-02-C",
+    "basePrice": 150,
+    "highestPrice": 216,
+    "production": "true",
+    "introduction": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
+    "sampleImg": "https://static.wixstatic.com/media/648814_414842491a2743eda628fc87dfcb4385~mv2.jpg/v1/fill/w_403,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_414842491a2743eda628fc87dfcb4385~mv2.jpg",
+    "imgUrl": [
+      {
+        "name": "IMG_0392_R2JM_S_S",
+        "url": "https://static.wixstatic.com/media/648814_414842491a2743eda628fc87dfcb4385~mv2.jpg/v1/fill/w_403,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_414842491a2743eda628fc87dfcb4385~mv2.jpg"
+      },
+      {
+        "name": "IMG_4735_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_d62e7aad1b054023bf682161764fd032~mv2.jpg/v1/fill/w_403,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_d62e7aad1b054023bf682161764fd032~mv2.jpg"
+      }
+    ]
+  },
+  {
+    "name": "",
+    "category": "zentai",
+    "model": "Super Thick Zentai Suit GPZ-03",
+    "basePrice": 200,
+    "highestPrice": 266,
+    "production": "true",
+    "introduction": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
+    "sampleImg": "https://static.wixstatic.com/media/648814_524a4fc5686945db90bdef757fccf674~mv2.jpg/v1/fill/w_453,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_524a4fc5686945db90bdef757fccf674~mv2.jpg",
+    "imgUrl": [
+      {
+        "name": "IMG_0082_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_524a4fc5686945db90bdef757fccf674~mv2.jpg/v1/fill/w_453,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_524a4fc5686945db90bdef757fccf674~mv2.jpg"
+      },
+      {
+        "name": "IMG_5075_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_015eff168b824347aae7a91423d977b5~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_015eff168b824347aae7a91423d977b5~mv2.jpg"
+      }
+    ]
+  },
+  {
+    "name": null,
+    "category": "zentai",
+    "model": "Zentai Suit GPZ-04",
+    "basePrice": 135,
+    "highestPrice": 216,
+    "production": "true",
+    "introduction": "For roles of shoujo, lolita and beast. For player whose height is under 170cm.",
+    "sampleImg": "https://static.wixstatic.com/media/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg/v1/fill/w_978,h_539,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg",
+    "imgUrl": [
+      {
+        "name": "MG_1590_R2JM_LOGO_S",
+        "url": "https://static.wixstatic.com/media/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg/v1/fill/w_978,h_539,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8fa2684e516f4057b0f88366028964ea~mv2.jpg"
+      },
+      {
+        "name": "IMG_5102_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_2e9f90673aba4b71b2c527ed150d656f~mv2.jpg/v1/fill/w_403,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_2e9f90673aba4b71b2c527ed150d656f~mv2.jpg"
+      },
+      {
+        "name": "IMG_8080_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_ae4e195f6e62445285cecd11a777401b~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_ae4e195f6e62445285cecd11a777401b~mv2.jpg"
+      },
+      {
+        "name": "IMG_4806_R2JM_S",
+        "url": "https://static.wixstatic.com/media/648814_59640af3219b4a13af26bdfc7229fbc0~mv2.jpg/v1/fill/w_403,h_604,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_59640af3219b4a13af26bdfc7229fbc0~mv2.jpg"
+      },
+      {
+        "name": "IMG_1578_R2JM_LOGO_S",
+        "url": "https://static.wixstatic.com/media/648814_b2877d708e874172ac822fe860d1ee26~mv2.jpg/v1/fill/w_906,h_604,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_b2877d708e874172ac822fe860d1ee26~mv2.jpg"
       }
     ]
   }

@@ -1,9 +1,9 @@
 <div class='offsale-img'>
-  <h1 id='offsale-img-model'>{{products.model}} </h1>
-  <h1 id="production-off"> {{#if products.production}} OFF SALE {{/if}}</h1>
+  <h1 id='offsale-img-model'>{{product.model}} </h1>
+  <h1 id="production-off"> {{#unless product.production}} OFF SALE {{/unless}}</h1>
 </div>
 <div class='row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4'>
-  {{#each products.imgUrl}}
+  {{#each product.imgUrl}}
     <div class='col'>
       <div class='card h-100'>
         <a href='{{this.url}}'>

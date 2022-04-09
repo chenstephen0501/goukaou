@@ -90,6 +90,7 @@ body {
   -webkit-filter:opacity(.6);
   max-width: 896px;
   max-height: 576px;
+  margin: 8px auto 0;
 }
 
 .card-img-overlay  {

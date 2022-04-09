@@ -9,10 +9,13 @@ const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const helpers = require('./tools/helpers.js')
 const mongoose = require('mongoose')
-const app = express()
-const PORT = process.env.PORT 
 
-mongoose.connect('mongodb://localhost/goukaou-test', {
+const app = express()
+const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT 
+const Product = require('./models/product.js')
+
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -31,83 +34,6 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const products = [
-  {
-    name: 'Alice',
-    category: 'mask',
-    model: 'Mask GPM-05',
-    basePrice: 930,
-    highestPrice: 0,
-    production: 'false',
-    introduction:
-      'For the roles of shoujo or older sister(onēsan) For player whose height is over 155cm',
-    sampleImg:
-      'https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg',
-    imgUrl: [
-      {
-        name: 'saber',
-        url: 'https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg',
-      },
-      {
-        name: 'saber',
-        url: 'https://static.wixstatic.com/media/648814_f53296ca4d8d4ba5945fd654a3900fbc~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_f53296ca4d8d4ba5945fd654a3900fbc~mv2.jpg',
-      },
-      {
-        name: 'acher',
-        url: 'https://static.wixstatic.com/media/648814_64941718023e4268a2653f2a3854e25d~mv2.jpg/v1/fill/w_501,h_334,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_64941718023e4268a2653f2a3854e25d~mv2.jpg',
-      },
-      {
-        name: 'assion',
-        url: 'https://static.wixstatic.com/media/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_6fc2f9baa95d41b796b9af0ca378da1e~mv2.jpg',
-      },
-      {
-        name: 'assion',
-        url: 'https://static.wixstatic.com/media/648814_c2a696b9e2fe461299570567230c4ae1~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_c2a696b9e2fe461299570567230c4ae1~mv2.jpg',
-      },
-      {
-        name: 'caster',
-        url: 'https://static.wixstatic.com/media/648814_4e11d1da219a4e298b40487bc5896696~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_4e11d1da219a4e298b40487bc5896696~mv2.jpg',
-      },
-      {
-        name: 'lancer',
-        url: 'https://static.wixstatic.com/media/648814_e6a972da0c7a49189c891ed6487d6229~mv2.jpg/v1/fill/w_964,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_e6a972da0c7a49189c891ed6487d6229~mv2.jpg',
-      },
-      {
-        name: 'lancer',
-        url: 'https://static.wixstatic.com/media/648814_65ee570772e14c03858d6bef8670af8d~mv2.jpg/v1/fill/w_964,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_65ee570772e14c03858d6bef8670af8d~mv2.jpg',
-      },
-      {
-        name: 'lancer',
-        url: 'https://static.wixstatic.com/media/648814_10ab8b5be02f4877b81abb4cb3a26d5d~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_10ab8b5be02f4877b81abb4cb3a26d5d~mv2.jpg',
-      },
-      {
-        name: 'lancer',
-        url: 'https://static.wixstatic.com/media/648814_da1b15d668434b158a7b60533741094f~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_da1b15d668434b158a7b60533741094f~mv2.jpg',
-      },
-      {
-        name: 'bascker',
-        url: 'https://static.wixstatic.com/media/648814_09d964b56680444cbdcf868b4810e74e~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_09d964b56680444cbdcf868b4810e74e~mv2.jpg',
-      },
-      {
-        name: 'bascker',
-        url: 'https://static.wixstatic.com/media/648814_43de08cb83e245dfb0b146ddc736cbe9~mv2.jpg/v1/fill/w_429,h_643,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/648814_43de08cb83e245dfb0b146ddc736cbe9~mv2.jpg',
-      },
-      {
-        name: 'bascker',
-        url: 'https://static.wixstatic.com/media/648814_dc48e3fafc0743a9a3e7a5bc7b669dd6~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_dc48e3fafc0743a9a3e7a5bc7b669dd6~mv2.jpg',
-      },
-      {
-        name: 'rider',
-        url: 'https://static.wixstatic.com/media/648814_9456cc952a3246498ed3003b120e4742~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_9456cc952a3246498ed3003b120e4742~mv2.jpg',
-      },
-      {
-        name: 'rider',
-        url: 'https://static.wixstatic.com/media/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg/v1/fill/w_965,h_643,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/648814_8560234d3ad74f62832c766f4c151e28~mv2.jpg',
-      },
-    ],
-  },
-]
-
 app.get('/', (req, res) => {
   res.render('index')
 })
@@ -115,19 +41,75 @@ app.get('/goukaou', (req, res) => {
   res.render('goukaou')
 })
 app.get('/mask-onsale', (req, res) => {
-  res.render('mask-onsale', { products })
+  return Product.find({ production: 'true', category: 'mask' })
+    .lean()
+    .then((products) => {
+      res.render('mask-onsale', { products })
+    })
+    .catch((err) => console.error(err))
 })
 app.get('/mask-offsale', (req, res) => {
-  res.render('mask-offsale', { products2 })
+  return Product.find({ production: 'false', category: 'mask' })
+    .lean()
+    .then((products) => {
+      res.render('mask-offsale', { products })
+    })
+    .catch((err) => console.error(err))
 })
-app.get('/onsale-img', (req, res) => {
-  res.render('onsale-img', { products: products[0] })
+app.get('/onsale-img/:_id', (req, res) => {
+  const _id = req.params._id
+  console.log(_id)
+  return Product.findOne({ _id })
+    .lean()
+    .then(product => {
+    res.render('onsale-img', { product: product })
+    })
+    .catch(err => console.error(err))
 })
-app.get('/offsale-img', (req, res) => {
-  res.render('offsale-img', { products: products2[0] })
+app.get('/offsale-img/:_id', (req, res) => {
+  const _id = req.params._id
+  console.log(_id)
+  return Product.findOne({ _id })
+    .lean()
+    .then(product => {
+    res.render('offsale-img', { product: product })
+    })
+    .catch(err => console.error(err))
 })
 app.get('/zentai-suit', (req, res) => {
-  res.render('zentai-suit', { products: products3 })
+  return Product.find({ category: 'zentai'})
+    .lean()
+    .then(products => {
+      const linkData = [
+        {
+          model: 'ZENTAI SUIT GPZ-02',
+          url: 'http://goukaou.blog131.fc2.com/blog-entry-424.html',
+        },
+        {
+          model: 'ZENTAI SUIT GPZ-02-C',
+          url: 'http://goukaou.blog131.fc2.com/blog-entry-359.html',
+        },
+        {
+          model: 'Super Thick Zentai Suit GPZ-03',
+          url: 'http://goukaou.blog131.fc2.com/blog-entry-449.html',
+        },
+        {
+          model: 'Zentai Suit GPZ-04',
+          url: 'http://goukaou.blog131.fc2.com/blog-entry-511.html',
+        },
+      ]
+      const newProducts = products.map((item, index) => {
+        linkData.forEach((j,jIndex) => {
+          if (j.model === item.model) {
+            // if (jIndex === index) {
+              item = { ...item, id: index + 1, url: j.url }
+            }
+        })
+        return item
+      })
+      res.render('zentai-suit', { products: newProducts, linkData })
+    })
+    .catch(err => console.error(err))
 })
 
 app.get('/contact',  (req, res) => {
@@ -148,11 +130,7 @@ app.post('/contact', async (req, res) => {
     // let testAccount = await nodemailer.createTestAccount()
     let transporter = nodemailer.createTransport({
       service: 'gmail',
-      // host: 'smtp.gmail.com', 
-      // port: 587,
-      // secure: false,
       auth: {
-        // type: 'login',
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
         // user: testAccount.user,
@@ -190,7 +168,6 @@ app.post('/contact', async (req, res) => {
     }
     let info = await transporter.sendMail({
       from: `Nodemailer Contact ${process.env.EMAIL_USERNAME}`,
-      // from: email,
       to: 'tom9876555@gmail.com',
       subject: 'Node Contact Request',
       text: 'Hello world?',
