@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const products = require('../../products2.json')
 const Product = require('../product.js')
-mongoose.connect('mongodb://localhost/goukaou-test', {
+const MONGODB_URI = process.env.MONGODB_URI
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
