@@ -20,12 +20,15 @@ router.post('/', async (req, res) => {
       }
       return res.render('contact', { msg_error })
     }
+    
     let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      secure: false, // true for 465, false for other ports
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
     })
     const output = `
       <p> You have a new contact request</p>
@@ -49,8 +52,8 @@ router.post('/', async (req, res) => {
       text: 'Hello world?',
       html: output,
     })
-    // console.log('Message sent: %s', info.messageId)
-    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+    console.log('Message sent: %s', info.messageId)
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
     res.render('contact', { msg_success })
   } catch (err) {
     console.warn(err)
