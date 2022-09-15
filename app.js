@@ -1,8 +1,8 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-require('./config/mongoose.js')
-const express = require('express')
+require('./config/mongoose.js');
+const express = require('express');
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 
@@ -10,7 +10,7 @@ const helpers = require('./tools/helpers.js')
 
 const routes = require('./routes')
 
-const app = express()
+const app = express();
 const PORT = process.env.PORT 
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: helpers }))
