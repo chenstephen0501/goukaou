@@ -10,15 +10,16 @@ const userSchema = new Schema({
     required: true
   },
   password: {
-    tyep: String,
+    type: String,
     required: true
   },
   isAdmin: {
+    type: Boolean,
     dafault: true
   },
   createdAt:  {
-    type: date,
-    dafault: Date.now()
+    type: Date,
+    dafault: Date.now
   }
 })
 

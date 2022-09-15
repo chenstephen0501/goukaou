@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seed": "node models/seeds/productSeeder.js"
+    "seed": "node models/seeds/productSeeder.js && node models/seeds/userSeeder.js"
   },
   "keywords": [],
   "author": "",

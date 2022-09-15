@@ -10,7 +10,7 @@ db.once('open', () => {
     try {
       await Product.create(item)
       if (index + 1 === arr.length) {
-        console.log('created is done')
+        console.log('Product created is done')
         db.close()
       }
     } catch(err) {
