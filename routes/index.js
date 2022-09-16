@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+// admin
+const login = require('./modules/login.js')
+
+
 const home = require('./modules/home.js')
 const goukaou = require('./modules/goukaou.js')
 const maskOnSale = require('./modules/mask-onsale.js')
@@ -9,6 +13,9 @@ const onSaleImg = require('./modules/onsale-img.js')
 const offSaleImg = require('./modules/offsale-img.js')
 const zenTaiSuit = require('./modules/zentai-suit.js')
 const contact = require('./modules/contact.js')
+
+// use admin 
+router.use('/admin/login', login)
 
 router.use('/goukaou', goukaou)
 router.use('/mask-onsale', maskOnSale)

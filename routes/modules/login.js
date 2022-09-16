@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  res.render('goukaou')
+  res.render('admin/login')
 })
 
 module.exports = router

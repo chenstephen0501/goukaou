@@ -23,50 +23,11 @@
 </head>
 
 <body>
-  <div class="container title-nav">
+  {{> header}}
 
-    <div class="title-img ">
-      <a href="/">
-      <img
-        src="https://static.wixstatic.com/media/648814_f85eae0caa5e4d808c9088204f0db58c~mv2_d_3840_2160_s_2.png/v1/crop/x_231,y_450,w_3609,h_1180/fill/w_360,h_120,al_c,usm_0.66_1.00_0.01,enc_auto/648814_f85eae0caa5e4d808c9088204f0db58c~mv2_d_3840_2160_s_2.png"
-        class="rounded mx-auto d-block" alt="...">
-      </a>
-    </div>
-    <div class="navbar-title mx-auto">
-      <ul class="nav justify-content-around">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/goukaou">GOUKAOU</a>
-        </li>
-        <li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            MASK
-          </a>
-          <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/mask-onsale" id="dropdown-link-color1">MASK-ON SALE</a></li>
-            <li><a class="dropdown-item" href="/mask-offsale" id="dropdown-link-color2">MASK-OFF SALE</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/zentai-suit">ZENTAI SUIT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/contact">CONTACY Q&A</a>
-        </li>
-      </ul>
-    </div>
-  </div>
   {{{body}}}
-  <footer>
-    <div class='iconBtn'>
-      <a href='https://www.facebook.com/gkokig/'><i class='fa-brands fa-facebook-f'></i></a>
-      <a href='https://twitter.com/goukaou'><i class='fa-brands fa-twitter'></i></a>
-      <a href='https://www.youtube.com/channel/UChplJxI8cZTnGtDz6hgdiCQ'><i class='fa-brands fa-youtube'></i></a>
-    </div>
-  </footer>
+  
+  {{> footer}}
   <script src="/javascripts/popper.js"></script>
   <script src="/javascripts/bootstrap.js"></script>
 </body>
