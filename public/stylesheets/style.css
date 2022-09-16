@@ -335,14 +335,13 @@ body {
 #carouselExampleCaptions:hover  .carousel-control-next {
   display: block;
 }
-
-.admin-login-page {
-  /* margin-top: 50px; */
-    /* box-shadow: 5px 5px 5px rgba(255, 120, 47, 0.76); */
-    /* background-color: #e0acac; */
-}
-
 .admin-login-page  .card{
+  background-color: #ffe7dd;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  box-shadow: 5px 5px 5px rgba(190, 87, 31, 0.76);
+}
+.admin-prducts-page .card{
   background-color: #ffe7dd;
   margin-top: 50px;
   margin-bottom: 50px;

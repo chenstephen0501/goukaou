@@ -1,0 +1,70 @@
+{{!-- {{> admin-tabs route='restaurants'}} --}}
+<div class="row admin-prducts-page">
+  <div class="col-md-10 col-sm-8 m-auto">
+    <h1 class="my-4">產品後台</h1>
+    <a href='/admin/prodicts/create'>
+      <button type='button' class='btn btn-primary'>New Products</button>
+    </a>
+    <br />
+    <br />
+    <table class='table align-middle'>
+      <thead class='thead-dark'>
+        <tr>
+          <th scope='col'>Model</th>
+          <th scope='col'>Category</th>
+          <th scope='col'>produciton</th>
+          <th scope='col'></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each product}}
+        <tr>
+          <th scope='row'>{{this.model}}</th>
+          <td>{{this.category}}</td>
+          <td {{#if this.production}} class="text-success" {{else}} class="text-danger" {{/if}}>{{this.production}}</td>
+          <td>
+            <button type='button' class='btn btn-link'>
+              <a class='btn btn-link link-primary' href='/admin/prodicts/{{this._id}}'>
+                Show
+              </a>
+            </button>
+            <button type='button' class='btn btn-link'>
+              <a class='btn btn-link link-primary' href='/admin/prodicts/{{this._id}}/edit'>
+                Edit
+              </a>
+            </button>
+            <form action='/admin/prodicts/{{this._id}}?_method=DELETE' method='POST' style='display: inline;'>
+              <button type='submit' class='btn btn-link link-danger'
+                onclick="return confirm(`確定要刪除 {{this.name}}嗎 ?`)">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    {{!-- <nav class="mt-3" aria-label="page navigation">
+      <ul class="pagination">
+        <li class="page-item {{#ifCond pagination.currentPage 1}}disabled{{/ifCond}}">
+          <a class="page-link" href="/admin/prodicts?page={{pagination.prev}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        {{#each pagination.pages}}
+        {{#ifCond this ../pagination.currentPage}}
+        <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
+        {{else}}
+        <li class="page-item">
+          <a class="page-link" href="/admin/restaurants?page={{this}}">{{this}}</a>
+        </li>
+        {{/ifCond}}
+        {{/each}}
+        <li class="page-item {{#ifCond pagination.currentPage pagination.totalPage}}disabled{{/ifCond}}">
+          <a class="page-link" href="/admin/restaurants?page={{pagination.next}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav> --}}
+  </div>
+</div>
