@@ -4,6 +4,7 @@ const router = express.Router()
 // admin
 const login = require('./modules/login.js')
 const products = require('./modules/products.js')
+const categories = require('./modules/categories.js')
 
 const home = require('./modules/home.js')
 const goukaou = require('./modules/goukaou.js')
@@ -17,6 +18,7 @@ const contact = require('./modules/contact.js')
 // use admin 
 router.use('/admin/login', login)
 router.use('/admin/products', products)
+router.use('/admin/categories', categories)
 
 router.use('/goukaou', goukaou)
 router.use('/mask-onsale', maskOnSale)
