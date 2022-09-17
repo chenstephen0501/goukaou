@@ -29,6 +29,10 @@ const productSchema = new Schema({
     type: Number,
     require: false,
   },
+  category: {
+    type: String,
+    required: true
+  }
   sampleImg: {
     type: String,
     required: false,
