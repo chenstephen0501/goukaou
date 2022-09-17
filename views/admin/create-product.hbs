@@ -1,0 +1,111 @@
+<div class="row admin-products-page">
+  <div class="col-md-6 col-sm-6 m-auto">
+{{!-- <form action='/admin/products' method='POST'> --}}
+    <form action='/admin/products' method='POST' enctype="multipart/form-data">
+      <div class='mb-4 text-center'>
+        <h1 class='h3 font-weight-normal my-4'>Create Product</h1>
+      </div>
+      {{!-- {{> admin-restaurant-form}} --}}
+      <div class='form-row mb-3'>
+        <label class='form-label' for='name'>Name</label>
+        <input class='form-control' type='text' name='name' id='name' placeholder='Enter name' value="{{product.name}}"
+          required />
+      </div>
+
+      <div class='form-row mb-3'>
+        <label class='form-label' for='categoryId'>Category</label>
+        <select class="form-control" id="categoryId" name="categoryId">
+          <option value="mask">mask
+          </option>
+          <option value="{{this.name}}">{{this.name}}
+          </option>
+          <option value="zentai">zentai
+          </option>
+          {{!-- {{#each categories}}
+          <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId }} selected {{/ifCond}}>{{this.name}}
+          </option>
+          {{/each}} --}}
+        </select>
+      </div>
+
+      {{!-- <div class='form-row mb-3'>
+        <label class='form-label' for='categoryId'>Category</label>
+        <select class="form-control" id="categoryId" name="categoryId">
+          {{#each categories}}
+          <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId }} selected {{/ifCond}}>{{this.name}}
+          </option>
+          {{/each}}
+        </select>
+      </div> --}}
+
+      <div class='form-row mb-3'>
+        <label class='form-label' for='model'>Model</label>
+        <input class='form-control' type='text' name='model' id='model' placeholder='Enter model'
+          value="{{product.model}}" />
+      </div>
+      <div class='form-row mb-3'>
+        <label class='form-label' for='basePrice'>
+          BasePrice</label>
+        <input class='form-control' type='number' name='basePrice' id='basePrice' placeholder='Enter basePrice'
+          value="{{product.basePrice}}" />
+      </div>
+      <div class='form-row mb-3'>
+        <label class='form-label' for='highestPrice'>
+          HighestPrice</label>
+        <input class='form-control' type='number' name='highestPrice' id='highestPrice' placeholder='Enter highestPrice'
+          value="{{product.highestPrice}}" />
+      </div>
+      {{!-- <div class='form-row mb-3'>
+        <label class='form-label' for='openingHours'>Opening Hours</label>
+        <input class='form-control' type='time' name='openingHours' id='openingHours' placeholder='Enter opening hours'
+          value="{{product.openingHours}}" />
+      </div> --}}
+
+      <div class='form-row mb-3'>
+        <label class='form-label' for='production'>Production</label>
+        <select class="form-control" id="production" name="production">
+          {{!-- {{#each categories}} --}}
+          <option value="true">true</option>
+          <option value="false">false</option>
+          {{!-- {{/each}} --}}
+        </select>
+      </div>
+
+      <div class='form-row mb-3'>
+        <label class='form-label' for='introduction'>Introduction</label>
+        <textarea class='form-control' id='introduction' name='introduction'
+          rows='3'>{{product.introduction}}</textarea>
+      </div>
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">SampleImg</label>
+        <input type="file" class="form-control" class="form-control-file" id="sampleImg" name="sampleImg">
+      </div>
+
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">image1</label>
+        <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+      </div>
+
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">image2</label>
+        <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+      </div>
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">image3</label>
+        <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+      </div>
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">image4</label>
+        <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+      </div>
+      <div class="form-row mb-3">
+        <label for="sampleImg" class="form-label">image5</label>
+        <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+      </div>
+
+      <button type='submit' class='btn btn-primary'>Submit</button>
+      <a class='btn btn-outline-secondary' href='javascript:history.back()'>Back</a>
+
+    </form>
+  </div>
+</div>

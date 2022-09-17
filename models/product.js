@@ -19,7 +19,7 @@ const productSchema = new Schema({
   },
   category: {
     type: String,
-    required: true,
+    required: false,
   },
   basePrice: {
     type: Number,
@@ -31,7 +31,7 @@ const productSchema = new Schema({
   },
   sampleImg: {
     type: String,
-    required: true,
+    required: false,
   },
   imgUrl: [],
 })

@@ -6,7 +6,8 @@ router.get('/', (req, res) => {
   return Product.find({ production: 'true', category: 'mask' })
     .lean()
     .then((products) => {
-      res.render('mask-onsale', { products })
+      const sampleImg = products[0].sampleImg
+      res.render('mask-onsale', { products, sampleImg })
     })
     .catch((err) => console.error(err))
 })
