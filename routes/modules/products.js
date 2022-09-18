@@ -15,22 +15,25 @@ router.get('/', (req, res) => {
     .then(products => {
       return res.render('admin/products', { products })
     })
+    .catch(err => console.error(err))
 })
 
 router.get('/create', (req, res) => {
   return Category.find()
+    .lean()
     .then(categories => {
-      console.log(categories)
       return res.render('admin/create-product', { categories })
     })
+    .catch(err => console.error(err))
 })
 
 router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
-  const { name, category, model, basePrice, highestPrice, production, introduction } = req.body
+  const { name, categoryId, model, basePrice, highestPrice, production, introduction } = req.body
   const { files } = req.files
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
   let ImgUrlData
+
   const getSampleImg = file => {
     return new Promise((resolve, reject) => {
       if (!file) return resolve(null)
@@ -54,11 +57,14 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       }))
       .catch(err => console.log(err))
   }
-  if (files !== 0) {
+  
+  if (sampleImg || imgUrl) {
     return Promise.all([
       getSampleImg(sampleImg),
-      getImgUrl(imgUrl)
-    ]).then(([productSampleImg, productImgUrl]) => {
+      getImgUrl(imgUrl),
+      Category.find()
+    ]).then(([productSampleImg, productImgUrl, categories]) => {
+      const category = categories.find(item => item._id.toString() === categoryId.toString()).name
       return Product.create({
         name,
         category,
@@ -68,29 +74,36 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
         production,
         introduction,
         sampleImg: sampleImg ? productSampleImg : null,
-        imgUrl: imgUrl ? productImgUrl : null
+        imgUrl: imgUrl ? productImgUrl : null,
+        categoryId
       })
         .then(product => {
-          console.log(product)
           return res.redirect('/admin/products')
         })
     })
+      .catch(err => console.error(err))
   } else {
-    return Product.create({
-      name,
-      category,
-      model,
-      basePrice,
-      highestPrice,
-      production,
-      introduction,
-      sampleImg: null,
-      imgUrl: null
+  return Category
+    .find()
+    .then(categories => {
+      const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+      return Product.create({
+        name,
+        category,
+        model,
+        basePrice,
+        highestPrice,
+        production,
+        introduction,
+        sampleImg: null,
+        imgUrl: null,
+        categoryId
+      })    
     })
-      .then(product => {
-        console.log('else', product)
-        return res.redirect('/admin/products')
-      })
+    .then(product => {
+      return res.redirect('/admin/products')
+    })
+    .catch(err => console.error(err))
   }
 })
 
