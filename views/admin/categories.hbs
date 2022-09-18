@@ -16,7 +16,7 @@
         </div>
       </form>
       {{else}}
-      <form class="row" action="/admin/categories" method="POST">
+      <form class="row my-3" action="/admin/categories" method="POST">
         <div class="col-auto">
           <input class="form-control" type="text" placeholder="Category Name" name="name">
         </div>
@@ -31,20 +31,20 @@
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">#</th>
         <th scope="col">CategoryName</th>
+        <th scope="col">CategoryName_CHT</th>
         <th scope="col">#</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="align-middle">
       {{#each categories}}
       <tr>
-        <th scope="row">{{this.id}}</th>
-        <td>{{this.name}}</td>
+        <th scope="row">{{this.name}}</th>
+        <td >{{this.name_cht}}</td>
         <td>
-          <a href="/admin/categories/{{this.id}}" class="btn btn-warning">Edit</a>
-          <form action="/admin/categories/{{this.id}}?_method=DELETE" method="post" style="display: inline;">
-            <button type="submit" class="btn btn-danger">Delete</button>
+          <a href="/admin/categories/{{this._id}}" class="btn btn-warning my-1">Edit</a>
+          <form action="/admin/categories/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-danger my-1">Delete</button>
           </form>
         </td>
       </tr>
