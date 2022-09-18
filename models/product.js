@@ -29,10 +29,12 @@ const productSchema = new Schema({
     type: Number,
     require: false,
   },
-  category: {
-    type: String,
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    index: true,
     required: true
-  }
+  },
   sampleImg: {
     type: String,
     required: false,

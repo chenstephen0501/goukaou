@@ -9,12 +9,10 @@ const db = require('../../config/mongoose.js')
 db.once('open', async () => {
   try {
     const categoryData = await Category.find()
-    console.log(categoryData)
     productData.forEach( async (item, index, arr) => {
       try {
-        const category_id = categoryData.find(item2 => item2.category === item.category).id
-        console.log(index, category_id)
-        await Product.create({ ...item, categort_id })
+        const categoryId = categoryData.find(item2 => item2.category === item.category).id
+        await Product.create({ ...item, categoryId })
         if (index + 1 === arr.length) {
           console.log('Product created is done')
           db.close()
