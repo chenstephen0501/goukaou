@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
   return Category
     .find()
     .lean()
+    .sort({ categoryId: 'asc' })
     .then(categories => {
       return res.render('admin/categories', { categories })
     })
@@ -24,7 +25,7 @@ router.post('/', (req, res) => {
       if (!category) {
         return Category.create({ name, name_cht })
         .then(() => {
-          return res.redirect(`/admin/categories/${category/categoryId}`, { categories })
+          return res.redirect('back')
         })
       }
       return res.render('admin/categories', { categories,category })
@@ -44,22 +45,24 @@ router.get('/:categoryId', (req, res) => {
     .catch(err => console.error(err))
 })
 
-router.put('/categoryId', (req, res) => {
-  const categoyId = req.params.categoryId
+router.put('/:categoryId', (req, res) => {
+  const categoryId = req.params.categoryId
   const { name, name_cht } = req.body
   if (!name) {
     return res.redirect('/admin/categories')
   }
   return Promise.all([
-    Category.find().lean(),
-    Category.findById(categoryId).lean()
-  ])
-    .then(([categories, category]) => {
-      console.log(category)
-      const newCategory = { ...category, name, name_cht }
-      return Category.save(newCategory)
+    Category.findById({ _id: categoryId }),
+    Category.find().lean()
+    ])
+    .then(([category, categories]) => {
+      const checkName = categories.some(c => c.name === name)
+      if (checkName) {
+        return res.redirect('/admin/categories')
+      }
+      return category.updateOne({ name, name_cht })
+        .then(() => res.redirect('/admin/categories'))
     })
-    .then(() => res.rediect('/admin/categoies'))
     .catch(err => console.error(err))
 })
 
