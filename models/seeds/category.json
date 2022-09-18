@@ -1,10 +1,10 @@
 [ 
   {
-    "category": "mask",
-    "category_cht": "面具"
+    "name": "mask",
+    "name_cht": "面具"
   },
   {
-    "category": "zentai",
-    "category_cht": "連身衣"
+    "name": "zentai",
+    "name_cht": "連身衣"
   }
 ]
