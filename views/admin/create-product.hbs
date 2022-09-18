@@ -15,14 +15,12 @@
       <div class='form-row mb-3'>
         <label class='form-label' for='categoryId'>Category</label>
         <select class="form-control" id="categoryId" name="categoryId">
-          <option value="mask">mask
+          {{#each categories}}
+          <option value="{{this._id}}">{{this.category}}
           </option>
-          <option value="{{this.name}}">{{this.name}}
-          </option>
-          <option value="zentai">zentai
-          </option>
+          {{/each}}
           {{!-- {{#each categories}}
-          <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId }} selected {{/ifCond}}>{{this.name}}
+          <option value="{{this._id}}" {{#ifCond this.id ../product.categoryId }} selected {{/ifCond}}>{{this.name}}
           </option>
           {{/each}} --}}
         </select>

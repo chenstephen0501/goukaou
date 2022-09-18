@@ -1,22 +1,28 @@
 const express = require('express')
 const router = express.Router()
+
 const multer = require('multer')
 const upload = multer({ dest: 'temp/' })
 
 const fs = require('fs')
 
 const Product = require('../../models/product.js')
+const Category = require('../../models/category.js')
 
 router.get('/', (req, res) => {
   return Product.find()
     .lean()
-    .then(product => {
-      return res.render('admin/products', { product })
+    .then(products => {
+      return res.render('admin/products', { products })
     })
 })
 
 router.get('/create', (req, res) => {
-  return res.render('admin/create-product')
+  return Category.find()
+    .then(categories => {
+      console.log(categories)
+      return res.render('admin/create-product', { categories })
+    })
 })
 
 router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
