@@ -14,21 +14,21 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, name_cht } = req.body
-  if (!name) { 
+  if (!name) {
     return res.redirect('/admin/categories')
   }
   return Promise.all([
     Category.find().lean(),
     Category.findOne({ name }).lean()
   ])
-  .then(([categories, category]) => {
+    .then(([categories, category]) => {
       if (!category) {
         return Category.create({ name, name_cht })
-        .then(() => res.redirect('back'))
+          .then(() => res.redirect('back'))
       }
-      return res.render('admin/categories', { categories,category })
+      return res.render('admin/categories', { categories, category })
     })
-  .catch(err => console.error(err))
+    .catch(err => console.error(err))
 })
 
 router.get('/:categoryId', (req, res) => {
@@ -50,15 +50,15 @@ router.put('/:categoryId', (req, res) => {
     return res.redirect('/admin/categories')
   }
   return Promise.all([
-    Category.findById({ _id: categoryId }),
-    Category.find({ _id: { $nin: categoryId }}).lean()
-    ])
+    Category.findById({ _id: categoryId }).lean(),
+    Category.find({ _id: { $nin: [categoryId] } }).lean()
+  ])
     .then(([category, categories]) => {
       const checkName = categories.some(c => c.name === name)
-      if (checkName || category.name !== name) {
+      if (checkName) {
         return res.redirect('/admin/categories')
       }
-      return category.updateOne({ name, name_cht })
+      return Category.update({ _id: categoryId }, { name, name_cht })
     })
     .then(() => res.redirect('/admin/categories'))
     .catch(err => console.error(err))
