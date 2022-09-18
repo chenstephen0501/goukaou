@@ -24,9 +24,7 @@ router.post('/', (req, res) => {
   .then(([categories, category]) => {
       if (!category) {
         return Category.create({ name, name_cht })
-        .then(() => {
-          return res.redirect('back')
-        })
+        .then(() => res.redirect('back'))
       }
       return res.render('admin/categories', { categories,category })
     })
@@ -53,16 +51,26 @@ router.put('/:categoryId', (req, res) => {
   }
   return Promise.all([
     Category.findById({ _id: categoryId }),
-    Category.find().lean()
+    Category.find({ _id: { $nin: categoryId }}).lean()
     ])
     .then(([category, categories]) => {
       const checkName = categories.some(c => c.name === name)
-      if (checkName) {
+      if (checkName || category.name !== name) {
         return res.redirect('/admin/categories')
       }
       return category.updateOne({ name, name_cht })
-        .then(() => res.redirect('/admin/categories'))
     })
+    .then(() => res.redirect('/admin/categories'))
+    .catch(err => console.error(err))
+})
+
+router.delete('/:categoryId', (req, res) => {
+  const categoryId = req.params.categoryId
+  return Category.findById({ _id: categoryId })
+    .then(category => {
+      return category.remove()
+    })
+    .then(() => res.redirect('/admin/categories'))
     .catch(err => console.error(err))
 })
 
