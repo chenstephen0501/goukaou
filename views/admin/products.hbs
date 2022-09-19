@@ -42,29 +42,23 @@
         {{/each}}
       </tbody>
     </table>
-
-    {{!-- <nav class="mt-3" aria-label="page navigation">
+    <nav aria-label="Page navigation ">
       <ul class="pagination">
-        <li class="page-item {{#ifCond pagination.currentPage 1}}disabled{{/ifCond}}">
-          <a class="page-link" href="/admin/prodicts?page={{pagination.prev}}" aria-label="Previous">
+        <li class="page-item {{#ifCond pagenation.currentPage 1}} disabled {{/ifCond}}">
+          <a class="page-link" href="/admin/products?page={{pagenation.prev}}" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        {{#each pagination.pages}}
-        {{#ifCond this ../pagination.currentPage}}
-        <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
-        {{else}}
-        <li class="page-item">
-          <a class="page-link" href="/admin/restaurants?page={{this}}">{{this}}</a>
-        </li>
-        {{/ifCond}}
+        {{#each pagenation.pages}}
+        <li class="page-item {{#ifCond this ../pagenation.currentPage}} active {{/ifCond}}"><a class="page-link"
+            href="/admin/products?page={{this}}">{{this}}</a></li>
         {{/each}}
-        <li class="page-item {{#ifCond pagination.currentPage pagination.totalPage}}disabled{{/ifCond}}">
-          <a class="page-link" href="/admin/restaurants?page={{pagination.next}}" aria-label="Next">
+        <li class="page-item {{#ifCond pagenation.currentPage pagenation.totalPage}} disabled {{/ifCond}}">
+          <a class="page-link" href="/admin/products?page={{pagenation.next}}" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
       </ul>
-    </nav> --}}
+    </nav>
   </div>
 </div>

@@ -11,10 +11,34 @@ const Category = require('../../models/category.js')
 const Model = require('../../models/model.js')
 
 router.get('/', (req, res) => {
-  return Product.find()
+  const DEFAULT_LIMIT = 8
+  const limit = Number(req.params.limit) || DEFAULT_LIMIT
+  const page = Number(req.query.page) || 1
+  const getSkip = (page = 1, limit = 8) => ((page - 1) * limit)
+  const getPagenation = (page = 1, limit = 8, total = 50 ) => {
+    const totalPage = Math.ceil(total / limit)
+    const pages = Array.from({ length: totalPage }, (_,index) => index + 1)
+    const currentPage = page < 1 ? 1 : page > totalPage ? totalPage : page
+    const prev = currentPage - 1 ? currentPage - 1 : 1
+    const next = currentPage + 1 ? currentPage + 1 : totalPage
+    return {
+      totalPage,
+      pages,
+      prev,
+      next,
+      currentPage
+    }
+  }
+  return Promise.all([
+    Product.find()
     .lean()
-    .then(products => {
-      return res.render('admin/products', { products })
+    .sort({ _id: 'asc'})
+    .limit(limit)
+    .skip(getSkip(page, limit)),
+    Product.countDocuments()
+  ])
+    .then(([products, productCount]) => {
+      return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
     })
     .catch(err => console.error(err))
 })
