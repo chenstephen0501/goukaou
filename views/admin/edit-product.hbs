@@ -1,8 +1,8 @@
-<div class="row admin-products-page">
+<div class="row admin-edit-products-page">
   <div class="col-md-6 col-sm-6 m-auto">
-    <form action='/admin/products' method='POST' enctype="multipart/form-data">
+    <form action='/admin/products/{{product._id}}?_method=PUT' method='POST' enctype="multipart/form-data">
       <div class='mb-4 text-center'>
-        <h1 class='h3 font-weight-normal my-4'>Create Product</h1>
+        <h1 class='h3 font-weight-normal my-4'>Edit Product</h1>
       </div>
       {{!-- {{> admin-restaurant-form}} --}}
       <div class='form-row mb-3'>
@@ -14,7 +14,8 @@
         <label class='form-label' for='categoryId'>Category</label>
         <select class="form-control" id="categoryId" name="categoryId">
           {{#each categories}}
-          <option value="{{this._id}}">{{this.name}}
+          <span>{{this._id}}</span>
+          <option value="{{this._id}}" {{#ifCond this._id ../product.categoryId}} selected {{/ifCond}}>{{this.name}}
           </option>
           {{/each}}
         </select>
@@ -23,8 +24,7 @@
         <label class='form-label' for='model'>Model</label>
         <select name="modelId" id="modelId" class="form-control">
           {{#each models}}
-          {{this._id}}
-          <option value="{{this._id}}">{{this.name}}</option>
+          <option value="{{this._id}}" {{#ifCond this._id ../product.modelId}} selected {{/ifCond}}>{{this.name}}</option>
           {{/each}}
         </select>
       </div>
@@ -43,8 +43,13 @@
       <div class='form-row mb-3'>
         <label class='form-label' for='production'>Production</label>
         <select class="form-control" id="production" name="production">
+          {{#if product.production}}
           <option value="true">true</option>
           <option value="false">false</option>
+          {{else}}
+          <option value="false">false</option>
+          <option value="true">true</option>
+          {{/if}}
         </select>
       </div>
       <div class='form-row mb-3'>

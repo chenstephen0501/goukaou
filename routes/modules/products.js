@@ -10,6 +10,30 @@ const Product = require('../../models/product.js')
 const Category = require('../../models/category.js')
 const Model = require('../../models/model.js')
 
+const getSampleImg = file => {
+  return new Promise((resolve, reject) => {
+    if (!file) return resolve(null)
+    const fileName = `upload/${file[0].originalname}`
+    fs.readFile(file[0].path, (err, data) => {
+      if (err) return reject('Error: ', err)
+      fs.writeFile(fileName, data, () => {
+        return resolve(`/${fileName}`)
+      })
+    })
+  })
+}
+const getImgUrl = files => {
+  if (!files) return null
+  return Promise.all(
+    files.map((file, fileIndex) => {
+      const fileName = `upload/${file.originalname}`
+      return fs.promises.readFile(file.path)
+        .then(data => fs.promises.writeFile(fileName, data))
+        .then((data) => ({ name: file.originalname, url: `/${fileName}` }))
+    }))
+    .catch(err => console.log(err))
+}
+
 router.get('/', (req, res) => {
   const DEFAULT_LIMIT = 8
   const limit = Number(req.params.limit) || DEFAULT_LIMIT
@@ -60,30 +84,6 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
   let ImgUrlData
-
-  const getSampleImg = file => {
-    return new Promise((resolve, reject) => {
-      if (!file) return resolve(null)
-      const fileName = `upload/${file[0].originalname}`
-      fs.readFile(file[0].path, (err, data) => {
-        if (err) return reject('Error: ', err)
-        fs.writeFile(fileName, data, () => {
-          return resolve(`/${fileName}`)
-        })
-      })
-    })
-  }
-  const getImgUrl = files => {
-    if (!files) return null
-    return Promise.all(
-      files.map((file, fileIndex) => {
-        const fileName = `upload/${file.originalname}`
-        return fs.promises.readFile(file.path)
-          .then(data => fs.promises.writeFile(fileName, data))
-          .then((data) => ({ name: file.originalname, url: `/${fileName}` }))
-      }))
-      .catch(err => console.log(err))
-  }
   
   if (sampleImg || imgUrl) {
     return Promise.all([
@@ -136,7 +136,7 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
     .catch(err => console.error(err))
   }
 })
-
+// 未做好
 router.get('/:productId', (req, res) => {
   const productId = req.params.productId
   return Product
@@ -159,6 +159,72 @@ router.get('/:productId/edit', (req, res) => {
       return res.render('admin/edit-product', { product, categories, models })
     })
     .catch(err => console.error(err)) 
+})
+
+router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
+  const productId = req.params.productId
+  const { name, categoryId, model, basePrice, highestPrice, production, introduction, modelId } = req.body
+  const { files } = req.files
+  const { sampleImg, imgUrl } = req.files
+  let sampleImgData
+  let ImgUrlData
+  if (sampleImg || imgUrl) {
+  return Promise.all([
+    getSampleImg(sampleImg),
+    getImgUrl(imgUrl),
+    Product.findById(productId).lean(),
+    Category.find().lean(),
+    Model.find().lean()
+  ])
+    .then(([productSampleImg, productImgUrl, product, categories, models]) => {
+      const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+      const model = models.find(item => item._id.toString() === modelId.toString()).name
+      return Product.updateOne({ _id: productId }, 
+        {
+          name,
+          category,
+          model,
+          basePrice,
+          highestPrice,
+          production,
+          introduction,
+          sampleImg: sampleImg ? productSampleImg : product.sampleImg,
+          imgUrl: imgUrl? productImgUrl : product.imgUrl,
+          categoryId,
+          modelId
+        })
+    })
+    .then(() => {
+      return res.redirect('/admin/products')
+    })
+    .catch(err => console.error(err))
+  } else {
+    return Promise.all([
+      Product.findById(productId).lean(),
+      Category.find().lean(),
+      Model.find().lean()
+    ])
+      .then(([product, categories, models]) => {
+        const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+        const model = models.find(item => item._id.toString() === modelId.toString()).name
+        return Product.updateOne({ _id: productId },
+          {
+            name,
+            category,
+            model,
+            basePrice,
+            highestPrice,
+            production,
+            introduction,
+            sampleImg: sampleImg ? productSampleImg : product.sampleImg,
+            imgUrl: imgUrl ? productImgUrl : product.imgUrl,
+            categoryId,
+            modelId
+          })
+      })
+      .then(() =>  res.redirect('/admin/products'))
+      .catch(err => console.error(err))
+  }
 })
 
 module.exports = router
