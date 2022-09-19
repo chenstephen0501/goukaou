@@ -14,7 +14,7 @@ db.once('open', async () => {
     productData.forEach( async (item, index, arr) => {
       try {
         const categoryId = categoryData.find(item2 => item2.name === item.category).id
-        const modelId = modelData.find(item2 => item2.name === item.model).id
+        const modelId = modelData.find(item3 => item3.name === item.model).id
         await Product.create({ ...item, categoryId, modelId })
         if (index + 1 === arr.length) {
           console.log('Product created is done')

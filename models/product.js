@@ -35,6 +35,12 @@ const productSchema = new Schema({
     index: true,
     required: true
   },
+  modelId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Model',
+    index: true,
+    required: true
+  },
   sampleImg: {
     type: String,
     required: false,
