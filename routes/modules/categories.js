@@ -49,11 +49,10 @@ router.put('/:categoryId', (req, res) => {
   if (!name) {
     return res.redirect('/admin/categories')
   }
-  return Promise.all([
-    Category.findById({ _id: categoryId }).lean(),
-    Category.find({ _id: { $nin: [categoryId] } }).lean()
-  ])
-    .then(([category, categories]) => {
+  return Category
+  .find({ _id: { $nin: [categoryId] } })
+  .lean()
+    .then((categories) => {
       const checkName = categories.some(c => c.name === name)
       if (checkName) {
         return res.redirect('/admin/categories')
