@@ -38,7 +38,7 @@ router.get('/:modelId', (req, res) => {
     Model.findById({ _id: modelId }).lean()
   ])
     .then(([models, model]) => {
-      return res.render('admin/model' ,{models, model })
+      return res.render('admin/model' ,{ models, model })
     })
 })
 
@@ -48,23 +48,27 @@ router.put('/:modelId', (req, res) => {
   if (!name) {
     return res.redirect('back')
   }
-  return Promise.all([
-    Model.find({ _id: { $nin: [modelId] } }).lean(),
-    Model.findById().lean()
-  ])
-    .then(([models, model]) => {
+  return Model
+    .find({ _id: { $nin: [modelId] } })
+    .lean()
+    .then((models) => {
       const checkModel = models.some(item => item.name === name)
       if (checkModel) {
         return res.redirect('back')
       }
-      return Model.create({ _id: modelId }, { name })
-      // if (!model) {
-      //   return Model.create({ name })
-      //     .then(() => res.redirect('back'))
-      // }
-      // return res.render('admin/model', { models, model })
+      return Model.updateOne({ _id: modelId }, { name })
     })
-    .then(() => res.redirect('/admin/model'))
+    .then(() => res.redirect('/admin/models'))
+    .catch(err => console.error(err))
+})
+
+router.delete('/:modelId', (req, res) => {
+  const modelId = req.params.modelId
+  return Model.findById({ _id: modelId })
+    .then(model => {
+      return model.remove()
+    })
+    .then(() => res.redirect('/admin/models'))
     .catch(err => console.error(err))
 })
 
