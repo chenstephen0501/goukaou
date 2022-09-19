@@ -31,7 +31,7 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
-  const { name, categoryId, model, basePrice, highestPrice, production, introduction } = req.body
+  const { name, categoryId, model, basePrice, highestPrice, production, introduction, modelId } = req.body
   const { files } = req.files
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
@@ -65,9 +65,11 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
     return Promise.all([
       getSampleImg(sampleImg),
       getImgUrl(imgUrl),
-      Category.find()
-    ]).then(([productSampleImg, productImgUrl, categories]) => {
+      Category.find(),
+      Model.find()
+    ]).then(([productSampleImg, productImgUrl, categories, models]) => {
       const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+      const model = models.find(item => item._id.toString() === modelId.toString()).name
       return Product.create({
         name,
         category,
@@ -78,7 +80,8 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
         introduction,
         sampleImg: sampleImg ? productSampleImg : null,
         imgUrl: imgUrl ? productImgUrl : null,
-        categoryId
+        categoryId,
+        modelId
       })
         .then(product => {
           return res.redirect('/admin/products')
