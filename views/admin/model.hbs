@@ -1,0 +1,53 @@
+{{!-- {{> admin-tabs route='categories'}} --}}
+{{!-- <br /> --}}
+
+<div class="row admin-prducts-page">
+  <div class=" col-8 m-auto">
+    <h1 class="my-4">產品後台</h1>
+    {{#if category}}
+    <form class="row my-3" action="/admin/categories/{{category._id}}?_method=PUT" method="POST">
+      <div class="col-auto">
+        <input class="form-control" type="text" placeholder="name" name="name" value="{{category.name}}">
+      </div>
+      <div class="col-auto">
+        <input class="form-control" type="text" placeholder="name_cht" name="name_cht" value="{{category.name_cht}}">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-warning" type="submit">Update</button>
+        <a class="btn btn-link link-secondary" href="/admin/categories">or Create New</a>
+      </div>
+    </form>
+    {{else}}
+    <form class="row my-3" action="/admin/categories" method="POST">
+      <div class="col-auto">
+        <input class="form-control" type="text" placeholder="Model Name" name="name">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-success" type="submit">Create</button>
+      </div>
+    </form>
+    {{/if}}
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ModelName</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="align-middle">
+        {{#each models}}
+        <tr>
+          <th scope="row">{{this.name}}</th>
+          <td>
+            <a href="/admin/models/{{this._id}}" class="btn btn-warning my-1">Edit</a>
+            <form action="/admin/models/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
+              <button type="submit" class="btn btn-danger my-1">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
