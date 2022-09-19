@@ -10,6 +10,7 @@
     <table class='table align-middle'>
       <thead class='thead-dark'>
         <tr>
+          <th scope='col'>Name</th>
           <th scope='col'>Model</th>
           <th scope='col'>Category</th>
           <th scope='col'>produciton</th>
@@ -19,7 +20,8 @@
       <tbody>
         {{#each products}}
         <tr>
-          <th scope='row'>{{this.model}}</th>
+          <th scope='row'>{{this.name}}</th>
+          <td>{{this.model}}</th>
           <td>{{this.category}}</td>
           <td {{#if this.production}} class="text-success" {{else}} class="text-danger" {{/if}}>{{this.production}}</td>
           <td>
