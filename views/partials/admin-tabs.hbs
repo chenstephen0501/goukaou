@@ -1,0 +1,12 @@
+<h1 class="my-3">產品後台</h1>
+<ul class="nav nav-tabs my-3">
+  <li class="nav-item">
+    <a class="nav-link {{#ifCond route 'products'}}active" {{/ifCond}}aria-current="page" href="/admin/products">Product</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{#ifCond route 'categories'}}active {{/ifCond}}" href="/admin/categories">Category</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{#ifCond route 'models'}}active {{/ifCond}}" href="/admin/models">Model</a>
+  </li>
+</ul>
