@@ -24,16 +24,16 @@
           <td {{#if this.production}} class="text-success" {{else}} class="text-danger" {{/if}}>{{this.production}}</td>
           <td>
             <button type='button' class='btn btn-link'>
-              <a class='btn btn-link link-info' href='/admin/prodicts/{{this._id}}'>
+              <a class='btn btn-link link-info' href='/admin/products/{{this._id}}'>
                 Show
               </a>
             </button>
             <button type='button' class='btn btn-link'>
-              <a class='btn btn-link link-success' href='/admin/prodicts/{{this._id}}/edit'>
+              <a class='btn btn-link link-success' href='/admin/products/{{this._id}}/edit'>
                 Edit
               </a>
             </button>
-            <form action='/admin/prodicts/{{this._id}}?_method=DELETE' method='POST' style='display: inline;'>
+            <form action='/admin/products/{{this._id}}?_method=DELETE' method='POST' style='display: inline;'>
               <button type='submit' class='btn btn-link link-danger'
                 onclick="return confirm(`確定要刪除 {{this.model}}嗎 ?`)">Delete</button>
             </form>

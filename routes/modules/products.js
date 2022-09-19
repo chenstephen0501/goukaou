@@ -137,4 +137,28 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
   }
 })
 
+router.get('/:productId', (req, res) => {
+  const productId = req.params.productId
+  return Product
+    .findById(productId)
+    .lean()
+    .then(product => {console.log(product)
+      return res.render('admin/product', { product })
+    })
+    .catch(err => console.error(err))
+})
+
+router.get('/:productId/edit', (req, res) => {
+  const productId = req.params.productId
+  return Promise.all([
+    Product.findById(productId).lean(),
+    Category.find().lean(),
+    Model.find().lean()
+  ])
+    .then(([product, categories, models]) => {
+      return res.render('admin/edit-product', { product, categories, models })
+    })
+    .catch(err => console.error(err)) 
+})
+
 module.exports = router
