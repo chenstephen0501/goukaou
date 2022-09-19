@@ -8,6 +8,7 @@ const fs = require('fs')
 
 const Product = require('../../models/product.js')
 const Category = require('../../models/category.js')
+const Model = require('../../models/model.js')
 
 router.get('/', (req, res) => {
   return Product.find()
@@ -19,10 +20,12 @@ router.get('/', (req, res) => {
 })
 
 router.get('/create', (req, res) => {
-  return Category.find()
-    .lean()
-    .then(categories => {
-      return res.render('admin/create-product', { categories })
+  return Promise.all([
+    Category.find().lean(),
+    Model.find().lean()   
+  ])
+    .then(([categories, models]) => {
+      return res.render('admin/create-product', { categories, models })
     })
     .catch(err => console.error(err))
 })

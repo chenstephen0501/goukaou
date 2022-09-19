@@ -19,27 +19,27 @@
           <option value="{{this._id}}">{{this.name}}
           </option>
           {{/each}}
-          {{!-- {{#each categories}}
-          <option value="{{this._id}}" {{#ifCond this.id ../product.categoryId }} selected {{/ifCond}}>{{this.name}}
-          </option>
-          {{/each}} --}}
         </select>
       </div>
 
-      {{!-- <div class='form-row mb-3'>
-        <label class='form-label' for='categoryId'>Category</label>
-        <select class="form-control" id="categoryId" name="categoryId">
-          {{#each categories}}
-          <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId }} selected {{/ifCond}}>{{this.name}}
-          </option>
-          {{/each}}
-        </select>
-      </div> --}}
-
+{{!-- <div class='form-row mb-3'>
+  <label class='form-label' for='categoryId'>Category</label>
+  <select class="form-control" id="categoryId" name="categoryId">
+    {{#each categories}}
+    <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId }} selected {{/ifCond}}>{{this.name}}
+    </option>
+    {{/each}}
+  </select>
+</div> --}}
+ 
       <div class='form-row mb-3'>
         <label class='form-label' for='model'>Model</label>
-        <input class='form-control' type='text' name='model' id='model' placeholder='Enter model'
-          value="{{product.model}}" />
+        <select name="modelId" id="modelId" class="form-control">
+          {{#each models}}
+          {{this._id}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
       </div>
       <div class='form-row mb-3'>
         <label class='form-label' for='basePrice'>
@@ -53,19 +53,12 @@
         <input class='form-control' type='number' name='highestPrice' id='highestPrice' placeholder='Enter highestPrice'
           value="{{product.highestPrice}}" />
       </div>
-      {{!-- <div class='form-row mb-3'>
-        <label class='form-label' for='openingHours'>Opening Hours</label>
-        <input class='form-control' type='time' name='openingHours' id='openingHours' placeholder='Enter opening hours'
-          value="{{product.openingHours}}" />
-      </div> --}}
 
       <div class='form-row mb-3'>
         <label class='form-label' for='production'>Production</label>
         <select class="form-control" id="production" name="production">
-          {{!-- {{#each categories}} --}}
           <option value="true">true</option>
           <option value="false">false</option>
-          {{!-- {{/each}} --}}
         </select>
       </div>
 
