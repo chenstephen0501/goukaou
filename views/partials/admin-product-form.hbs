@@ -1,0 +1,78 @@
+<div class='form-row mb-3'>
+  <label class='form-label' for='name'>Name</label>
+  <input class='form-control' type='text' name='name' id='name' placeholder='Enter name' value="{{product.name}}"
+    required />
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='categoryId'>Category</label>
+  <select class="form-control" id="categoryId" name="categoryId">
+    {{#each categories}}
+    <span>{{this._id}}</span>
+    <option value="{{this._id}}" {{#ifCond this._id ../product.categoryId}} selected {{/ifCond}}>{{this.name}}
+    </option>
+    {{/each}}
+  </select>
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='model'>Model</label>
+  <select name="modelId" id="modelId" class="form-control">
+    {{#each models}}
+    <option value="{{this._id}}" {{#ifCond this._id ../product.modelId}} selected {{/ifCond}}>{{this.name}}
+    </option>
+    {{/each}}
+  </select>
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='basePrice'>
+    BasePrice</label>
+  <input class='form-control' type='number' name='basePrice' id='basePrice' placeholder='Enter basePrice'
+    value="{{product.basePrice}}" />
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='highestPrice'>
+    HighestPrice</label>
+  <input class='form-control' type='number' name='highestPrice' id='highestPrice' placeholder='Enter highestPrice'
+    value="{{product.highestPrice}}" />
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='production'>Production</label>
+  <select class="form-control" id="production" name="production">
+    {{#if product.production}}
+    <option value="true">true</option>
+    <option value="false">false</option>
+    {{else}}
+    <option value="false">false</option>
+    <option value="true">true</option>
+    {{/if}}
+  </select>
+</div>
+<div class='form-row mb-3'>
+  <label class='form-label' for='introduction'>Introduction</label>
+  <textarea class='form-control' id='introduction' name='introduction' rows='3'>{{product.introduction}}</textarea>
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">SampleImg</label>
+  <input type="file" class="form-control" class="form-control-file" id="sampleImg" name="sampleImg">
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">image1</label>
+  <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">image2</label>
+  <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">image3</label>
+  <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">image4</label>
+  <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+</div>
+<div class="form-row mb-3">
+  <label for="sampleImg" class="form-label">image5</label>
+  <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
+</div>
+<button type='submit' class='btn btn-primary'>Submit</button>
+<a class='btn btn-outline-secondary' href='javascript:history.back()'>Back</a>

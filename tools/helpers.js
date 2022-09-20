@@ -1,6 +1,12 @@
 module.exports = {
   ifCond : (a, b, options) => {
-    if (a.toString() === b.toString()) {
+    if (typeof a === 'object') {
+      a = a.toString()
+    }
+    if (typeof b === 'object') {
+      b = b.toString()
+    }
+    if (a === b) {
       return options.fn(this)
     } else {
       return options.inverse(this)
