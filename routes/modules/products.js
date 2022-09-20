@@ -136,13 +136,13 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
     .catch(err => console.error(err))
   }
 })
-// 未做好
+
 router.get('/:productId', (req, res) => {
   const productId = req.params.productId
   return Product
     .findById(productId)
     .lean()
-    .then(product => {console.log(product)
+    .then(product => {
       return res.render('admin/product', { product })
     })
     .catch(err => console.error(err))
