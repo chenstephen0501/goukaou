@@ -227,4 +227,16 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
   }
 })
 
+router.delete('/:productId', (req, res) => {
+  const productId = req.params.productId
+  return Product
+    .findById(productId)
+    .lean()
+    .then(product => {
+      return Product.deleteOne({ _id: productId })
+    })
+    .then(()=> res.redirect('back'))
+    .catch(err => console.error(err))
+})
+
 module.exports = router
