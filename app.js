@@ -6,6 +6,8 @@ const express = require('express');
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const flash = require('connect-flash')
+const session = require('express-session')
 
 const helpers = require('./tools/helpers.js')
 
@@ -21,6 +23,18 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/upload', express.static(__dirname + '/upload'))
+app.use(session({
+  cookie: { maxAge: 60000 },
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}))
+app.use(flash())
+
+app.use((req, res, next) => {
+  res.locals.success_messages = req.flash('success_messages')
+  next()
+})
 
 app.use(routes)
 

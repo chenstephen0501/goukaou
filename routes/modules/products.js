@@ -135,6 +135,7 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
         modelId
       })
         .then(product => {
+          req.flash('success_messages', '成功新增產品。')
           return res.redirect('/admin/products')
         })
     })

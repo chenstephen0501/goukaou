@@ -23,8 +23,7 @@ router.post('/', async (req, res) => {
     
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      // port: 587,
-      secure: false, // true for 465, false for other ports
+      secure: false, 
       service: 'gmail',
       auth: {
           user: process.env.EMAIL_USERNAME,
@@ -53,8 +52,6 @@ router.post('/', async (req, res) => {
       text: 'Hello world?',
       html: output,
     })
-    console.log('Message sent: %s', info.messageId)
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
     res.render('contact', { msg_success })
   } catch (err) {
     console.warn(err)
