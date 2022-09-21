@@ -109,7 +109,6 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
   let ImgUrlData
-
   if (sampleImg || imgUrl) {
     return Promise.all([
       // localFileHandler(sampleImg),
@@ -141,10 +140,13 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
     })
       .catch(err => console.error(err))
   } else {
-    return Category
-      .find()
-      .then(categories => {
+    return Promise.all([
+      Category.find(),
+      Model.find()
+    ])
+      .then(([categories, models]) => {
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+        const model = models.find(item => item._id.toString() === modelId.toString()).name
         return Product.create({
           name,
           category,
@@ -159,6 +161,7 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
         })
       })
       .then(product => {
+        req.flash('success_messages', '成功新增產品。')
         return res.redirect('/admin/products')
       })
       .catch(err => console.error(err))

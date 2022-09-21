@@ -15,6 +15,7 @@ const onSaleImg = require('./modules/onsale-img.js')
 const offSaleImg = require('./modules/offsale-img.js')
 const zenTaiSuit = require('./modules/zentai-suit.js')
 const contact = require('./modules/contact.js')
+const register = require('./modules/register.js')
 
 // use admin 
 router.use('/admin/login', login)
@@ -29,6 +30,7 @@ router.use('/onsale-img', onSaleImg)
 router.use('/offsale-img', offSaleImg)
 router.use('/zentai-suit', zenTaiSuit)
 router.use('/contact', contact)
+router.use('/register', register)
 
 router.use('/', home)
 module.exports = router
