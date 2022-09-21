@@ -5,12 +5,14 @@ const multer = require('multer')
 const upload = multer({ dest: 'temp/' })
 
 const fs = require('fs')
+const imgur = require('imgur')
+imgur.setClientId(process.env.IMGUR_CLIENT_ID)
 
 const Product = require('../../models/product.js')
 const Category = require('../../models/category.js')
 const Model = require('../../models/model.js')
 
-const getSampleImg = file => {
+const localFileHandler = file => {
   return new Promise((resolve, reject) => {
     if (!file) return resolve(null)
     const fileName = `upload/${file[0].originalname}`
@@ -22,7 +24,7 @@ const getSampleImg = file => {
     })
   })
 }
-const getImgUrl = files => {
+const localManyFileHandler = files => {
   if (!files) return null
   return Promise.all(
     files.map((file, fileIndex) => {
@@ -34,14 +36,37 @@ const getImgUrl = files => {
     .catch(err => console.log(err))
 }
 
+const imgurFileHandler = file => {
+  return new Promise((resolve, reject) => {
+    if (!file) return resolve(null)
+    imgur.uploadFile(file[0].path)
+      .then(img => {
+        resolve(img ? img.link : null)
+      })
+      .catch(err => reject(err))
+  })
+}
+const imgurManyFileHandler = files => {
+  if (!files) return null
+  return Promise.all(
+    files.map((file, fileIndex) => {
+      const fileName = file.originalname
+      return imgur.uploadFile(file.path)
+        .then(img => {
+          return { name: fileName, url:img.link } 
+        })
+    }))
+    .catch(err => console.error(err))
+}
+
 router.get('/', (req, res) => {
   const DEFAULT_LIMIT = 8
   const limit = Number(req.params.limit) || DEFAULT_LIMIT
   const page = Number(req.query.page) || 1
   const getSkip = (page = 1, limit = 8) => ((page - 1) * limit)
-  const getPagenation = (page = 1, limit = 8, total = 50 ) => {
+  const getPagenation = (page = 1, limit = 8, total = 50) => {
     const totalPage = Math.ceil(total / limit)
-    const pages = Array.from({ length: totalPage }, (_,index) => index + 1)
+    const pages = Array.from({ length: totalPage }, (_, index) => index + 1)
     const currentPage = page < 1 ? 1 : page > totalPage ? totalPage : page
     const prev = currentPage - 1 ? currentPage - 1 : 1
     const next = currentPage + 1 ? currentPage + 1 : totalPage
@@ -55,10 +80,10 @@ router.get('/', (req, res) => {
   }
   return Promise.all([
     Product.find()
-    .lean()
-    .sort({ _id: 'asc'})
-    .limit(limit)
-    .skip(getSkip(page, limit)),
+      .lean()
+      .sort({ _id: 'asc' })
+      .limit(limit)
+      .skip(getSkip(page, limit)),
     Product.countDocuments()
   ])
     .then(([products, productCount]) => {
@@ -70,7 +95,7 @@ router.get('/', (req, res) => {
 router.get('/create', (req, res) => {
   return Promise.all([
     Category.find().lean(),
-    Model.find().lean()   
+    Model.find().lean()
   ])
     .then(([categories, models]) => {
       return res.render('admin/create-product', { categories, models })
@@ -84,11 +109,13 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
   let ImgUrlData
-  
+
   if (sampleImg || imgUrl) {
     return Promise.all([
-      getSampleImg(sampleImg),
-      getImgUrl(imgUrl),
+      // localFileHandler(sampleImg),
+      // localManyFileHandler(imgUrl),
+      imgurFileHandler(sampleImg),
+      imgurManyFileHandler(imgUrl),
       Category.find(),
       Model.find()
     ]).then(([productSampleImg, productImgUrl, categories, models]) => {
@@ -113,27 +140,27 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
     })
       .catch(err => console.error(err))
   } else {
-  return Category
-    .find()
-    .then(categories => {
-      const category = categories.find(item => item._id.toString() === categoryId.toString()).name
-      return Product.create({
-        name,
-        category,
-        model,
-        basePrice,
-        highestPrice,
-        production,
-        introduction,
-        sampleImg: null,
-        imgUrl: null,
-        categoryId
-      })    
-    })
-    .then(product => {
-      return res.redirect('/admin/products')
-    })
-    .catch(err => console.error(err))
+    return Category
+      .find()
+      .then(categories => {
+        const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+        return Product.create({
+          name,
+          category,
+          model,
+          basePrice,
+          highestPrice,
+          production,
+          introduction,
+          sampleImg: null,
+          imgUrl: null,
+          categoryId
+        })
+      })
+      .then(product => {
+        return res.redirect('/admin/products')
+      })
+      .catch(err => console.error(err))
   }
 })
 
@@ -158,7 +185,7 @@ router.get('/:productId/edit', (req, res) => {
     .then(([product, categories, models]) => {
       return res.render('admin/edit-product', { product, categories, models })
     })
-    .catch(err => console.error(err)) 
+    .catch(err => console.error(err))
 })
 
 router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
@@ -169,35 +196,37 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
   let sampleImgData
   let ImgUrlData
   if (sampleImg || imgUrl) {
-  return Promise.all([
-    getSampleImg(sampleImg),
-    getImgUrl(imgUrl),
-    Product.findById(productId).lean(),
-    Category.find().lean(),
-    Model.find().lean()
-  ])
-    .then(([productSampleImg, productImgUrl, product, categories, models]) => {
-      const category = categories.find(item => item._id.toString() === categoryId.toString()).name
-      const model = models.find(item => item._id.toString() === modelId.toString()).name
-      return Product.updateOne({ _id: productId }, 
-        {
-          name,
-          category,
-          model,
-          basePrice,
-          highestPrice,
-          production,
-          introduction,
-          sampleImg: sampleImg ? productSampleImg : product.sampleImg,
-          imgUrl: imgUrl? productImgUrl : product.imgUrl,
-          categoryId,
-          modelId
-        })
-    })
-    .then(() => {
-      return res.redirect('/admin/products')
-    })
-    .catch(err => console.error(err))
+    return Promise.all([
+      // localFileHandler(sampleImg),
+      // localManyFileHandler(imgUrl),
+      imgurFileHandler(sampleImg),
+      imgurManyFileHandler(imgUrl),
+      Product.findById(productId).lean(),
+      Category.find().lean(),
+      Model.find().lean()
+    ])
+      .then(([productSampleImg, productImgUrl, product, categories, models]) => {
+        const category = categories.find(item => item._id.toString() === categoryId.toString()).name
+        const model = models.find(item => item._id.toString() === modelId.toString()).name
+        return Product.updateOne({ _id: productId },
+          {
+            name,
+            category,
+            model,
+            basePrice,
+            highestPrice,
+            production,
+            introduction,
+            sampleImg: sampleImg ? productSampleImg : product.sampleImg,
+            imgUrl: imgUrl ? productImgUrl : product.imgUrl,
+            categoryId,
+            modelId
+          })
+      })
+      .then(() => {
+        return res.redirect('/admin/products')
+      })
+      .catch(err => console.error(err))
   } else {
     return Promise.all([
       Product.findById(productId).lean(),
@@ -222,7 +251,7 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
             modelId
           })
       })
-      .then(() =>  res.redirect('/admin/products'))
+      .then(() => res.redirect('/admin/products'))
       .catch(err => console.error(err))
   }
 })
@@ -235,7 +264,7 @@ router.delete('/:productId', (req, res) => {
     .then(product => {
       return Product.deleteOne({ _id: productId })
     })
-    .then(()=> res.redirect('back'))
+    .then(() => res.redirect('back'))
     .catch(err => console.error(err))
 })
 

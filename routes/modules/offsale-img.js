@@ -6,7 +6,7 @@ router.get('/:_id', (req, res) => {
   const _id = req.params._id
   return Product.findOne({ _id })
     .lean()
-    .then((product) => {
+    .then((product) => {console.log(product)
       res.render('offsale-img', { product: product })
     })
     .catch((err) => console.error(err))
