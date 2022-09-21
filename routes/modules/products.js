@@ -157,7 +157,8 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
           introduction,
           sampleImg: null,
           imgUrl: null,
-          categoryId
+          categoryId,
+          modelId
         })
       })
       .then(product => {
