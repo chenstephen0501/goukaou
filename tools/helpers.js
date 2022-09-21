@@ -6,6 +6,12 @@ module.exports = {
     if (typeof b === 'object') {
       b = b.toString()
     }
+    if (typeof a === 'boolean') {
+      a = a.toString()
+    }
+    if (typeof b === 'boolean') {
+      b = b.toString()
+    }
     if (a === b) {
       return options.fn(this)
     } else {
