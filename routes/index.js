@@ -18,7 +18,6 @@ const contact = require('./modules/contact.js')
 const register = require('./modules/register.js')
 
 // use admin 
-router.use('/admin/login', login)
 router.use('/admin/products', products)
 router.use('/admin/categories', categories)
 router.use('/admin/models', models)
@@ -31,6 +30,7 @@ router.use('/offsale-img', offSaleImg)
 router.use('/zentai-suit', zenTaiSuit)
 router.use('/contact', contact)
 router.use('/register', register)
+router.use('/login', login)
 
 router.use('/', home)
 module.exports = router

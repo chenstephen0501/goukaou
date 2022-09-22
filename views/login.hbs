@@ -1,9 +1,9 @@
 <div class="row admin-login-page">
   <div class="col-xl-4 col-md-5 col-sm-8 m-auto">
     <div class="card card-body">
-      <h1 class='h1 font-weight-normal mb-3 text-center'>Backstage Login </h1>
+      <h1 class='h1 font-weight-normal mb-3 text-center'>Login</h1>
       {{> messages}}
-      <form class='form-login-admin' action='/login/admin' method='POST'>
+      <form class='form-login' action='/login' method='POST'>
         <div class='form-row mb-3'>
           <label class='form-label' for='email'>Email</label>
           <input class='form-control' id='email' type='text' name='email' class='form-control' placeholder='Email'
@@ -14,8 +14,12 @@
           <input class='form-control' id='password' type='password' name='password' class='form-control'
             placeholder='Password' required />
         </div>
-        <button class='mb-5 btn btn-primary btn-block-inline' type='submit'>Submit</button>
+        <button class='mb-2 btn btn-primary btn-block-inline' type='submit'>Submit</button>
       </form>
+      <p class='lead mt-4'>
+        No Account?
+        <a href='/register'>Register</a>
+      </p>
     </div>
   </div>
 </div>

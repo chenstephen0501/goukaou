@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
+const passport = require('./config/passport.js')
 
 const helpers = require('./tools/helpers.js')
 
@@ -30,8 +31,12 @@ app.use(session({
   saveUninitialized: true,
 }))
 app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use((req, res, next) => {
+  console.log(req)
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   next()

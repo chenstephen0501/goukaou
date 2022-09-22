@@ -1,30 +1,32 @@
-<div class="col-md-10 col-sm-8 mx-auto mt-2">
-  {{> messages}}
-</div>
 <div class="row admin-login-page">
   <div class="col-xl-4 col-md-5 col-sm-8 m-auto">
     <div class="card card-body">
       <h1 class='h1 font-weight-normal mb-3 text-center'>Register</h1>
+  {{> messages}}
       <form class='form-signin' action='/register' method='POST'>
         <div class='form-row mb-3'>
           <label class='form-label' for='email'>Email</label>
-          <input class='form-control' id='email' type='text' name='email' class='form-control' placeholder='Email'
-            required autofocus />
+          <input class='form-control' id='email' type='text' name='email' class='form-control' placeholder='Email' 
+          value="{{email}}"
+             autofocus />
         </div>
         <div class='form-row mb-3'>
           <label class='form-label' for='email'>Name</label>
-          <input class='form-control' id='name' type='text' name='name' class='form-control' placeholder='name'
-            required />
+          <input class='form-control' id='name' type='text' name='name' class='form-control' placeholder='name' 
+          value="{{name}}"
+             />
         </div>
         <div class='form-row mb-3'>
           <label class='form-label' for='password'>Password</label>
           <input class='form-control' id='password' type='password' name='password' class='form-control'
-            placeholder='Password' required />
+            placeholder='Password' 
+            value="{{password}}"  />
         </div>
         <div class='form-row mb-3'>
-          <label class='form-label' for='password'>checkPassword</label>
-          <input class='form-control' id='checkPassword' type='password' name='checkPassword' class='form-control'
-            placeholder='checkPassword' required />
+          <label class='form-label' for='password'>passwordCheck</label>
+          <input class='form-control' id='passwordCheck' type='password' name='passwordCheck' class='form-control'
+            placeholder='passwordCheck' 
+            value="{{passwordCheck}}"  />
         </div>
         <button class='mb-2 btn btn-primary btn-block-inline' type='submit'>Submit</button>
       </form>
