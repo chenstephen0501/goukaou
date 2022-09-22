@@ -11,6 +11,7 @@ const session = require('express-session')
 const passport = require('./config/passport.js')
 
 const helpers = require('./tools/helpers.js')
+const { getUser } = require('./tools/auth-helpers.js')
 
 const routes = require('./routes')
 
@@ -36,9 +37,9 @@ app.use(passport.session())
 
 
 app.use((req, res, next) => {
-  console.log(req)
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
+  res.locals.user = req.user
   next()
 })
 

@@ -78,9 +78,13 @@ body {
   margin: 5px 12px 0;
   color: #FD8537;
 }
-
 .iconBtn > a :hover {
-  color: #FD8537;
+  color: salmon;
+}
+.footer-content {
+  display: flex;
+  justify-content: center;
+  padding: auto;
 }
 
 #goukaou-card {

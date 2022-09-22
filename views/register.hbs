@@ -8,25 +8,25 @@
           <label class='form-label' for='email'>Email</label>
           <input class='form-control' id='email' type='text' name='email' class='form-control' placeholder='Email' 
           value="{{email}}"
-             autofocus />
+             required autofocus />
         </div>
         <div class='form-row mb-3'>
           <label class='form-label' for='email'>Name</label>
           <input class='form-control' id='name' type='text' name='name' class='form-control' placeholder='name' 
           value="{{name}}"
-             />
+            required />
         </div>
         <div class='form-row mb-3'>
           <label class='form-label' for='password'>Password</label>
           <input class='form-control' id='password' type='password' name='password' class='form-control'
             placeholder='Password' 
-            value="{{password}}"  />
+            value="{{password}}" required />
         </div>
         <div class='form-row mb-3'>
           <label class='form-label' for='password'>passwordCheck</label>
           <input class='form-control' id='passwordCheck' type='password' name='passwordCheck' class='form-control'
             placeholder='passwordCheck' 
-            value="{{passwordCheck}}"  />
+            value="{{passwordCheck}}" required />
         </div>
         <button class='mb-2 btn btn-primary btn-block-inline' type='submit'>Submit</button>
       </form>
