@@ -17,8 +17,10 @@ router.get('/backstage', (req, res) => {
   res.render('admin/login')
 }),
 
-router.post('/backstage', (req, res) => {
-  res.render('admin/login')
-})
+router.post('/backstage', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login/admin',
+  failureFlash: true
+}))
 
 module.exports = router
