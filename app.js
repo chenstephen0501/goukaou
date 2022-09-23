@@ -1,8 +1,9 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-require('./config/mongoose.js');
-const express = require('express');
+require('./config/mongoose.js')
+const path = require('path')
+const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -24,7 +25,7 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-app.use('/upload', express.static(__dirname + '/upload'))
+app.use('/upload', express.static(path.join(__dirname + 'upload')))
 app.use(session({
   cookie: { maxAge: 60000 },
   secret: process.env.SESSION_SECRET,
@@ -39,6 +40,7 @@ app.use(passport.session())
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
+  res.locals.warning_messages = req.flash('warning_messages')
   res.locals.user = req.user
   next()
 })

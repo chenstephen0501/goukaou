@@ -229,6 +229,7 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
           })
       })
       .then(() => {
+        req.flash('success_messages', '成功編輯產品。')
         return res.redirect('/admin/products')
       })
       .catch(err => console.error(err))
@@ -256,7 +257,10 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
             modelId
           })
       })
-      .then(() => res.redirect('/admin/products'))
+      .then(() => {
+        req.flash('success_messages', '成功編輯產品。')
+        res.redirect('/admin/products') 
+      })
       .catch(err => console.error(err))
   }
 })

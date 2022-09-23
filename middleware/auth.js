@@ -4,15 +4,20 @@ const authenticated = (req, res, next) => {
   if (ensureAuthenticated(req)) {
     return next()
   }
-  res.redirect('login')
+  req.flash('warning_messages', '請先登入才能使用。')
+  res.redirect('/login')
 }
 const authenticatedAdmin = (req, res, next) => {
   if (ensureAuthenticated(req)) {
     if (getUser(req).isAdmin) return next()
     res.redirect('/')
   } else {
-    res.redirect('login')
+    req.flash('warning_messages', '請先登入才能使用。')
+    res.redirect('/login/backstage')
   }
 }
 
-module.exports = { authenticated, authenticatedAdmin }
+module.exports = {
+   authenticated,
+    authenticatedAdmin 
+  }
