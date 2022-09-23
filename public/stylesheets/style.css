@@ -339,15 +339,23 @@ body {
 #carouselExampleCaptions:hover  .carousel-control-next {
   display: block;
 }
-.admin-login-page  .card{
+
+.login-page .card, .register-page .card {
   background-color: #ffe7dd;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   box-shadow: 5px 5px 5px rgba(190, 87, 31, 0.76);
 }
-.admin-prducts-page .card{
+
+.admin-login-page  .card{
   background-color: #ffe7dd;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   box-shadow: 5px 5px 5px rgba(190, 87, 31, 0.76);
+}
+.admin-edit-products-page .card, .admin-create-products-page .card {
+  background-color: #ddf8d2;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px rgba(126, 245, 152, 0.76);
 }

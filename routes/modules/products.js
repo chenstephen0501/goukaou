@@ -3,60 +3,12 @@ const router = express.Router()
 
 const upload = require('../../middleware/multer.js')
 const { getSkip, getPagenation } = require('../../tools/pagination.js')
-const fs = require('fs')
-const imgur = require('imgur')
-imgur.setClientId(process.env.IMGUR_CLIENT_ID)
+const { localFileHandler, localManyFileHandler, imgurFileHandler, imgurManyFileHandler
+} = require('../../tools/file-heplers.js')
 
 const Product = require('../../models/product.js')
 const Category = require('../../models/category.js')
 const Model = require('../../models/model.js')
-
-const localFileHandler = file => {
-  return new Promise((resolve, reject) => {
-    if (!file) return resolve(null)
-    const fileName = `upload/${file[0].originalname}`
-    fs.readFile(file[0].path, (err, data) => {
-      if (err) return reject('Error: ', err)
-      fs.writeFile(fileName, data, () => {
-        return resolve(`/${fileName}`)
-      })
-    })
-  })
-}
-const localManyFileHandler = files => {
-  if (!files) return null
-  return Promise.all(
-    files.map((file, fileIndex) => {
-      const fileName = `upload/${file.originalname}`
-      return fs.promises.readFile(file.path)
-        .then(data => fs.promises.writeFile(fileName, data))
-        .then((data) => ({ name: file.originalname, url: `/${fileName}` }))
-    }))
-    .catch(err => console.log(err))
-}
-
-const imgurFileHandler = file => {
-  return new Promise((resolve, reject) => {
-    if (!file) return resolve(null)
-    imgur.uploadFile(file[0].path)
-      .then(img => {
-        resolve(img ? img.link : null)
-      })
-      .catch(err => reject(err))
-  })
-}
-const imgurManyFileHandler = files => {
-  if (!files) return null
-  return Promise.all(
-    files.map((file, fileIndex) => {
-      const fileName = file.originalname
-      return imgur.uploadFile(file.path)
-        .then(img => {
-          return { name: fileName, url:img.link } 
-        })
-    }))
-    .catch(err => console.error(err))
-}
 
 router.get('/', (req, res) => {
   const DEFAULT_LIMIT = 8
@@ -88,20 +40,33 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
-  const { name, categoryId, model, basePrice, highestPrice, production, introduction, modelId } = req.body
+  const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
   const { files } = req.files
   const { sampleImg, imgUrl } = req.files
   let sampleImgData
   let ImgUrlData
+  console.log('name', typeof name)
+  if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId ) {
+    console.log(req.body)
+    console.log('In here.')
+    req.flash('error_messages', "新增的產品所有欄位都要填寫。")
+    return res.redirect('back')
+  }
   if (sampleImg || imgUrl) {
     return Promise.all([
+      Product.findOne({ name }).lean(),
       // localFileHandler(sampleImg),
       // localManyFileHandler(imgUrl),
       imgurFileHandler(sampleImg),
       imgurManyFileHandler(imgUrl),
       Category.find(),
       Model.find()
-    ]).then(([productSampleImg, productImgUrl, categories, models]) => {
+    ]).then(([product, productSampleImg, productImgUrl, categories, models]) => {
+      console.log(product)
+      if (product) {
+        req.flash('error_messages', '這個名稱己用過，請更換!')
+        return res.redirect('back')
+      }
       const category = categories.find(item => item._id.toString() === categoryId.toString()).name
       const model = models.find(item => item._id.toString() === modelId.toString()).name
       return Product.create({
@@ -125,10 +90,16 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       .catch(err => console.error(err))
   } else {
     return Promise.all([
+      Product.findOne({ name }).lean(),
       Category.find(),
       Model.find()
     ])
-      .then(([categories, models]) => {
+      .then(([product, categories, models]) => {
+        console.log(product)
+        if (product) {
+          req.flash('error_messages', '這個名稱己用過，請更換!')
+          return res.redirect('back')
+        }
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
         const model = models.find(item => item._id.toString() === modelId.toString()).name
         return Product.create({

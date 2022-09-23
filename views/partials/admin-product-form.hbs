@@ -26,13 +26,13 @@
   <label class='form-label' for='basePrice'>
     BasePrice</label>
   <input class='form-control' type='number' name='basePrice' id='basePrice' placeholder='Enter basePrice'
-    value="{{product.basePrice}}" />
+    value="{{product.basePrice}}" required/>
 </div>
 <div class='form-row mb-3'>
   <label class='form-label' for='highestPrice'>
     HighestPrice</label>
   <input class='form-control' type='number' name='highestPrice' id='highestPrice' placeholder='Enter highestPrice'
-    value="{{product.highestPrice}}" />
+    value="{{product.highestPrice}}" required/>
 </div>
 <div class='form-row mb-3'>
   <label class='form-label' for='production'>Production</label>
@@ -43,7 +43,7 @@
 </div>
 <div class='form-row mb-3'>
   <label class='form-label' for='introduction'>Introduction</label>
-  <textarea class='form-control' id='introduction' name='introduction' rows='3'>{{product.introduction}}</textarea>
+  <textarea class='form-control' id='introduction' name='introduction' placeholder='Enter introduction' rows='3'>{{product.introduction}}</textarea>
 </div>
 <div class="form-row mb-3">
   <label for="sampleImg" class="form-label">SampleImg</label>
@@ -69,5 +69,5 @@
   <label for="sampleImg" class="form-label">image5</label>
   <input type="file" class="form-control" class="form-control-file" id="imgUrl" name="imgUrl">
 </div>
-<button type='submit' class='btn btn-primary'>Submit</button>
+<button type='submit' class='btn btn-primary my-2'>Submit</button>
 <a class='btn btn-outline-secondary' href='javascript:history.back()'>Back</a>

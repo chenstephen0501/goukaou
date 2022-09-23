@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const productSchema = new Schema({
   name: {
     type: String,
-    required: false,
+    required: true,
   },
   model: {
     type: String,
@@ -15,7 +15,7 @@ const productSchema = new Schema({
   },
   introduction: {
     type: String,
-    required: true,
+    required: false,
   },
   category: {
     type: String,
@@ -27,7 +27,7 @@ const productSchema = new Schema({
   },
   highestPrice: {
     type: Number,
-    require: false,
+    require: true,
   },
   categoryId: {
     type: Schema.Types.ObjectId,

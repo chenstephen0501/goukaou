@@ -32,6 +32,7 @@ router.post('/', (req, res) => {
         req.flash('error_messages', '此名字己被使用。')
         return res.redirect('back')
       }
+      console.log('out')
       return bcrypt.genSalt(10)
     })
     .then(salt => bcrypt.hash(password, salt))
@@ -44,7 +45,7 @@ router.post('/', (req, res) => {
     })
     .then((user) => {
       req.flash('success_messages', '註冊成功。')
-      return res.render('admin/login')
+      return res.redirect('/login')
     })
     .catch(err => console.error(err))
 })

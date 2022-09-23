@@ -7,9 +7,13 @@ router.get('/', (req, res) => {
 }),
 
 router.post('/', passport.authenticate('local', {
-  successRedirect: '/',
+  // successRedirect: '/',
+  // failureRedirect: '/login',
+  // failureFlash: true
+  successReturnToOrRedirect: '/',
   failureRedirect: '/login',
-  failureFlash: true
+  failureMessage: true,
+  keepSessionInfo: true 
  })
 )
 
@@ -19,7 +23,7 @@ router.get('/backstage', (req, res) => {
 
 router.post('/backstage', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login/admin',
+  failureRedirect: '/login/backstage',
   failureFlash: true
 }))
 

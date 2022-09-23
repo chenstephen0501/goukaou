@@ -1,10 +1,12 @@
 <div class="row admin-edit-products-page">
   <div class="col-md-6 col-sm-6 m-auto">
-    <form action='/admin/products/{{product._id}}?_method=PUT' method='POST' enctype="multipart/form-data">
-      <div class='mb-4 text-center'>
-        <h1 class='h3 font-weight-normal my-4'>Edit Product</h1>
-      </div>
-      {{> admin-product-form}}
-    </form>
+    <div class="card-body card">
+      <form action='/admin/products/{{product._id}}?_method=PUT' method='POST' enctype="multipart/form-data">
+        <div class='mb-3 text-center'>
+          <h1 class='h3 font-weight-normal my-2'>Edit Product</h1>
+        </div>
+        {{> admin-product-form}}
+      </form>
+    </div>
   </div>
 </div>
