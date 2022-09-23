@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const upload = require('../../middleware/multer.js')
-
+const { getSkip, getPagenation } = require('../../tools/pagination.js')
 const fs = require('fs')
 const imgur = require('imgur')
 imgur.setClientId(process.env.IMGUR_CLIENT_ID)
@@ -62,21 +62,6 @@ router.get('/', (req, res) => {
   const DEFAULT_LIMIT = 8
   const limit = Number(req.params.limit) || DEFAULT_LIMIT
   const page = Number(req.query.page) || 1
-  const getSkip = (page = 1, limit = 8) => ((page - 1) * limit)
-  const getPagenation = (page = 1, limit = 8, total = 50) => {
-    const totalPage = Math.ceil(total / limit)
-    const pages = Array.from({ length: totalPage }, (_, index) => index + 1)
-    const currentPage = page < 1 ? 1 : page > totalPage ? totalPage : page
-    const prev = currentPage - 1 ? currentPage - 1 : 1
-    const next = currentPage + 1 ? currentPage + 1 : totalPage
-    return {
-      totalPage,
-      pages,
-      prev,
-      next,
-      currentPage
-    }
-  }
   return Promise.all([
     Product.find()
       .lean()
