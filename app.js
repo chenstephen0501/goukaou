@@ -11,7 +11,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('./config/passport.js')
 
-const helpers = require('./tools/helpers.js')
+const handlebarsHelpers = require('./tools/handlebars-helpers.js')
 const { getUser } = require('./tools/auth-helpers.js')
 
 const routes = require('./routes')
@@ -19,7 +19,7 @@ const routes = require('./routes')
 const app = express();
 const PORT = process.env.PORT 
 
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: helpers }))
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
