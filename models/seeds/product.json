@@ -116,7 +116,7 @@
     ]
   },
   {
-    "name": "",
+    "name": "Doll-1",
     "category": "zentai",
     "model": "ZENTAI SUIT GPZ-02",
     "basePrice": 0,
@@ -135,9 +135,8 @@
       }
     ]
   },
-
   {
-    "name": "",
+    "name": "Doll-1",
     "category": "zentai",
     "model": "ZENTAI SUIT GPZ-02-C",
     "basePrice": 150,
@@ -157,7 +156,7 @@
     ]
   },
   {
-    "name": "",
+    "name": "Doll-2",
     "category": "zentai",
     "model": "Super Thick Zentai Suit GPZ-03",
     "basePrice": 200,
@@ -177,7 +176,7 @@
     ]
   },
   {
-    "name": null,
+    "name": "Doll-3",
     "category": "zentai",
     "model": "Zentai Suit GPZ-04",
     "basePrice": 135,

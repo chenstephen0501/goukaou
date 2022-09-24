@@ -5,11 +5,6 @@ const passport = require('passport')
 router.get('/', (req, res, next) => {
   req.flash('success_messages', '成功登出')
   res.redirect('/login')
-  // req.logout((err) => {
-  //   if (err) { return next() }
-  //   req.flash('sucesss_messages', '成功登出。')
-  //   res.redirect('/login')
-  // }) 
 })
 
 module.exports = router
