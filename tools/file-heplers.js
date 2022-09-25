@@ -17,7 +17,7 @@ const localFileHandler = file => {
 const localManyFileHandler = files => {
   if (!files) return null
   return Promise.all(
-    files.map((file, fileIndex) => {
+    files.map((file, _fileIndex) => {
       const fileName = `upload/${file.originalname}`
       return fs.promises.readFile(file.path)
         .then(data => fs.promises.writeFile(fileName, data))
@@ -39,7 +39,7 @@ const imgurFileHandler = file => {
 const imgurManyFileHandler = files => {
   if (!files) return null
   return Promise.all(
-    files.map((file, fileIndex) => {
+    files.map((file, _fileIndex) => {
       const fileName = file.originalname
       return imgur.uploadFile(file.path)
         .then(img => {

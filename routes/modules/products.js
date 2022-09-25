@@ -43,12 +43,9 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
   const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
   const { files } = req.files
   const { sampleImg, imgUrl } = req.files
-  let sampleImgData
-  let ImgUrlData
-  console.log('name', typeof name)
+  // let sampleImgData
+  // let ImgUrlData
   if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId ) {
-    console.log(req.body)
-    console.log('In here.')
     req.flash('error_messages', "新增的產品所有欄位都要填寫。")
     return res.redirect('back')
   }
@@ -62,7 +59,6 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       Category.find(),
       Model.find()
     ]).then(([product, productSampleImg, productImgUrl, categories, models]) => {
-      console.log(product)
       if (product) {
         req.flash('error_messages', '這個名稱己用過，請更換!')
         return res.redirect('back')
@@ -95,7 +91,6 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       Model.find()
     ])
       .then(([product, categories, models]) => {
-        console.log(product)
         if (product) {
           req.flash('error_messages', '這個名稱己用過，請更換!')
           return res.redirect('back')
