@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { authenticated, authenticatedAdmin } = require('../middleware/auth.js')
+const { generalErrorHandler } = require('../middleware/error-handler.js')
 
 // admin
 const products = require('./modules/products.js')
@@ -47,4 +48,5 @@ router.use('/register', register)
 router.use('/', home)
 // router.use('/', authenticated, home)
 
+router.use('/', generalErrorHandler)
 module.exports = router
