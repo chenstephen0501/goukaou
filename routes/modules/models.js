@@ -8,38 +8,43 @@ router.get('/', (req, res) => {
     .find()
     .lean()
     .then(models => {
-      return res.render('admin/model', { models })
+      return res.render('admin/models', { models })
     })
 })
 
 router.post('/', (req, res) => {
   const { name } = req.body
-  if (!name) { 
-    return res.redirect('back')
-  }
+  if (!name) throw new Error('模型名稱不能為空!')
   return Promise.all([
     Model.find().lean(),
     Model.findOne({ name }).lean()
   ]) 
     .then(([models, model]) => {
-      if (!model) {
-        return Model.create({ name })
-          .then(() => res.redirect('back'))
+      if (!models) throw new Error('找不到所有模型資料!')
+      if (model) {
+        return res.render('admin/models', { models, model })
       }
-      return res.render('admin/model', { models, model })
+      return Model.create({ name })
+        .then(() => {
+          req.flash('success_messages', '新增模型成功。')
+          return res.redirect('back')
+        })
     })
     .catch(err => console.error(err))
 })
 
-router.get('/:modelId', (req, res) => {
+router.get('/:modelId', (req, res, next) => {
   const modelId = req.params.modelId
   return Promise.all([
     Model.find().lean(),
-    Model.findById({ _id: modelId }).lean()
+    Model.findById(modelId).lean()
   ])
     .then(([models, model]) => {
-      return res.render('admin/model' ,{ models, model })
+      if (!models) throw new Error('找不到所有模型資料!')
+      if (!model) throw new Error('找不到這個模型資料!')
+      return res.render('admin/models', { models, model })
     })
+    .catch(err => next(err))
 })
 
 router.put('/:modelId', (req, res) => {
@@ -48,17 +53,24 @@ router.put('/:modelId', (req, res) => {
   if (!name) {
     return res.redirect('back')
   }
-  return Model
-    .find({ _id: { $nin: [modelId] } })
-    .lean()
-    .then((models) => {
+  return Promise.all([
+    Model.find({ _id: { $nin: [modelId] } }).lean(),
+    Model.findById(modelId).lean()
+  ]) 
+    .then(([models, model]) => {
+      if (!models) throw new Error('找不到所有模型資料!')
+      if (!model) throw new Error('找不到這個模型資料!')
       const checkModel = models.some(item => item.name === name)
       if (checkModel) {
+        req.flash('error_messages', '這個名稱已被使用!')
         return res.redirect('back')
       }
       return Model.updateOne({ _id: modelId }, { name })
     })
-    .then(() => res.redirect('/admin/models'))
+    .then(() => {
+      req.flash('success_messages', '編輯成功!')
+      return res.redirect('/admin/models')
+    })
     .catch(err => console.error(err))
 })
 
@@ -66,6 +78,7 @@ router.delete('/:modelId', (req, res) => {
   const modelId = req.params.modelId
   return Model.findById({ _id: modelId })
     .then(model => {
+      if (!model) throw new Error('找不到這個模型資料!')
       return model.remove()
     })
     .then(() => res.redirect('/admin/models'))

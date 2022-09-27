@@ -4,7 +4,7 @@
     {{#if category}}
     <form class="row my-3" action="/admin/categories/{{category._id}}?_method=PUT" method="POST">
       <div class="col-auto my-2">
-        <input class="form-control" type="text" placeholder="name" name="name" value="{{category.name}}">
+        <input class="form-control" type="text" placeholder="name" name="name" value="{{category.name}}" required>
       </div>
       <div class="col-auto my-2">
         <input class="form-control" type="text" placeholder="name_cht" name="name_cht" value="{{category.name_cht}}">

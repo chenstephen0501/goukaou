@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, name_cht } = req.body
-  if (!name) throw new Error('類名名稱不能為空白!')
+  if (!name) throw new Error('類別名稱不能為空白!')
   return Promise.all([
     Category.find().lean(),
     Category.findOne({ name }).lean()
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
       }
       return Category.create({ name, name_cht })
         .then((category) => {
-          req.flash('success_messages', '新增類別。')
+          req.flash('success_messages', '新增類別成功。')
           return res.redirect('/admin/categories')
         })
     })
@@ -56,7 +56,7 @@ router.put('/:categoryId', (req, res) => {
   }
   return Promise.all([
     Category.find({ _id: { $nin: [categoryId] } }).lean(),
-    Category.findById({ _id: categoryId})
+    Category.findById({ _id: categoryId}).lean()
     ])
     .then(([categories, category]) => {
       if (!categories) throw new Error('找不到所有類別資料!')

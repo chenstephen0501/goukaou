@@ -4,7 +4,7 @@
     {{#if model}}
     <form class="row my-3" action="/admin/models/{{model._id}}?_method=PUT" method="POST">
       <div class="col-auto my-2">
-        <input class="form-control" type="text" placeholder="name" name="name" value="{{model.name}}">
+        <input class="form-control" type="text" placeholder="name" name="name" value="{{model.name}}" required>
       </div>
       <div class="col-auto my-2">
         <button class="btn btn-warning" type="submit">Update</button>
