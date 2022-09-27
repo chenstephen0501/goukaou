@@ -23,6 +23,8 @@ router.get('/', (req, res) => {
     Product.countDocuments()
   ])
     .then(([products, productCount]) => {
+      if (!products) throw new Error('找不到產品!')
+      if (!productCount) throw new Error('找不到產品數量!')
       return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
     })
     .catch(err => console.error(err))
@@ -34,35 +36,28 @@ router.get('/create', (req, res) => {
     Model.find().lean()
   ])
     .then(([categories, models]) => {
+      if (!categories) throw new Error('找不到類別資料!')
+      if (!models) throw new Error('找不到模型資料!')
       return res.render('admin/create-product', { categories, models })
     })
     .catch(err => console.error(err))
 })
 
-router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
+router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res, next) => {
   const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
-  const { files } = req.files
   const { sampleImg, imgUrl } = req.files
-  // let sampleImgData
-  // let ImgUrlData
-  if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId ) {
-    req.flash('error_messages', "新增的產品所有欄位都要填寫。")
-    return res.redirect('back')
-  }
+  if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) throw new Error('新增的產品所有欄位都要填寫。')
   if (sampleImg || imgUrl) {
     return Promise.all([
       Product.findOne({ name }).lean(),
-      // localFileHandler(sampleImg),
-      // localManyFileHandler(imgUrl),
       imgurFileHandler(sampleImg),
       imgurManyFileHandler(imgUrl),
       Category.find(),
       Model.find()
     ]).then(([product, productSampleImg, productImgUrl, categories, models]) => {
-      if (product) {
-        req.flash('error_messages', '這個名稱己用過，請更換!')
-        return res.redirect('back')
-      }
+      if (product) throw new Error('這個名稱己用過，請更換!')
+      if (!categories) throw new Error('找不到類別資料!')
+      if (!models) throw new Error('找不到模型資料!')
       const category = categories.find(item => item._id.toString() === categoryId.toString()).name
       const model = models.find(item => item._id.toString() === modelId.toString()).name
       return Product.create({
@@ -83,7 +78,7 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
           return res.redirect('/admin/products')
         })
     })
-      .catch(err => console.error(err))
+      .catch(err => next(err))
   } else {
     return Promise.all([
       Product.findOne({ name }).lean(),
@@ -91,10 +86,9 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       Model.find()
     ])
       .then(([product, categories, models]) => {
-        if (product) {
-          req.flash('error_messages', '這個名稱己用過，請更換!')
-          return res.redirect('back')
-        }
+        if (product) throw new Error('這個名稱己用過，請更換!')
+        if (!categories) throw new Error('找不到類別資料!')
+        if (!models) throw new Error('找不到模型資料!')
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
         const model = models.find(item => item._id.toString() === modelId.toString()).name
         return Product.create({
@@ -115,22 +109,23 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
         req.flash('success_messages', '成功新增產品。')
         return res.redirect('/admin/products')
       })
-      .catch(err => console.error(err))
+      .catch(err => next(err))
   }
 })
 
-router.get('/:productId', (req, res) => {
+router.get('/:productId', (req, res, next) => {
   const productId = req.params.productId
   return Product
     .findById(productId)
     .lean()
     .then(product => {
+      if (!product) throw new Error('找不到此產品!')
       return res.render('admin/product', { product })
     })
-    .catch(err => console.error(err))
+    .catch(err => next(err))
 })
 
-router.get('/:productId/edit', (req, res) => {
+router.get('/:productId/edit', (req, res, next) => {
   const productId = req.params.productId
   return Promise.all([
     Product.findById(productId).lean(),
@@ -138,22 +133,20 @@ router.get('/:productId/edit', (req, res) => {
     Model.find().lean()
   ])
     .then(([product, categories, models]) => {
+      if (!product) throw new Error('找不到這個產品!')
+      if (!categories) throw new Error('找不到類別資料!')
+      if (!models) throw new Error('找不到模型資料!')
       return res.render('admin/edit-product', { product, categories, models })
     })
-    .catch(err => console.error(err))
+    .catch(err => next(err))
 })
 
-router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res) => {
+router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]), (req, res, next) => {
   const productId = req.params.productId
-  const { name, categoryId, model, basePrice, highestPrice, production, introduction, modelId } = req.body
-  const { files } = req.files
+  const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
   const { sampleImg, imgUrl } = req.files
-  let sampleImgData
-  let ImgUrlData
   if (sampleImg || imgUrl) {
     return Promise.all([
-      // localFileHandler(sampleImg),
-      // localManyFileHandler(imgUrl),
       imgurFileHandler(sampleImg),
       imgurManyFileHandler(imgUrl),
       Product.findById(productId).lean(),
@@ -161,6 +154,9 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
       Model.find().lean()
     ])
       .then(([productSampleImg, productImgUrl, product, categories, models]) => {
+        if (!product) throw new Error('找不到這個產品!')
+        if (!categories) throw new Error('找不到類別資料!')
+        if (!models) throw new Error('找不到模型資料!')
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
         const model = models.find(item => item._id.toString() === modelId.toString()).name
         return Product.updateOne({ _id: productId },
@@ -182,7 +178,7 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
         req.flash('success_messages', '成功編輯產品。')
         return res.redirect('/admin/products')
       })
-      .catch(err => console.error(err))
+      .catch(err => next(err))
   } else {
     return Promise.all([
       Product.findById(productId).lean(),
@@ -190,8 +186,12 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
       Model.find().lean()
     ])
       .then(([product, categories, models]) => {
+        if (!product) throw new Error('找不到這個產品!')
+        if (!categories) throw new Error('找不到類別資料!')
+        if (!models) throw new Error('找不到模型資料!')
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
         const model = models.find(item => item._id.toString() === modelId.toString()).name
+        if (!product) throw new Error('找不到這個產品!')
         return Product.updateOne({ _id: productId },
           {
             name,
@@ -209,9 +209,9 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
       })
       .then(() => {
         req.flash('success_messages', '成功編輯產品。')
-        res.redirect('/admin/products') 
+        res.redirect('/admin/products')
       })
-      .catch(err => console.error(err))
+      .catch(err => next(err))
   }
 })
 
@@ -221,6 +221,7 @@ router.delete('/:productId', (req, res) => {
     .findById(productId)
     .lean()
     .then(product => {
+      if (!product) throw new Error('找不到這個產品!')
       return Product.deleteOne({ _id: productId })
     })
     .then(() => res.redirect('back'))

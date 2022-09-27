@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/upload', express.static(path.join(__dirname + 'upload')))
 app.use(session({
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 600000 },
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
