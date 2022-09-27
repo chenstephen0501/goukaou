@@ -1,6 +1,5 @@
 module.exports = {
   generalErrorHandler (err, req, res, next) {
-    console.log('~~~~~~~~~~',err)
     if (err.name === 'CastError') {
       req.flash('error_messages', `${err.name}: 沒有找到ID為 ${err.value}的資源。`)
     } else {

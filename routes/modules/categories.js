@@ -48,7 +48,7 @@ router.get('/:categoryId', (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.put('/:categoryId', (req, res) => {
+router.put('/:categoryId', (req, res, next) => {
   const categoryId = req.params.categoryId
   const { name, name_cht } = req.body
   if (!name) {
@@ -56,7 +56,7 @@ router.put('/:categoryId', (req, res) => {
   }
   return Promise.all([
     Category.find({ _id: { $nin: [categoryId] } }).lean(),
-    Category.findById({ _id: categoryId}).lean()
+    Category.findById(categoryId).lean()
     ])
     .then(([categories, category]) => {
       if (!categories) throw new Error('找不到所有類別資料!')
@@ -67,12 +67,12 @@ router.put('/:categoryId', (req, res) => {
         return res.redirect('back')
       }
       return Category.updateOne({ _id: categoryId }, { name, name_cht })
+        .then(() => {
+          req.flash('success_messages', '編輯成功!')
+          return res.redirect('/admin/categories')
+        })
     })
-    .then(() => {
-      req.flash('success_messages', '編輯成功!')
-      return res.redirect('/admin/categories') 
-    })
-    .catch(err => console.error(err))
+    .catch(err => next(err))
 })
 
 router.delete('/:categoryId', (req, res) => {

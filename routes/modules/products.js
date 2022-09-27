@@ -54,8 +54,8 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       imgurManyFileHandler(imgUrl),
       Category.find(),
       Model.find()
-    ]).then(([product, productSampleImg, productImgUrl, categories, models]) => {
-      if (product) throw new Error('這個名稱己用過，請更換!')
+    ]).then(([checkName, productSampleImg, productImgUrl, categories, models]) => {
+      if (checkName) throw new Error('這個名稱己用過，請更換!')
       if (!categories) throw new Error('找不到類別資料!')
       if (!models) throw new Error('找不到模型資料!')
       const category = categories.find(item => item._id.toString() === categoryId.toString()).name
@@ -85,8 +85,8 @@ router.post('/', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'img
       Category.find(),
       Model.find()
     ])
-      .then(([product, categories, models]) => {
-        if (product) throw new Error('這個名稱己用過，請更換!')
+      .then(([checkName, categories, models]) => {
+        if (checkName) throw new Error('這個名稱己用過，請更換!')
         if (!categories) throw new Error('找不到類別資料!')
         if (!models) throw new Error('找不到模型資料!')
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
@@ -147,13 +147,15 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
   const { sampleImg, imgUrl } = req.files
   if (sampleImg || imgUrl) {
     return Promise.all([
+      Product.findOne({ name }).lean(),
       imgurFileHandler(sampleImg),
       imgurManyFileHandler(imgUrl),
       Product.findById(productId).lean(),
       Category.find().lean(),
       Model.find().lean()
     ])
-      .then(([productSampleImg, productImgUrl, product, categories, models]) => {
+      .then(([checkName, productSampleImg, productImgUrl, product, categories, models]) => { 
+        if (checkName) throw new Error('這個名稱己用過，請更換!')
         if (!product) throw new Error('找不到這個產品!')
         if (!categories) throw new Error('找不到類別資料!')
         if (!models) throw new Error('找不到模型資料!')
@@ -181,11 +183,13 @@ router.put('/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { n
       .catch(err => next(err))
   } else {
     return Promise.all([
+      Product.findOne({ name }).lean(),
       Product.findById(productId).lean(),
       Category.find().lean(),
       Model.find().lean()
     ])
-      .then(([product, categories, models]) => {
+      .then(([checkName, product, categories, models]) => {
+        if (checkName) throw new Error('這個名稱己用過，請更換!')
         if (!product) throw new Error('找不到這個產品!')
         if (!categories) throw new Error('找不到類別資料!')
         if (!models) throw new Error('找不到模型資料!')

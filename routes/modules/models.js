@@ -66,10 +66,10 @@ router.put('/:modelId', (req, res) => {
         return res.redirect('back')
       }
       return Model.updateOne({ _id: modelId }, { name })
-    })
-    .then(() => {
-      req.flash('success_messages', '編輯成功!')
-      return res.redirect('/admin/models')
+        .then(() => {
+          req.flash('success_messages', '編輯成功!')
+          return res.redirect('/admin/models')
+        })
     })
     .catch(err => console.error(err))
 })
