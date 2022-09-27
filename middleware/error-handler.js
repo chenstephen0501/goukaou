@@ -1,8 +1,8 @@
 module.exports = {
   generalErrorHandler (err, req, res, next) {
-    console.log('err',err)
+    console.log('~~~~~~~~~~',err)
     if (err.name === 'CastError') {
-      req.flash('error_messages', 'Error: 找不到這個產品!')
+      req.flash('error_messages', `${err.name}: 沒有找到ID為 ${err.value}的資源。`)
     } else {
       if (err instanceof Error) {
         req.flash('error_messages', `${err.name}: ${err.message}`)

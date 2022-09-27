@@ -3,7 +3,7 @@ const router = express.Router()
 
 const upload = require('../../middleware/multer.js')
 const { getSkip, getPagenation } = require('../../tools/pagination.js')
-const { localFileHandler, localManyFileHandler, imgurFileHandler, imgurManyFileHandler
+const { imgurFileHandler, imgurManyFileHandler
 } = require('../../tools/file-heplers.js')
 
 const Product = require('../../models/product.js')
