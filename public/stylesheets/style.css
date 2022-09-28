@@ -293,6 +293,7 @@ body {
   font-weight: bolder;
   line-height: 15px;
   letter-spacing: -0.05em;
+  color: #f37927;
 }
 .carousel-indicators {
   display: flex;

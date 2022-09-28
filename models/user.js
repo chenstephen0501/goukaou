@@ -15,11 +15,11 @@ const userSchema = new Schema({
   },
   isAdmin: {
     type: Boolean,
-    dafault: false
+    default: false
   },
   createdAt:  {
     type: Date,
-    dafault: Date.now
+    default: Date.now
   }
 })
 

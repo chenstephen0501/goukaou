@@ -42,9 +42,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/users/{{user.id}}">Profile</a>
             </li>
+            {{#if user.isAdmin}}
+            <li class='nav-item'>
+              <a href='/admin/logout'><button class='btn btn-outline-success my-sm-0 my-2'>Logout</button></a>
+            </li>
+            {{else}}
             <li class='nav-item'>
               <a href='/logout'><button class='btn btn-outline-success my-sm-0 my-2'>Logout</button></a>
             </li>
+            {{/if}}
           </ul>
         </div>
       </div>

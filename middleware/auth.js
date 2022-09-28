@@ -15,7 +15,7 @@ const authenticatedAdmin = (req, res, next) => {
     res.redirect('/')
   } else {
     req.flash('warning_messages', '請先登入才能使用。')
-    res.redirect('/login/backstage')
+    res.redirect('/admin/backstage')
   }
 }
 
