@@ -35,15 +35,7 @@ const adminController = {
     adminServices.postProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
   getProduct: (req, res, next) => {
-    const productId = req.params.productId
-    return Product
-      .findById(productId)
-      .lean()
-      .then(product => {
-        if (!product) throw new Error('找不到此產品!')
-        return res.render('admin/product', { product })
-      })
-      .catch(err => next(err))
+    adminServices.getProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
   editProduct: (req, res, next) => {
     const productId = req.params.productId

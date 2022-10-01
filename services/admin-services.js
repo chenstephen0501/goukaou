@@ -73,10 +73,8 @@ const adminController = {
           modelId
         })
           .then(product => {
-            // req.flash('success_messages', '成功新增產品。')
             const data = product
             return cb(null, { product: data })
-            // return res.redirect('/admin/products')
           })
       })
         .catch(err => cb(err))
@@ -112,6 +110,18 @@ const adminController = {
         })
         .catch(err => cb(err))
     }
+  },
+  getProduct: (req, cb) => {
+    const productId = req.params.productId
+    return Product
+      .findById(productId)
+      .lean()
+      .then(product => {
+        if (!product) throw new Error('找不到此產品!')
+        const data = product
+        return cb(null, { product: data })
+      })
+      .catch(err => cb(err))
   },
 }
 
