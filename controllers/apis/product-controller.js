@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const Product = require('../models/product.js')
+const Product = require('../../models/product.js')
 
 const linkData = [
   {
@@ -31,8 +31,15 @@ const productController = {
     return Product.find({ production: 'true', category: 'mask' })
       .lean()
       .then((products) => {
-        products.map(p => p.introduction = p.introduction.substring(0, 100))
-        res.render('mask-onsale', { products })
+        const data = products.map(p => {
+          return { 
+            ...p, 
+            introduction: p.introduction.substring(0, 100) 
+          }
+          })
+        return res.json({
+          products: data
+        })
       })
       .catch((err) => console.error(err))
   },
@@ -40,8 +47,15 @@ const productController = {
     return Product.find({ production: 'false', category: 'mask' })
       .lean()
       .then((products) => {
-        products.map(p => p.introduction = p.introduction.substring(0, 100))
-        res.render('mask-offsale', { products })
+        const data = products.map(p => {
+          return {
+            ...p,
+            introduction: p.introduction.substring(0, 100)
+          }
+        })
+        return res.json({
+          products: data
+        })
       })
       .catch((err) => console.error(err))
   },
@@ -71,7 +85,7 @@ const productController = {
         let newProducts
         products = products.map((item, _iIndex) => {
           linkData.forEach((j, _jIndex) => {
-            if (j.model === item.model) { 
+            if (j.model === item.model) {
               item = { ...item, url: j.url }
             }
           })
