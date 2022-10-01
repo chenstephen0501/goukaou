@@ -20,6 +20,8 @@ const linkData = [
   },
 ]
 
+const productServices = require('../services/product-services.js')
+
 const productController = {
   getHome: (req, res) => {
     res.render('index')
@@ -27,23 +29,11 @@ const productController = {
   getGoukaou: (req, res) => {
     res.render('goukaou')
   },
-  getMaskOnSale: (req, res) => {
-    return Product.find({ production: 'true', category: 'mask' })
-      .lean()
-      .then((products) => {
-        products.map(p => p.introduction = p.introduction.substring(0, 100))
-        res.render('mask-onsale', { products })
-      })
-      .catch((err) => console.error(err))
+  getMaskOnSale: (req, res, next) => {
+    productServices.getMaskOnSale(req, (err, data) => err ? next(err) : res.render('mask-onsale', data ))
   },
-  getMaskOffSale: (req, res) => {
-    return Product.find({ production: 'false', category: 'mask' })
-      .lean()
-      .then((products) => {
-        products.map(p => p.introduction = p.introduction.substring(0, 100))
-        res.render('mask-offsale', { products })
-      })
-      .catch((err) => console.error(err))
+  getMaskOffSale: (req, res, next) => {
+    productServices.getMaskOffSale(req, (err, data) => err ? next(err) : res.render('mask-offsale', data))
   },
   getOnSaleImg: (req, res) => {
     const _id = req.params.productId
