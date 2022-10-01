@@ -15,7 +15,7 @@ const modelController = require('../../../controllers/model-controller.js')
 
 // ADMIN PRODUCT 路由
 router.get('/products/create',  adminController.createProduct)
-router.get('/products/:productId/edit',  adminController.editProduct)
+ // editProduct 路由 可以用 createProduct, getProduct 拿到資掉
 router.put('/products/:productId', upload.fields([{ name: 'sampleImg', maxCount: 1 }, { name: 'imgUrl', maxCount: 5 }]),  adminController.putProduct)
 router.delete('/products/:productId',  adminController.deleteProduct)
 router.get('/products/:productId',  adminController.getProduct)

@@ -37,111 +37,12 @@ const adminController = {
   getProduct: (req, res, next) => {
     adminServices.getProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
-  editProduct: (req, res, next) => {
-    const productId = req.params.productId
-    return Promise.all([
-      Product.findById(productId).lean(),
-      Category.find().lean(),
-      Model.find().lean()
-    ])
-      .then(([product, categories, models]) => {
-        if (!product) throw new Error('找不到這個產品!')
-        if (!categories) throw new Error('找不到類別資料!')
-        if (!models) throw new Error('找不到模型資料!')
-        return res.render('admin/edit-product', { product, categories, models })
-      })
-      .catch(err => next(err))
-  },
+  // editProduct 路由 可以用 createProduct, getProduct 拿到資掉
   putProduct: (req, res, next) => {
-    const productId = req.params.productId
-    const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
-    const { sampleImg, imgUrl } = req.files
-    if (sampleImg || imgUrl) {
-      return Promise.all([
-        Product.find({ _id: { $nin: [productId] } }).lean(),
-        imgurFileHandler(sampleImg),
-        imgurManyFileHandler(imgUrl),
-        Product.findById(productId).lean(),
-        Category.find().lean(),
-        Model.find().lean()
-      ])
-        .then(([products, productSampleImg, productImgUrl, product, categories, models]) => {
-          const checkName = products.some(p => p.name === name)
-          if (checkName) throw new Error('這個名稱己用過，請更換!')
-          if (!product) throw new Error('找不到這個產品!')
-          if (!categories) throw new Error('找不到類別資料!')
-          if (!models) throw new Error('找不到模型資料!')
-          const category = categories.find(item => item._id.toString() === categoryId.toString()).name
-          const model = models.find(item => item._id.toString() === modelId.toString()).name
-          return Product.updateOne({ _id: productId },
-            {
-              name,
-              category,
-              model,
-              basePrice,
-              highestPrice,
-              production,
-              introduction,
-              sampleImg: sampleImg ? productSampleImg : product.sampleImg,
-              imgUrl: imgUrl ? productImgUrl : product.imgUrl,
-              categoryId,
-              modelId
-            })
-        })
-        .then(() => {
-          req.flash('success_messages', '成功編輯產品。')
-          return res.redirect('/admin/products')
-        })
-        .catch(err => next(err))
-    } else {
-      return Promise.all([
-        Product.find({ _id: { $nin: [productId] } }).lean(),
-        Product.findById(productId).lean(),
-        Category.find().lean(),
-        Model.find().lean()
-      ])
-        .then(([products, product, categories, models]) => {
-          const checkName = products.some(p => p.name === name)
-          if (checkName) throw new Error('這個名稱己用過，請更換!')
-          if (!product) throw new Error('找不到這個產品!')
-          if (!categories) throw new Error('找不到類別資料!')
-          if (!models) throw new Error('找不到模型資料!')
-          const category = categories.find(item => item._id.toString() === categoryId.toString()).name
-          const model = models.find(item => item._id.toString() === modelId.toString()).name
-          if (!product) throw new Error('找不到這個產品!')
-          return Product.updateOne({ _id: productId },
-            {
-              name,
-              category,
-              model,
-              basePrice,
-              highestPrice,
-              production,
-              introduction,
-              sampleImg: sampleImg ? productSampleImg : product.sampleImg,
-              imgUrl: imgUrl ? productImgUrl : product.imgUrl,
-              categoryId,
-              modelId
-            })
-        })
-        .then(() => {
-          req.flash('success_messages', '成功編輯產品。')
-          res.redirect('/admin/products')
-        })
-        .catch(err => next(err))
-    }
+    adminServices.putProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
-  deleteProduct: (req, res) => {
-    const productId = req.params.productId
-    return Product
-      .findById(productId)
-      .lean()
-      .then(product => {
-        if (!product) throw new Error('找不到這個產品!')
-        return Product.deleteOne({ _id: productId })
-      })
-      .then(() => res.redirect('/admin/products'))
-      .catch(err => console.error(err))
+  deleteProduct: (req, res, next) => {
+    adminServices.deleteProduct(req, (err, data) => err ? next(err) : res.json(data))
   }
 }
 
