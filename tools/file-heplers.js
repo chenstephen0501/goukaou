@@ -7,7 +7,7 @@ const localFileHandler = file => {
     if (!file) return resolve(null)
     const fileName = `upload/${file[0].originalname}`
     fs.readFile(file[0].path, (err, data) => {
-      if (err) return reject('Error: ', err)
+      if (err) return reject(err)
       fs.writeFile(fileName, data, () => {
         return resolve(`/${fileName}`)
       })
@@ -49,7 +49,7 @@ const imgurManyFileHandler = files => {
     .catch(err => console.error(err))
 }
 
-module.exports = { 
+module.exports = {
   localFileHandler,
   localManyFileHandler,
   imgurFileHandler,

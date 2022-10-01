@@ -2,7 +2,7 @@ const dayjs = require('dayjs')
 
 module.exports = {
   currentYear: () => dayjs().year(),
-  ifCond : (a, b, options) => {
+  ifCond: (a, b, options) => {
     if (typeof a === 'object') {
       a = a.toString()
     }

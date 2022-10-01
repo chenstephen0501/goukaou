@@ -12,11 +12,11 @@ const session = require('express-session')
 const passport = require('./config/passport.js')
 
 const handlebarsHelpers = require('./tools/handlebars-helpers.js')
-const { getUser } = require('./tools/auth-helpers.js')
 
-const routes = require('./routes')
+// const routes = require('./routes/pages')
+const pages = require('./routes/pages')
 
-const app = express();
+const app = express()
 const PORT = process.env.PORT 
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs', helpers: handlebarsHelpers }))
@@ -36,7 +36,6 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
@@ -45,7 +44,8 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(routes)
+// app.use(routes)
+app.use('/', pages)
 
 app.listen(PORT, () => {
   console.log(`The GOUKAOU web is running on http://localhost:${PORT}`)
