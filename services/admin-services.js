@@ -26,9 +26,21 @@ const adminController = {
         if (!productCount) throw new Error('找不到產品數量!')
         const data = products
         cb(null, { products: data, pagenation: getPagenation(page, limit, productCount) })
-        // return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
       })
-      .catch(err => console.error(err))
+      .catch(err => cb(err))
+  },
+  createProduct: (req, cb) => {
+    return Promise.all([
+      Category.find().lean(),
+      Model.find().lean()
+    ])
+      .then(([categories, models]) => {
+        if (!categories) throw new Error('找不到類別資料!')
+        if (!models) throw new Error('找不到模型資料!')
+        const data = { categories, models }
+        return cb(null, data)
+      })
+      .catch(err => cb(err))
   },
 }
 

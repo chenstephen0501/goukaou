@@ -7,6 +7,8 @@ const { getSkip, getPagenation } = require('../../tools/pagination.js')
 const { imgurFileHandler, imgurManyFileHandler
 } = require('../../tools/file-heplers.js')
 
+const adminServices = require('../../services/admin-services.js')
+
 const adminController = {
   //  ADMIN PRODUCT 路由
   loginPage: (req, res) => {
@@ -23,38 +25,11 @@ const adminController = {
   //   req.logout()
   //   res.redirect('/admin/login')
   // },
-  getProducts: (req, res) => {
-    const DEFAULT_LIMIT = 8
-    const limit = Number(req.params.limit) || DEFAULT_LIMIT
-    const page = Number(req.query.page) || 1
-    return Promise.all([
-      Product.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .limit(limit)
-        .skip(getSkip(page, limit)),
-      Product.countDocuments()
-    ])
-      .then(([products, productCount]) => {
-        if (!products) throw new Error('找不到產品!')
-        if (!productCount) throw new Error('找不到產品數量!')
-        const data = products
-        return res.json({ data, pagenation: getPagenation(page, limit, productCount) })
-        // return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
-      })
-      .catch(err => console.error(err))
+  getProducts: (req, res, next) => {
+    adminServices.getProducts(req, (err, data) => err ? next(err) : res.json(data))
   },
-  createProduct: (req, res) => {
-    return Promise.all([
-      Category.find().lean(),
-      Model.find().lean()
-    ])
-      .then(([categories, models]) => {
-        if (!categories) throw new Error('找不到類別資料!')
-        if (!models) throw new Error('找不到模型資料!')
-        return res.render('admin/create-product', { categories, models })
-      })
-      .catch(err => console.error(err))
+  createProduct: (req, res, next) => {
+    adminServices.createProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
   postProduct: (req, res, next) => {
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
