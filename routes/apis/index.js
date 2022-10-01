@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-// const { authenticated } = require('../../middleware/auth.js')
 
 const productController = require('../../controllers/apis/product-controller.js')
+
+const admin = require('./modules/admin.js')
+
+router.use('/admin', admin)
 
 router.get('/products/goukaou', productController.getGoukaou)
 router.get('/products/mask-onsale', productController.getMaskOnSale)
@@ -14,5 +17,6 @@ router.get('/products/zentai-suit', productController.getZentaiSuit)
 router.get('/products/contact', productController.getContact)
 router.get('/products', productController.getHome)
 router.post('/products/contact', productController.postContact)
+
 
 module.exports = router

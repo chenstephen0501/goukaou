@@ -1,28 +1,28 @@
-const Product = require('../models/product.js')
-const Category = require('../models/category.js')
-const Model = require('../models/model.js')
-const passport = require('../config/passport.js')
+const Product = require('../../models/product.js')
+const Category = require('../../models/category.js')
+const Model = require('../../models/model.js')
+// const passport = require('../config/passport.js')
 
-const { getSkip, getPagenation } = require('../tools/pagination.js')
+const { getSkip, getPagenation } = require('../../tools/pagination.js')
 const { imgurFileHandler, imgurManyFileHandler
-} = require('../tools/file-heplers.js')
+} = require('../../tools/file-heplers.js')
 
 const adminController = {
   //  ADMIN PRODUCT 路由
   loginPage: (req, res) => {
     res.render('admin/login')
   },
-  login: passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/admin/login',
-    failureFlash: true
+  // login: passport.authenticate('local', {
+  //   successRedirect: '/',
+  //   failureRedirect: '/admin/login',
+  //   failureFlash: true
 
-  }),
-  logout: (req, res, next) => {
-    req.flash('success_messages', '成功登出')
-    req.logout()
-    res.redirect('/admin/login')
-  },
+  // }),
+  // logout: (req, res, next) => {
+  //   req.flash('success_messages', '成功登出')
+  //   req.logout()
+  //   res.redirect('/admin/login')
+  // },
   getProducts: (req, res) => {
     const DEFAULT_LIMIT = 8
     const limit = Number(req.params.limit) || DEFAULT_LIMIT
@@ -38,7 +38,9 @@ const adminController = {
       .then(([products, productCount]) => {
         if (!products) throw new Error('找不到產品!')
         if (!productCount) throw new Error('找不到產品數量!')
-        return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
+        const data = products
+        return res.json({ data, pagenation: getPagenation(page, limit, productCount) })
+        // return res.render('admin/products', { products, pagenation: getPagenation(page, limit, productCount) })
       })
       .catch(err => console.error(err))
   },
