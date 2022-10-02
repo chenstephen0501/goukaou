@@ -224,11 +224,15 @@ const adminController = {
       .findById(productId)
       .lean()
       .then(product => {
-        if (!product) throw new Error('找不到這個產品!')
+        if (!product) { 
+          const err = new Error('找不到這個產品!')
+          err.status = 404
+          throw err
+        }
         return Product.deleteOne({ _id: productId })
       })
-      .then((product) => {
-        const data = product
+      .then((deleteProduct) => {
+        const data = deleteProduct
         return cb(null, { product: data })
       })
       .catch(err => cb(err))

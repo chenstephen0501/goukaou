@@ -3,7 +3,7 @@ const productServices = require('../services/product-services.js')
 const productController = {
   getHome: (req, res, next) => { productServices.getHome(req, (err, data) => err ? next(err) : res.render('index', data))
   },
-  getGoukaou: (req, res) => {
+  getGoukaou: (req, res, next) => {
     productServices.getGoukaou(req, (err, data) => err ? next(err) : res.render('goukaou', data))
   },
   getMaskOnSale: (req, res, next) => {

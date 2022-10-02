@@ -1,11 +1,4 @@
-const Product = require('../../models/product.js')
-const Category = require('../../models/category.js')
-const Model = require('../../models/model.js')
 // const passport = require('../config/passport.js')
-
-const { getSkip, getPagenation } = require('../../tools/pagination.js')
-const { imgurFileHandler, imgurManyFileHandler
-} = require('../../tools/file-heplers.js')
 
 const adminServices = require('../../services/admin-services.js')
 
@@ -42,7 +35,7 @@ const adminController = {
     adminServices.putProduct(req, (err, data) => err ? next(err) : res.json(data))
   },
   deleteProduct: (req, res, next) => {
-    adminServices.deleteProduct(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.deleteProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   }
 }
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+const { apiErrorHandler } = require('../../middleware/error-handler.js')
 
 const productController = require('../../controllers/apis/product-controller.js')
 
@@ -18,5 +19,6 @@ router.get('/products/contact', productController.getContact)
 router.get('/products', productController.getHome)
 router.post('/products/contact', productController.postContact)
 
+router.use('/', apiErrorHandler)
 
 module.exports = router

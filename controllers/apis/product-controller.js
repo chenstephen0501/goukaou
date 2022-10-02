@@ -26,7 +26,7 @@ const productController = {
   getHome: (req, res, next) => {
     productServices.getHome(req, (err, data) => err ? next(err) : res.json(data))
   },
-  getGoukaou: (req, res) => {
+  getGoukaou: (req, res, next) => {
     productServices.getGoukaou(req, (err, data) => err ? next(err) : res.json(data))
   },
   getMaskOnSale: (req, res, next) => {

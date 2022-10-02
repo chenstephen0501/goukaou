@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const upload = require('../../../middleware/multer.js')
-const { generalErrorHandler } = require('../../../middleware/error-handler.js')
 
 const adminController = require('../../../controllers/apis/admin-controller.js')
 const categoryController = require('../../../controllers/category-controller.js')
@@ -35,6 +34,5 @@ router.delete('/models/:modelId',  modelController.deleteModel)
 router.get('/models/:modelId',  modelController.getModel)
 router.post('/models',  modelController.postModel)
 router.get('/models',  modelController.getModels)
-router.use('/', generalErrorHandler)
 
 module.exports = router
