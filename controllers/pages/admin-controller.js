@@ -26,7 +26,7 @@ const adminController = {
   },
   postProduct: (req, res, next) => {
     adminServices.postProduct(req, (err, data) => {
-      if (err) next(err)
+      if (err) return next(err)
       req.session.createData = data
       req.flash('success_messages', '成功新增產品。')
        return res.redirect('/admin/products')

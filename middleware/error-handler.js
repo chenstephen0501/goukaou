@@ -13,11 +13,12 @@ module.exports = {
       } else {
         req.flash('error_messages', `${err}`)
       }
-      res.redirect('back')
+    res.redirect('back')
     }
     next()
   },
   apiErrorHandler (err, req, res, next) {
+    console.log('err', err)
     if (err.name === 'CastError') {
       err.status = 404
       res.status(err.status || 500).json({

@@ -32,7 +32,7 @@ const adminController = {
           throw err
         }
         const data = products
-        cb(null, { products: data, pagenation: getPagenation(page, limit, productCount) })
+        return cb(null, { products: data, pagenation: getPagenation(page, limit, productCount) })
       })
       .catch(err => cb(err))
   },
@@ -74,7 +74,7 @@ const adminController = {
         Model.find()
       ]).then(([checkName, productSampleImg, productImgUrl, categories, models]) => {
         if (checkName) {
-          const err = new Error('這個名稱己用過，請更換!')
+          const err = new Error(`名稱 [${name}] 己經被使用過，請更換!`)
           err.status = 404
           throw err
         }
@@ -116,7 +116,7 @@ const adminController = {
       ])
         .then(([checkName, categories, models]) => {
           if (checkName) {
-            const err = new Error('這個名稱己用過，請更換!')
+            const err = new Error(`名稱 [${name}] 己經被使用過，請更換!`)
             err.status = 404
             throw err
           }
@@ -201,7 +201,6 @@ const adminController = {
     const productId = req.params.productId
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
     const { sampleImg, imgUrl } = req.files
-    // if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) throw new Error('編輯的產品，除了簡介其他都是必填的!')
     if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) {
       const err = new Error('編輯的產品，除了簡介其他都是必填的!')
       err.status = 404
@@ -219,7 +218,7 @@ const adminController = {
         .then(([products, productSampleImg, productImgUrl, product, categories, models]) => {
           const checkName = products.some(p => p.name === name)
           if (checkName) {
-            const err = new Error('這個名稱己用過，請更換!')
+            const err = new Error(`名稱 [${name}] 己經被使用過，請更換!`)
             err.status = 404
             throw err
           }
@@ -269,7 +268,7 @@ const adminController = {
         .then(([products, product, categories, models]) => {
           const checkName = products.some(p => p.name === name)
           if (checkName) {
-            const err = new Error('這個名稱己用過，請更換!')
+            const err = new Error(`名稱 [${name}] 己經被使用過，請更換!`)
             err.status = 404
             throw err
           }
