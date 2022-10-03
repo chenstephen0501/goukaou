@@ -162,7 +162,7 @@ const adminController = {
         if (!product) {
           const err = new Error('沒有這個產品!')
           err.status = 404
-          throw err 
+          throw err
         }
         const data = product
         return cb(null, { product: data })
@@ -211,7 +211,7 @@ const adminController = {
         Product.find({ _id: { $nin: [productId] } }).lean(),
         imgurFileHandler(sampleImg),
         imgurManyFileHandler(imgUrl),
-        Product.findById(productId).lean(),
+        Product.findById(productId),
         Category.find().lean(),
         Model.find().lean()
       ])
@@ -239,7 +239,8 @@ const adminController = {
           }
           const category = categories.find(item => item._id.toString() === categoryId.toString()).name
           const model = models.find(item => item._id.toString() === modelId.toString()).name
-          return Product.updateOne({ _id: productId },
+          product = Object.assign(
+            product,
             {
               name,
               category,
@@ -252,7 +253,9 @@ const adminController = {
               imgUrl: imgUrl ? productImgUrl : product.imgUrl,
               categoryId,
               modelId
-            })
+            }
+          )
+          return product.save()
         })
         .then((updateProduct) => {
           return cb(null, { product: updateProduct })
@@ -261,7 +264,7 @@ const adminController = {
     } else {
       return Promise.all([
         Product.find({ _id: { $nin: [productId] } }).lean(),
-        Product.findById(productId).lean(),
+        Product.findById(productId),
         Category.find().lean(),
         Model.find().lean()
       ])
@@ -289,7 +292,8 @@ const adminController = {
           }
           const category = categories.find(item => item._id.toString() === categoryId.toString()).name
           const model = models.find(item => item._id.toString() === modelId.toString()).name
-          return Product.updateOne({ _id: productId },
+          product = Object.assign(
+            product,
             {
               name,
               category,
@@ -302,7 +306,9 @@ const adminController = {
               imgUrl: imgUrl ? productImgUrl : product.imgUrl,
               categoryId,
               modelId
-            })
+            }
+          )
+          return product.save()
         })
         .then((updateProduct) => {
           return cb(null, { product: updateProduct })
@@ -314,14 +320,13 @@ const adminController = {
     const productId = req.params.productId
     return Product
       .findById(productId)
-      .lean()
       .then(product => {
-        if (!product) { 
+        if (!product) {
           const err = new Error('沒有這個產品!')
           err.status = 404
           throw err
         }
-        return Product.deleteOne({ _id: productId })
+        return product.remove()
       })
       .then((deleteProduct) => {
         return cb(null, { product: deleteProduct })
