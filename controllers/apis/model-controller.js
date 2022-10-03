@@ -4,7 +4,7 @@ const modelServices = require('../../services/model-services.js')
 
 const modelController = {
   getModels: (req, res, next) => {
-    modelServices.getModels(req, (err, data) => err ? next(err) : res.render('admin/models', data))
+    modelServices.getModels(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   postModel: (req, res, next) => {
     const { name } = req.body

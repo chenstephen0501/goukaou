@@ -1,6 +1,4 @@
-const Category = require('../../models/category.js')
-
-const categoryServices = require('../../services/categories-services.js')
+const categoryServices = require('../../services/category-services.js')
 
 const categoryController = {
   getCategories: (req, res, next) => {

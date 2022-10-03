@@ -5,7 +5,7 @@ const upload = require('../../../middleware/multer.js')
 
 const adminController = require('../../../controllers/apis/admin-controller.js')
 const categoryController = require('../../../controllers/apis/category-controller.js')
-// const modelController = require('../../../controllers/apis/model-controller.js')
+const modelController = require('../../../controllers/apis/model-controller.js')
 
 // 管理者登入登出路由
 // router.get('/login', adminController.loginPage)
@@ -29,10 +29,10 @@ router.post('/categories',  categoryController.postCategory)
 router.get('/categories',  categoryController.getCategories)
 
 // ADMIN MODELS 路由
-// router.put('/models/:modelId',  modelController.putModel)
-// router.delete('/models/:modelId',  modelController.deleteModel)
-// router.get('/models/:modelId',  modelController.getModel)
-// router.post('/models',  modelController.postModel)
-// router.get('/models',  modelController.getModels)
+router.put('/models/:modelId',  modelController.putModel)
+router.delete('/models/:modelId',  modelController.deleteModel)
+router.get('/models/:modelId',  modelController.getModel)
+router.post('/models',  modelController.postModel)
+router.get('/models',  modelController.getModels)
 
 module.exports = router
