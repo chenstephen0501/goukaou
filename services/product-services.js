@@ -33,14 +33,19 @@ const productServices = {
     return Product.find({ production: 'true', category: 'mask' })
     .lean()
     .then((products) => {
-      const data = products.map(p => {
+      if (!products) {
+        const err =  new Error('沒有找到產品資料!')
+        err.status = 404
+        throw err
+      }
+      const newProducts = products.map(p => {
         return {
           ...p,
           introduction: p.introduction.substring(0, 100)
         }
       })
       return cb(null, {
-        products: data
+        products: newProducts
       })
     })
     .catch((err) => cb(err))
@@ -49,14 +54,19 @@ const productServices = {
     return Product.find({ production: 'false', category: 'mask' })
       .lean()
       .then((products) => {
-        const data = products.map(p => {
+        if (!products) {
+          const err = new Error('沒有找到產品資料!')
+          err.status = 404
+          throw err
+        }
+        const newProducts = products.map(p => {
           return {
             ...p,
             introduction: p.introduction.substring(0, 100)
           }
         })
         return cb(null, {
-          products: data
+          products: newProducts
         })
       })
       .catch((err) => cb(err))
@@ -66,8 +76,12 @@ const productServices = {
     return Product.findOne({ _id })
       .lean()
       .then((product) => {
-        const data = product
-        cb(null, { product: data})
+        if (!product) {
+          const err = new Error('沒有這個產品!')
+          err.status = 404
+          throw err
+        }
+        cb(null, { product })
       })
       .catch((err) => cb(err))
   },
@@ -76,8 +90,12 @@ const productServices = {
     return Product.findOne({ _id })
       .lean()
       .then((product) => {
-        const data = product
-        cb(null, { product: data })
+        if (!product) {
+          const err = new Error('沒有這個產品!')
+          err.status = 404
+          throw err
+        }
+        cb(null, { product })
       })
       .catch((err) => cb(err))
   },
@@ -86,7 +104,12 @@ const productServices = {
     return Product.find({ category: 'zentai' })
       .lean()
       .then((products) => {
-        let data
+        if (!products) {
+          const err = new Error('沒有找到產品資料!')
+          err.status = 404
+          throw err
+        }
+        let newProducts
         products = products.map((item, _iIndex) => {
           linkData.forEach((j, _jIndex) => {
             if (j.model === item.model) {
@@ -95,7 +118,7 @@ const productServices = {
           })
           return item
         })
-        data = products.sort((a, b) => {
+        newProducts = products.sort((a, b) => {
           const indexOfa = a.model.indexOf('-')
           const indexOfb = b.model.indexOf('-')
           const newA = a.model.substr(indexOfa + 1, 2)
@@ -104,7 +127,7 @@ const productServices = {
             return -1
           }
         })
-        data = data.map((item, _index) => {
+        newProducts = newProducts.map((item, _index) => {
           item.imgUrl = item.imgUrl.map((j, indexJ) => {
             j = { ...j, id: imgLength + indexJ + 1 }
             return j
@@ -112,7 +135,7 @@ const productServices = {
           imgLength += item.imgUrl.length
           return item
         })
-        cb(null, { products: data, imgLength})
+        cb(null, { products: newProducts, imgLength })
       })
       .catch((err) => cb(err))
   },
@@ -128,10 +151,9 @@ const productServices = {
       if (!name || !email || !subject || !message) {
         msg_error = {
           name: '訪問者',
-          message: '你沒有輸入訊息 !',
+          message: '你沒有輸入訊息!',
         }
-        const data = msg_error
-        return cb(null, { msg_error: data })
+        return cb(null, { msg_error: msg_error })
       }
 
       let transporter = nodemailer.createTransport({
@@ -165,8 +187,7 @@ const productServices = {
         text: 'Hello world?',
         html: output,
       })
-      const data = msg_success
-      return cb(null, { msg_success : data })
+      return cb(null, { msg_success: msg_success })
     } catch (err) {
       cb(err)
     }
