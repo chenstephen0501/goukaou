@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
-const User = require('../models/user.js')
+const User = require('../../models/user.js')
 
 const userController = {
   registerPage: (req, res) => {

@@ -4,8 +4,8 @@ const router = express.Router()
 // const { authenticated } = require('../middleware/auth.js')
 const { generalErrorHandler } = require('../../middleware/error-handler.js')
 
-const userController = require('../../controllers/user-controller.js')
-const productController = require('../../controllers/product-controller.js')
+const userController = require('../../controllers/pages/user-controller.js')
+const productController = require('../../controllers/pages/product-controller.js')
 
 // admin
 const admin = require('./modules/admin.js')

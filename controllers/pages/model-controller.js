@@ -1,4 +1,4 @@
-const Model = require('../models/model.js')
+const Model = require('../../models/model.js')
 
 const modelController = {
   getModels: (req, res) => {

@@ -1,4 +1,4 @@
-const productServices = require('../services/product-services.js')
+const productServices = require('../../services/product-services.js')
 
 const productController = {
   getHome: (req, res, next) => { productServices.getHome(req, (err, data) => err ? next(err) : res.render('index', data))

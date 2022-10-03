@@ -4,9 +4,9 @@ const router = express.Router()
 const upload = require('../../../middleware/multer.js')
 
 const { authenticatedAdmin } = require('../../../middleware/auth.js')
-const adminController = require('../../../controllers/admin-controller.js')
-const categoryController = require('../../../controllers/category-controller.js')
-const modelController = require('../../../controllers/model-controller.js')
+const adminController = require('../../../controllers/pages/admin-controller.js')
+const categoryController = require('../../../controllers/pages/category-controller.js')
+const modelController = require('../../../controllers/pages/model-controller.js')
 
 // 管理者登入登出路由
 router.get('/login', adminController.loginPage)

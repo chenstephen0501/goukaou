@@ -1,6 +1,6 @@
-const passport = require('../config/passport.js')
+const passport = require('../../config/passport.js')
 
-const adminServices = require('../services/admin-services.js')
+const adminServices = require('../../services/admin-services.js')
 
 const adminController = {
   //  ADMIN PRODUCT 路由

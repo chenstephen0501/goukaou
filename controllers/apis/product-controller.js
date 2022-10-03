@@ -1,25 +1,3 @@
-const nodemailer = require('nodemailer')
-const Product = require('../../models/product.js')
-
-const linkData = [
-  {
-    model: 'ZENTAI SUIT GPZ-02',
-    url: 'http://goukaou.blog131.fc2.com/blog-entry-424.html',
-  },
-  {
-    model: 'ZENTAI SUIT GPZ-02-C',
-    url: 'http://goukaou.blog131.fc2.com/blog-entry-359.html',
-  },
-  {
-    model: 'Super Thick Zentai Suit GPZ-03',
-    url: 'http://goukaou.blog131.fc2.com/blog-entry-449.html',
-  },
-  {
-    model: 'Zentai Suit GPZ-04',
-    url: 'http://goukaou.blog131.fc2.com/blog-entry-511.html',
-  },
-]
-
 const productServices = require('../../services/product-services.js')
 
 const productController = {

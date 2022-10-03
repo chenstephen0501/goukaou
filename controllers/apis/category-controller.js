@@ -1,15 +1,10 @@
-const Category = require('../models/category.js')
+const Category = require('../../models/category.js')
+
+const categoryServices = require('../../services/categories-services.js')
 
 const categoryController = {
-  getCategories: (req, res) => {
-    return Category
-      .find()
-      .lean()
-      .sort({ categoryId: 'asc' })
-      .then(categories => {
-        if (!categories) throw new Error('找不到所有類別資料!')
-        return res.render('admin/categories', { categories })
-      })
+  getCategories: (req, res, next) => {
+    categoryServices.getCategories(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   postCategory: (req, res) => {
     const { name, name_cht } = req.body
