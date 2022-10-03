@@ -26,12 +26,10 @@ const adminController = {
   },
   postProduct: (req, res, next) => {
     adminServices.postProduct(req, (err, data) => {
-      if (err) {
-        return next(err)
-      } else {
-        req.flash('success_messages', '成功新增產品。')
-        return res.redirect('/admin/products')
-      }
+      if (err) next(err)
+      req.session.createData = data
+      req.flash('success_messages', '成功新增產品。')
+       return res.redirect('/admin/products')
     })
   },
   getProduct: (req, res, next) => {
@@ -42,12 +40,10 @@ const adminController = {
   },
   putProduct: (req, res, next) => {
     adminServices.putProduct(req, (err, data) => {
-      if (err) {
-        return next(err)
-      } else {
-        req.flash('success_messages', '成功編輯產品。')
-        return res.redirect('/admin/products')
-      }
+      if (err) return next(err)
+      req.session.updateData = data
+      req.flash('success_messages', '成功編輯產品。')
+      return res.redirect('/admin/products')
     })
   },
   deleteProduct: (req, res, next) => {

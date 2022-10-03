@@ -9,7 +9,6 @@ const { imgurFileHandler, imgurManyFileHandler
 
 const adminController = {
   getProducts: (req, cb) => {
-    1
     const DEFAULT_LIMIT = 8
     const limit = Number(req.params.limit) || DEFAULT_LIMIT
     const page = Number(req.query.page) || 1
@@ -22,8 +21,16 @@ const adminController = {
       Product.countDocuments()
     ])
       .then(([products, productCount]) => {
-        if (!products) throw new Error('找不到產品!')
-        if (!productCount) throw new Error('找不到產品數量!')
+        if (!products) {
+          const err = new Error('找不到產品資料!')
+          err.status = 404
+          throw err
+        }
+        if (!productCount) {
+          const err = new Error('找不到產品數量!')
+          err.status = 404
+          throw err
+        }
         const data = products
         cb(null, { products: data, pagenation: getPagenation(page, limit, productCount) })
       })
@@ -35,8 +42,16 @@ const adminController = {
       Model.find().lean()
     ])
       .then(([categories, models]) => {
-        if (!categories) throw new Error('找不到類別資料!')
-        if (!models) throw new Error('找不到模型資料!')
+        if (!categories) {
+          const err = new Error('找不到類別資料!')
+          err.status = 404
+          throw err
+        }
+        if (!models) {
+          const err = new Error('找不到模型資料!')
+          err.status = 404
+          throw err
+        }
         const data = { categories, models }
         return cb(null, data)
       })
@@ -44,8 +59,12 @@ const adminController = {
   },
   postProduct: (req, cb) => {
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
+    if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) {
+      const err = new Error('新增的產品，除了簡介其他都是必填的!')
+      err.status = 404
+      throw err
+    }
     const { sampleImg, imgUrl } = req.files
-    if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) throw new Error('新增的產品所有欄位都要填寫。')
     if (sampleImg || imgUrl) {
       return Promise.all([
         Product.findOne({ name }).lean(),
@@ -54,9 +73,21 @@ const adminController = {
         Category.find(),
         Model.find()
       ]).then(([checkName, productSampleImg, productImgUrl, categories, models]) => {
-        if (checkName) throw new Error('這個名稱己用過，請更換!')
-        if (!categories) throw new Error('找不到類別資料!')
-        if (!models) throw new Error('找不到模型資料!')
+        if (checkName) {
+          const err = new Error('這個名稱己用過，請更換!')
+          err.status = 404
+          throw err
+        }
+        if (!categories) {
+          const err = new Error('找不到類別資料!')
+          err.status = 404
+          throw err
+        }
+        if (!models) {
+          const err = new Error('找不到模型資料!')
+          err.status = 404
+          throw err
+        }
         const category = categories.find(item => item._id.toString() === categoryId.toString()).name
         const model = models.find(item => item._id.toString() === modelId.toString()).name
         return Product.create({
@@ -72,9 +103,8 @@ const adminController = {
           categoryId,
           modelId
         })
-          .then(product => {
-            const data = product
-            return cb(null, { product: data })
+          .then(createProduct => {
+            return cb(null, { product: createProduct })
           })
       })
         .catch(err => cb(err))
@@ -85,9 +115,21 @@ const adminController = {
         Model.find()
       ])
         .then(([checkName, categories, models]) => {
-          if (checkName) throw new Error('這個名稱己用過，請更換!')
-          if (!categories) throw new Error('找不到類別資料!')
-          if (!models) throw new Error('找不到模型資料!')
+          if (checkName) {
+            const err = new Error('這個名稱己用過，請更換!')
+            err.status = 404
+            throw err
+          }
+          if (!categories) {
+            const err = new Error('找不到類別資料!')
+            err.status = 404
+            throw err
+          }
+          if (!models) {
+            const err = new Error('找不到模型資料!')
+            err.status = 404
+            throw err
+          }
           const category = categories.find(item => item._id.toString() === categoryId.toString()).name
           const model = models.find(item => item._id.toString() === modelId.toString()).name
           return Product.create({
@@ -117,7 +159,11 @@ const adminController = {
       .findById(productId)
       .lean()
       .then(product => {
-        if (!product) throw new Error('找不到此產品!')
+        if (!product) {
+          const err = new Error('沒有這個產品!')
+          err.status = 404
+          throw err 
+        }
         const data = product
         return cb(null, { product: data })
       })
@@ -131,9 +177,21 @@ const adminController = {
       Model.find().lean()
     ])
       .then(([product, categories, models]) => {
-        if (!product) throw new Error('找不到這個產品!')
-        if (!categories) throw new Error('找不到類別資料!')
-        if (!models) throw new Error('找不到模型資料!')
+        if (!product) {
+          const err = new Error('沒有這個產品!')
+          err.status = 404
+          throw err
+        }
+        if (!categories) {
+          const err = new Error('找不到類別資料!')
+          err.status = 404
+          throw err
+        }
+        if (!models) {
+          const err = new Error('找不到模型資料!')
+          err.status = 404
+          throw err
+        }
         const data = { product, categories, models }
         return cb(null, data)
       })
@@ -143,6 +201,12 @@ const adminController = {
     const productId = req.params.productId
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
     const { sampleImg, imgUrl } = req.files
+    // if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) throw new Error('編輯的產品，除了簡介其他都是必填的!')
+    if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) {
+      const err = new Error('編輯的產品，除了簡介其他都是必填的!')
+      err.status = 404
+      throw err
+    }
     if (sampleImg || imgUrl) {
       return Promise.all([
         Product.find({ _id: { $nin: [productId] } }).lean(),
@@ -154,10 +218,26 @@ const adminController = {
       ])
         .then(([products, productSampleImg, productImgUrl, product, categories, models]) => {
           const checkName = products.some(p => p.name === name)
-          if (checkName) throw new Error('這個名稱己用過，請更換!')
-          if (!product) throw new Error('找不到這個產品!')
-          if (!categories) throw new Error('找不到類別資料!')
-          if (!models) throw new Error('找不到模型資料!')
+          if (checkName) {
+            const err = new Error('這個名稱己用過，請更換!')
+            err.status = 404
+            throw err
+          }
+          if (!product) {
+            const err = new Error('沒有這個產品!')
+            err.status = 404
+            throw err
+          }
+          if (!categories) {
+            const err = new Error('找不到類別資料!')
+            err.status = 404
+            throw err
+          }
+          if (!models) {
+            const err = new Error('找不到模型資料!')
+            err.status = 404
+            throw err
+          }
           const category = categories.find(item => item._id.toString() === categoryId.toString()).name
           const model = models.find(item => item._id.toString() === modelId.toString()).name
           return Product.updateOne({ _id: productId },
@@ -175,9 +255,8 @@ const adminController = {
               modelId
             })
         })
-        .then((product) => {
-          const data = product
-          return cb(null, { product: data })
+        .then((updateProduct) => {
+          return cb(null, { product: updateProduct })
         })
         .catch(err => cb(err))
     } else {
@@ -189,13 +268,28 @@ const adminController = {
       ])
         .then(([products, product, categories, models]) => {
           const checkName = products.some(p => p.name === name)
-          if (checkName) throw new Error('這個名稱己用過，請更換!')
-          if (!product) throw new Error('找不到這個產品!')
-          if (!categories) throw new Error('找不到類別資料!')
-          if (!models) throw new Error('找不到模型資料!')
+          if (checkName) {
+            const err = new Error('這個名稱己用過，請更換!')
+            err.status = 404
+            throw err
+          }
+          if (!product) {
+            const err = new Error('沒有這個產品!')
+            err.status = 404
+            throw err
+          }
+          if (!categories) {
+            const err = new Error('找不到類別資料!')
+            err.status = 404
+            throw err
+          }
+          if (!models) {
+            const err = new Error('找不到模型資料!')
+            err.status = 404
+            throw err
+          }
           const category = categories.find(item => item._id.toString() === categoryId.toString()).name
           const model = models.find(item => item._id.toString() === modelId.toString()).name
-          if (!product) throw new Error('找不到這個產品!')
           return Product.updateOne({ _id: productId },
             {
               name,
@@ -211,9 +305,8 @@ const adminController = {
               modelId
             })
         })
-        .then((product) => {
-          const data = product
-          return cb(null, { product: data })
+        .then((updateProduct) => {
+          return cb(null, { product: updateProduct })
         })
         .catch(err => cb(err))
     }
@@ -225,15 +318,14 @@ const adminController = {
       .lean()
       .then(product => {
         if (!product) { 
-          const err = new Error('找不到這個產品!')
+          const err = new Error('沒有這個產品!')
           err.status = 404
           throw err
         }
         return Product.deleteOne({ _id: productId })
       })
       .then((deleteProduct) => {
-        const data = deleteProduct
-        return cb(null, { product: data })
+        return cb(null, { product: deleteProduct })
       })
       .catch(err => cb(err))
   }

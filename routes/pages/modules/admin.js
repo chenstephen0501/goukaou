@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const upload = require('../../../middleware/multer.js')
+
 const { authenticatedAdmin } = require('../../../middleware/auth.js')
 const adminController = require('../../../controllers/admin-controller.js')
 const categoryController = require('../../../controllers/category-controller.js')

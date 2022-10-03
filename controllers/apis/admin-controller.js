@@ -19,20 +19,20 @@ const adminController = {
   //   res.redirect('/admin/login')
   // },
   getProducts: (req, res, next) => {
-    adminServices.getProducts(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.getProducts(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   createProduct: (req, res, next) => {
-    adminServices.createProduct(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.createProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   postProduct: (req, res, next) => {
-    adminServices.postProduct(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.postProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data } ))
   },
   getProduct: (req, res, next) => {
-    adminServices.getProduct(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.getProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   // editProduct 路由 可以用 createProduct, getProduct 拿到資掉
   putProduct: (req, res, next) => {
-    adminServices.putProduct(req, (err, data) => err ? next(err) : res.json(data))
+    adminServices.putProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
   },
   deleteProduct: (req, res, next) => {
     adminServices.deleteProduct(req, (err, data) => err ? next(err) : res.json({ 'status': 'success', data }))
