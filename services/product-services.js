@@ -41,7 +41,7 @@ const productServices = {
       const newProducts = products.map(p => {
         return {
           ...p,
-          introduction: p.introduction.substring(0, 100)
+          introduction: p.introduction ? p.introduction.substring(0, 100) : null
         }
       })
       return cb(null, {
@@ -62,7 +62,7 @@ const productServices = {
         const newProducts = products.map(p => {
           return {
             ...p,
-            introduction: p.introduction.substring(0, 100)
+            introduction: p.introduction ? p.introduction.substring(0, 100) : null
           }
         })
         return cb(null, {
