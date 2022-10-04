@@ -1,5 +1,3 @@
-const Model = require('../../models/model.js')
-
 const modelServices = require('../../services/model-services.js')
 
 const modelController = {

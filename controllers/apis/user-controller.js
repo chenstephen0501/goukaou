@@ -1,25 +1,31 @@
-const bcrypt = require('bcryptjs')
-const passport = require('passport')
+const jwt = require('jsonwebtoken')
 
+const bcrypt = require('bcryptjs')
 const User = require('../../models/user.js')
 
 const userController = {
-  loginPage: (req, res) => {
-    res.render('login')
+  login: (req, res, next) => {
+    try {
+      console.log(req.user)
+      const userData = req.user.toJSON()
+      delete userData.password
+      console.log('back', userData)
+      const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '30d' })
+      console.log('token', token)
+      res.json({ 'status': 'success', data: {
+        token,
+        user: userData
+      }})
+    } catch (err) {
+      console.log('err', err)
+      next(err)
+    }
   },
-  login: passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-  }),
   logout: (req, res, next) => {
     req.logout()
     req.flash('success_messages', '成功登出')
     return res.redirect('/login')
   }, 
-  registerPage: (req, res) => {
-    res.render('register')
-  },
   register: (req, res, next) => {
     const { name, email, password, passwordCheck } = req.body
     if (!name || !email || !password || !passwordCheck) throw new Error('所有欄位都要填寫。')
@@ -47,6 +53,7 @@ const userController = {
       })
       .catch(err => next(err))
   }
+
 }
 
 module.exports = userController
