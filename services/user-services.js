@@ -9,8 +9,7 @@ const userServices = {
   },
   registerPage: (req, cb) => {
     return cb(null, {})
-  },
-
+  }
 }
 
 module.exports = userServices

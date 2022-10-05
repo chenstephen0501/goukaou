@@ -15,10 +15,10 @@ module.exports = {
       }
     res.redirect('back')
     }
-    next()
+    next(err)
   },
   apiErrorHandler (err, req, res, next) {
-    console.log('err', err)
+    console.log('apiErrorHandler', err)
     if (err.name === 'CastError') {
       err.status = 404
       res.status(err.status || 500).json({
@@ -37,7 +37,8 @@ module.exports = {
         message: `${err}`
       })
     }
+    next(err)
   }
-    next()
+    next(err)
   }
 }

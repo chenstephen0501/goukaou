@@ -64,7 +64,7 @@ const categoryServices = {
           err.status = 404
           throw err
         }
-        return cb(null, { categories, category } )
+        return cb(null, { categories, category })
       })
       .catch(err => cb(err))
   },
@@ -124,4 +124,4 @@ const categoryServices = {
   }
 }
 
-module.exports = categoryServices 
+module.exports = categoryServices

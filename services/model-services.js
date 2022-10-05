@@ -60,7 +60,9 @@ const modelServices = {
     const modelId = req.params.modelId
     const { name } = req.body
     if (!name) {
-      return res.redirect('back')
+      const err = new Error('模型名稱不能為空!')
+      err.status = 404
+      throw err
     }
     return Promise.all([
       Model.find({ _id: { $nin: [modelId] } }).lean(),
@@ -86,7 +88,7 @@ const modelServices = {
         model.name = name
         return model.save()
           .then((updateModel) => {
-            return cb(null,{ model: updateModel})
+            return cb(null, { model: updateModel })
           })
       })
       .catch(err => cb(err))
@@ -103,7 +105,7 @@ const modelServices = {
         return model.remove()
       })
       .then((deleteModel) => {
-        return cb(null, { model: deleteModel }) 
+        return cb(null, { model: deleteModel })
       })
       .catch(err => cb(err))
   }

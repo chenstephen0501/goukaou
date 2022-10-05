@@ -5,24 +5,43 @@ const User = require('../../models/user.js')
 
 const userController = {
   login: (req, res, next) => {
-    try {
-      const userData = req.user.toJSON()
-      delete userData.password
-      const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '30d' })
-      res.json({ 'status': 'success', data: {
-        token,
-        user: userData
-      }})
-    } catch (err) {
-      console.log('err', err)
-      next(err)
+    const { email, password } = req.body
+    if (!email || !password) {
+      const err = new Error('密碼或電子郵件欄位錯誤')
+      err.status = 401
+      throw err
     }
+    return User.findOne({ email })
+      .lean()
+      .then(user => {
+        if (!user) {
+          const err = new Error('密碼或電子郵件錯誤')
+          err.status = 401
+          throw err
+        }
+        return bcrypt.compare(password, user.password)
+          .then(isMatch => {
+            if (!isMatch) {
+              const err = new Error('密碼或電子郵件錯誤!')
+              err.status = 401
+              throw err
+            }
+            try {
+              delete user.password
+              const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '30d' })
+              res.json({
+                'status': 'success', data: {
+                  token,
+                  user
+                }
+              })
+            } catch (err) {
+              next(err)
+            }
+          })
+      })
+      .catch(err => next(err))
   },
-  logout: (req, res, next) => {
-    req.logout()
-    req.flash('success_messages', '成功登出')
-    return res.redirect('/login')
-  }, 
   register: (req, res, next) => {
     const { name, email, password, passwordCheck } = req.body
     if (!name || !email || !password || !passwordCheck) throw new Error('所有欄位都要填寫。')
@@ -45,8 +64,7 @@ const userController = {
         })
       })
       .then((user) => {
-        req.flash('success_messages', '註冊成功。')
-        return res.redirect('/login')
+        return res.json({ 'status': 'success', message: '註冊成功' })
       })
       .catch(err => next(err))
   }

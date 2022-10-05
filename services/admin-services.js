@@ -1,11 +1,9 @@
 const Product = require('../models/product.js')
 const Category = require('../models/category.js')
 const Model = require('../models/model.js')
-const passport = require('../config/passport.js')
 
 const { getSkip, getPagenation } = require('../tools/pagination.js')
-const { imgurFileHandler, imgurManyFileHandler
-} = require('../tools/file-heplers.js')
+const { imgurFileHandler, imgurManyFileHandler } = require('../tools/file-heplers.js')
 
 const adminController = {
   getProducts: (req, cb) => {
@@ -59,7 +57,7 @@ const adminController = {
   },
   postProduct: (req, cb) => {
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
-    if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) {
+    if (!name || !categoryId || !basePrice || !highestPrice || !production || !modelId) {
       const err = new Error('新增的產品，除了簡介其他都是必填的!')
       err.status = 404
       throw err
@@ -201,7 +199,7 @@ const adminController = {
     const productId = req.params.productId
     const { name, categoryId, basePrice, highestPrice, production, introduction, modelId } = req.body
     const { sampleImg, imgUrl } = req.files
-    if (!name || !categoryId || !basePrice, !highestPrice || !production || !modelId) {
+    if (!name || !categoryId || !basePrice || !highestPrice || !production || !modelId) {
       const err = new Error('編輯的產品，除了簡介其他都是必填的!')
       err.status = 404
       throw err
@@ -302,8 +300,8 @@ const adminController = {
               highestPrice,
               production,
               introduction,
-              sampleImg: sampleImg ? productSampleImg : product.sampleImg,
-              imgUrl: imgUrl ? productImgUrl : product.imgUrl,
+              sampleImg: !sampleImg ? product.sampleImg : null,
+              imgUrl: !imgUrl ? product.imgUrl : null,
               categoryId,
               modelId
             }

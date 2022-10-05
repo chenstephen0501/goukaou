@@ -12,7 +12,7 @@ const session = require('express-session')
 const passport = require('./config/passport.js')
 
 const handlebarsHelpers = require('./tools/handlebars-helpers.js')
-
+const { getUer } = require('./tools/auth-helpers.js')
 const { pages, apis } = require('./routes')
 
 const app = express()
@@ -23,6 +23,7 @@ app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
 app.use(methodOverride('_method'))
 app.use('/upload', express.static(path.join(__dirname + 'upload')))
 app.use(session({
@@ -39,7 +40,7 @@ app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   res.locals.warning_messages = req.flash('warning_messages')
-  res.locals.user = req.user
+  res.locals.user = getUer
   next()
 })
 
