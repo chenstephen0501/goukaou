@@ -1,21 +1,20 @@
 {{> goukaou-tabs}}
-<div class="onsale-img">
-<h1 id="onsale-img-model">{{product.model}} </h1>
-<h1 id="production-on"> {{#if product.production}} ON SALE {{/if}}</h1>
-</div>   
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  row-cols-lg-5 g-4 ">
-  {{#each product.imgUrl}}
-  <div class="col">
-    <div class="card h-100">
-      <a
-        href="{{this.url}}">
-        <img
-          src="{{this.url}}"
-          class="card-img-top" alt="..."></a>
-      <div class="card-body">
-        <p class="fw-bolder fs-1 text-center">{{this.name}}</p>
+<div class="container">
+  <div class="onsale-img">
+    <h1 id="onsale-img-model">{{product.model}} </h1>
+    <h1 id="production-on"> {{#if product.production}} ON SALE {{/if}}</h1>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  row-cols-lg-5 g-4 ">
+    {{#each product.imgUrl}}
+    <div class="col">
+      <div class="card h-100">
+        <a href="{{this.url}}">
+          <img src="{{this.url}}" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <p class="fw-bolder fs-1 text-center">{{this.name}}</p>
+        </div>
       </div>
     </div>
+    {{/each}}
   </div>
-  {{/each}}
 </div>

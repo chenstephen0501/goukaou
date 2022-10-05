@@ -78,22 +78,25 @@
 
   </div>
 </div>
-<h4 id="img-model-h4">MASK MOLD</h4>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  row-cols-lg-5 g-4">
-  {{#each products}}
-  <div class="col">
-    <div class="card h-100">
-      <a href="{{this.sampleImg}}">
-        <img src="{{this.sampleImg}}" class="card-img-top" alt="..."></a>
-      <div class="card-body">
-        <h5 class="card-title">{{this.model}}</h5>
-        <p lass="card-text"> {{this.introduction}}</p>
-      </div>
-      <div class="card-footer d-flex justify-content-around align-items-center">
-        <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
-        <a href="/products/onsale-img/{{this._id}}" class="btn btn-info">More</a>
+<div class="container">
+
+  <h4 id="img-model-h4">MASK MOLD</h4>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  row-cols-lg-5 g-4">
+    {{#each products}}
+    <div class="col">
+      <div class="card h-100">
+        <a href="{{this.sampleImg}}">
+          <img src="{{this.sampleImg}}" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <h5 class="card-title">{{this.model}}</h5>
+          <p lass="card-text"> {{this.introduction}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-around align-items-center">
+          <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
+          <a href="/products/onsale-img/{{this._id}}" class="btn btn-info">More</a>
+        </div>
       </div>
     </div>
+    {{/each}}
   </div>
-  {{/each}}
 </div>

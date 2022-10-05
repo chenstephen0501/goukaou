@@ -29,9 +29,9 @@ const userServices = {
             try {
               delete user.password
               const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '30d' })
-              cb(null, { token, user})
+              cb(null, { token, user })
             } catch (err) {
-              next(err)
+              return cb(err)
             }
           })
       })
@@ -51,7 +51,7 @@ const userServices = {
     }
     return Promise.all([
       User.find({ name }).lean(),
-      User.find({ email }).lean(),
+      User.find({ email }).lean()
     ])
       .then(([checkName, checkEmail]) => {
         if (checkEmail[0]) {

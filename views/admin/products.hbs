@@ -42,23 +42,43 @@
         {{/each}}
       </tbody>
     </table>
-    <nav aria-label="Page navigation col-6">
-      <ul class="pagination">
-        <li class="page-item {{#ifCond pagenation.currentPage 1}} disabled {{/ifCond}}">
-          <a class="page-link" href="/admin/products?page={{pagenation.prev}}" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        {{#each pagenation.pages}}
-        <li class="page-item {{#ifCond this ../pagenation.currentPage}} active {{/ifCond}}"><a class="page-link"
-            href="/admin/products?page={{this}}">{{this}}</a></li>
-        {{/each}}
-        <li class="page-item {{#ifCond pagenation.currentPage pagenation.totalPage}} disabled {{/ifCond}}">
-          <a class="page-link" href="/admin/products?page={{pagenation.next}}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div class="mt-1 d-flex justify-content-center align-items-center ">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item {{#ifCond pagenation.currentPage 1}} disabled {{/ifCond}}">
+            <a class="page-link" href="/admin/products?page={{pagenation.prev}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {{!-- 上十頁頭 --}}
+          {{#if pagenation.prevTenPage}}
+          <li class="page-item ">
+            <a class="page-link" href="/admin/products?page={{pagenation.prevTenPage}}" aria-label="Next">
+              <span aria-hidden="true">上十頁</span>
+            </a>
+          </li>
+          {{/if }}
+          {{!-- 上十頁尾 --}}
+          {{#each pagenation.pages}}
+          <li class="page-item {{#ifCond this ../pagenation.currentPage}} active {{/ifCond}}"><a class="page-link"
+              href="/admin/products?page={{this}}">{{this}}</a></li>
+          {{/each}}
+          {{!-- 下十頁頭 --}}
+          {{#if pagenation.nextTenPage}}
+          <li class="page-item ">
+            <a class="page-link" href="/admin/products?page={{pagenation.nextTenPage}}" aria-label="Next">
+              <span aria-hidden="true">下十頁</span>
+            </a>
+          </li>
+          {{/if}}
+          {{!-- 下十頁尾 --}}
+          <li class="page-item {{#ifCond pagenation.currentPage pagenation.totalPage}} disabled {{/ifCond}}">
+            <a class="page-link" href="/admin/products?page={{pagenation.next}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
