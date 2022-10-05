@@ -1,15 +1,44 @@
 const Model = require('../models/model.js')
 
+const { getSkip, getPagenation } = require('../tools/pagination.js')
+
 const modelServices = {
   getModels: (req, cb) => {
-    return Model
-      .find()
-      .lean()
-      .then(models => {
-        return cb(null, { models })
+    const DEFAULT_LIMIT = 8
+    const limit = Number(req.params.limit) || DEFAULT_LIMIT
+    const page = Number(req.query.page) || 1
+    return Promise.all([
+      Model.find()
+        .lean()
+        .sort({ _id: 'asc' })
+        .limit(limit)
+        .skip(getSkip(page, limit)),
+      Model.countDocuments()
+    ])
+      .then(([models, modelCount]) => {
+        if (!models) {
+          const err = new Error('找不到模型資料!')
+          err.status = 404
+          throw err
+        }
+        if (!modelCount) {
+          const err = new Error('找不到模型數量!')
+          err.status = 404
+          throw err
+        }
+        return cb(null, { models, pagenation: getPagenation(page, limit, modelCount) })
       })
       .catch(err => cb(err))
   },
+  // getModels: (req, cb) => {
+  //   return Model
+  //     .find()
+  //     .lean()
+  //     .then(models => {
+  //       return cb(null, { models })
+  //     })
+  //     .catch(err => cb(err))
+  // },
   postModel: (req, cb) => {
     const { name } = req.body
     if (!name) throw new Error('模型名稱不能為空!')
