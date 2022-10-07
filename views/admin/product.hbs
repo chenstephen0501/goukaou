@@ -14,9 +14,12 @@
       <br />
       <div class='well'>
         <ul class='list-unstyled'>
-          <li class="{{#ifCond true product.production}} text-success {{else}}text-danger{{/ifCond}}"><h3><strong
-              class="text-black">production : </strong> {{product.production}}</h3></li>
-          <li><h4><strong>USD : </strong> {{product.basePrice}} ~ {{product.highestPrice}}</h4></li>
+          <li class="{{#ifCond true product.production}} text-success {{else}}text-danger{{/ifCond}}">
+            <h3><strong class="text-black">production : </strong> {{product.production}}</h3>
+          </li>
+          <li>
+            <h4><strong>USD : </strong> {{product.basePrice}} ~ {{product.highestPrice}}</h4>
+          </li>
         </ul>
       </div>
     </div>
@@ -31,8 +34,7 @@
         張相片</div>
       <div class='text-left ms-4 '>
         {{#each product.imgUrl}}
-        <a href='/admin/products/{{../product._id}}'><img src='{{this.url}}' class='rounded my-2 ms-2' alt='...'
-            style='width: 180px' /></a>
+        <a href='{{this.url}}'><img src='{{this.url}}' class='rounded my-2 ms-2' alt='...' style='width: 180px' /></a>
         {{/each}}
       </div>
     </div>

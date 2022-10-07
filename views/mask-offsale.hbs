@@ -1,19 +1,23 @@
 {{> goukaou-tabs}}
 <div class="container">
   <h4 id='img-model-h4'>MASK MOLD - OFF SALE</h4>
-  <div class='row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4'>
+  <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4'>
     {{#each products}}
     <div class='col'>
       <div class='card h-100'>
         <a href='{{this.sampleImg}}'>
+          <div class="inner">
           <img src='{{this.sampleImg}}' class='card-img-top' alt='...' /></a>
+          </div>
         <div class='card-body'>
           <h5 class='card-title'>{{this.model}}</h5>
           <p lass='card-text'> {{this.introduction}}</p>
         </div>
         <div class='card-footer d-flex justify-content-around align-items-center'>
-          <span class='fw-bolder'>MASK MOLD-{{#unless production}} OFF SALE {{/unless}}</span>
-          <a href='/products/offsale-img/{{this._id}}' class='btn btn-info'>More</a>
+            <span class='fw-bolder'>{{#unless production}} OFF SALE {{/unless}}</span>
+            <a href="/products/offsale-img/{{this._id}}" id="offSalePage-fileBtn" class="salePage-btn"><i
+                class="fa-solid fa-file-invoice "></i>
+              file</a>
         </div>
       </div>
     </div>

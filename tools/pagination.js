@@ -11,7 +11,7 @@ const getPagenation = (page = 1, limit = 8, total = 50) => {
   const nextTenPage = currentPage + 10 <= totalPage ? currentPage + 10 : false
   let pages
   if (total <= limit * pageCount) {
-    pages= Array.from({ length: totalPage }, (_, index) => {
+    pages = Array.from({ length: totalPage }, (_, index) => {
       return index + 1
     })
   } else {

@@ -78,25 +78,30 @@
 
   </div>
 </div>
-<div class="container">
 
+<div class="container">
   <h4 id="img-model-h4">MASK MOLD</h4>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4  row-cols-lg-5 g-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  row-cols-lg-5 g-4">
     {{#each products}}
     <div class="col">
-      <div class="card h-100">
+      <div class="card img-model-card">
         <a href="{{this.sampleImg}}">
-          <img src="{{this.sampleImg}}" class="card-img-top" alt="..."></a>
-        <div class="card-body">
-          <h5 class="card-title">{{this.model}}</h5>
-          <p lass="card-text"> {{this.introduction}}</p>
-        </div>
-        <div class="card-footer d-flex justify-content-around align-items-center">
-          <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
-          <a href="/products/onsale-img/{{this._id}}" class="btn btn-info">More</a>
-        </div>
+          <div class="inner">
+            <img src="{{this.sampleImg}}" class="card-img-top" alt="...">
+      </div>
+        </a>
+      <div class="card-body">
+        <h5 class="card-title">{{this.model}}</h5>
+        <p lass="card-text"> {{this.introduction}}</p>
+        <p lass="card-text">{{this.name}}</p>
+      </div>
+      <div class="card-footer d-flex justify-content-around align-items-center">
+        <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
+        <a href="/products/offsale-img/{{this._id}}" id="onSalePage-fileBtn" class="salePage-btn"><i class="fa-solid fa-file-invoice "></i>
+          file</a>
       </div>
     </div>
-    {{/each}}
   </div>
+  {{/each}}
+</div>
 </div>
