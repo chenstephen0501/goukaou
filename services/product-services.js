@@ -42,7 +42,7 @@ const productServices = {
         const newProducts = products.map(p => {
           return {
             ...p,
-            introduction: p.introduction ? p.introduction.substring(0, 100) : null
+            introduction: p.introduction ? p.introduction.substring(0, 60) + '...' : null
           }
         })
         return cb(null, {
@@ -63,7 +63,7 @@ const productServices = {
         const newProducts = products.map(p => {
           return {
             ...p,
-            introduction: p.introduction ? p.introduction.substring(0, 100) : null
+            introduction: p.introduction ? p.introduction.substring(0, 60) + '...' : null
           }
         })
         return cb(null, {
