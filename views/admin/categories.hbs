@@ -41,7 +41,7 @@
         <tr>
           <th scope="row">{{this.name}}</th>
           <td>{{this.name_cht}}</td>
-          <td>{{formatTime product.createdAt}}</td>
+          <td>{{formatTime this.createdAt}}</td>
           <td class="">
             <a href="/admin/categories/{{this._id}}" class="btn btn-warning my-1 mx-1">Edit</a>
             <form action="/admin/categories/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
