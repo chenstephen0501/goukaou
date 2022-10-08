@@ -88,20 +88,21 @@
         <a href="{{this.sampleImg}}">
           <div class="inner">
             <img src="{{this.sampleImg}}" class="card-img-top" alt="...">
-      </div>
+          </div>
         </a>
-      <div class="card-body">
-        <h6>{{this.name}}</h6>
-        <span class="badge rounded-pill bg-primary">{{this.model}}</span>
-        <p lass="card-text"> {{this.introduction}}</p>
-      </div>
-      <div class="card-footer d-flex justify-content-around align-items-center">
-        <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
-        <a href="/products/offsale-img/{{this._id}}" id="onSalePage-fileBtn" class="salePage-btn"><i class="fa-solid fa-file-invoice "></i>
-          file</a>
+        <div class="card-body">
+          <h6>{{this.name}}</h6>
+          <span class="badge rounded-pill bg-primary">{{this.model}}</span>
+          <p lass="card-text"> {{this.introduction}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-around align-items-center">
+          <span class="fw-bolder">{{#if production}} ON SALE {{/if}}</span>
+          <a href="/products/onsale-img/{{this._id}}" id="onSalePage-fileBtn" class="salePage-btn"><i
+              class="fa-solid fa-file-invoice "></i>
+            file</a>
+        </div>
       </div>
     </div>
+    {{/each}}
   </div>
-  {{/each}}
-</div>
 </div>

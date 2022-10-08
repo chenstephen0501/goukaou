@@ -1,10 +1,12 @@
 [ 
   {
     "name": "mask",
-    "name_cht": "面具"
+    "name_cht": "面具",
+    "createdAt" : "2016/05/05"
   },
   {
     "name": "zentai",
-    "name_cht": "連身衣"
+    "name_cht": "連身衣",
+    "createdAt": "2017/05/05"
   }
 ]

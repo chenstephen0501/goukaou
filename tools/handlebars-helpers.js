@@ -2,6 +2,7 @@ const dayjs = require('dayjs')
 
 module.exports = {
   currentYear: () => dayjs().year(),
+  formatTime: (date) => dayjs(date).format('YYYY/MM/DD'),
   ifCond: (a, b, options) => {
     if (typeof a === 'object') {
       a = a.toString()

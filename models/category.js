@@ -8,6 +8,10 @@ const categorySchema = new Schema({
   name_cht: {
     type: String,
     required: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 

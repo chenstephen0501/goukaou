@@ -1,51 +1,51 @@
 {{> goukaou-tabs}}
-  <div class="onsale-img">
-    <h1 id="onsale-img-model">{{product.model}} </h1>
-    <h1 id="production-on"> {{#if product.production}} ON SALE {{/if}}</h1>
-  </div>
-  <div class='row admin-product-page'>
-    <div class='col-md-10 d-flex m-auto'>
-      <div class="col-auto p-2 ">
-        <h1>Name : {{product.name}}</h1>
-      </div>
-    </div>
-    <div class="col-md-10 d-flex mx-auto">
-      <div class='col-md-4 p-2'>
-        <img class='img-responsive center-block' src='{{product.sampleImg}}'
-          style='width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;'
-          onload='this.style.opacity=1;' />
-        <br />
-        <div class='well'>
-          <ul class='list-unstyled'>
-            <li class="{{#ifCond true product.production}} text-success {{else}}text-danger{{/ifCond}}">
-              <h3><strong class="text-black">production : </strong> {{product.production}}</h3>
-            </li>
-            <li>
-              <h4><strong>USD : </strong> {{product.basePrice}} ~ {{product.highestPrice}}</h4>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class='col-md-8 '>
-        <p style='white-space: break-spaces;'>{{product.introduction}}</p>
-      </div>
-    </div>
-  
-    <div class='col-md-10 mx-auto'>
-      <div class='card'>
-        <div class='card-header'>{{product.imgUrl.length}}
-          張相片</div>
-        <div class='text-left ms-4 '>
-          {{#each product.imgUrl}}
-              <a href='{{this.url}}'><img src='{{this.url}}' class='rounded my-2 ms-2' alt='...'
-                  style='width: 180px' /></a>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-  
-    <div class='col-md-10  m-auto '>
-      <hr>
-      <a class='btn btn-outline-secondary' href='javascript:history.back()'>Back</a>
+<div class="onsale-img">
+  <h1 id="onsale-img-model">{{product.model}} </h1>
+  <h1 id="production-on"> {{#if product.production}} ON SALE {{/if}}</h1>
+</div>
+<div class='row admin-product-page'>
+  <div class='col-md-10 d-flex m-auto'>
+    <div class="col-auto p-2 ">
+      <h1>Name : {{product.name}}</h1>
+      <h5 class="text-info">Creation time: {{formatTime product.createdAt}}</h5>
     </div>
   </div>
+  <div class="col-md-10 d-flex mx-auto">
+    <div class='col-md-4 p-2'>
+      <img class='img-responsive center-block' src='{{product.sampleImg}}'
+        style='width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;'
+        onload='this.style.opacity=1;' />
+      <br />
+      <div class='well'>
+        <ul class='list-unstyled'>
+          <li class="{{#ifCond true product.production}} text-success {{else}}text-danger{{/ifCond}}">
+            <h3><strong class="text-black">production : </strong> {{product.production}}</h3>
+          </li>
+          <li>
+            <h4><strong>USD : </strong> {{product.basePrice}} ~ {{product.highestPrice}}</h4>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-md-8 '>
+      <p style='white-space: break-spaces;'>{{product.introduction}}</p>
+    </div>
+  </div>
+
+  <div class='col-md-10 mx-auto'>
+    <div class='card'>
+      <div class='card-header'>{{product.imgUrl.length}}
+        張相片</div>
+      <div class='text-left ms-4 '>
+        {{#each product.imgUrl}}
+        <a href='{{this.url}}'><img src='{{this.url}}' class='rounded my-2 ms-2' alt='...' style='width: 180px' /></a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-10  m-auto '>
+    <hr>
+    <a class='btn btn-outline-secondary' href='javascript:history.back()'>Back</a>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 <div class='row admin-product-page'>
   <div class='col-md-10 d-flex m-auto'>
-    <div class="col-4 p-2">
+    <div class="col p-2">
       <h1>Name : {{product.name}}</h1>
+      <h5 class="text-info">Creation time: {{formatTime product.createdAt}}</h5>
       <h4>Categoy : [{{product.category}}]</h4>
       <p>Model : {{product.model}}</p>
     </div>

@@ -46,6 +46,10 @@ const productSchema = new Schema({
     required: false,
   },
   imgUrl: [],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 module.exports = mongoose.model('Product', productSchema)
