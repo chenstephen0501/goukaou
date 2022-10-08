@@ -38,7 +38,7 @@ db.once('open', async () => {
          imgUrl,
       }
     }))
-    console.log('Product created is done')
+    console.log('ProductTest created is done.')
     db.close()
   } catch (err) {
     console.warn(err)

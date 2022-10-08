@@ -10,7 +10,7 @@ db.once('open', () => {
     try {
       await Model.create(item)
       if (index + 1 === arr.length) {
-        console.log('Model created is done')
+        console.log('Model created is done.')
         db.close()
       }
     } catch (err) {

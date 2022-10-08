@@ -28,7 +28,7 @@ db.once('open', async () => {
           name: faker.name.findName(undefined, undefined, 'female')
         })
         if (index + 1 === arr.length) {
-          console.log('Product created is done')
+          console.log('Product created is done.')
           db.close()
         }
       } catch (err) {

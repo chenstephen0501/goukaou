@@ -10,7 +10,7 @@ db.once('open', () => {
     try {
       await Category.create(item)
       if (index + 1 === arr.length) {
-        console.log('Category created is done')
+        console.log('Category created is done.')
         db.close()
       }
     } catch(err) {
