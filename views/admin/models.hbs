@@ -25,6 +25,7 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">ModelName</th>
+          <th scope="col">CreatedAt</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
         {{#each models}}
         <tr>
           <th scope="row">{{this.name}}</th>
+          <td>{{formatTime product.createdAt}}</td>
           <td class="d-flex justify-content-center">
             <a href="/admin/models/{{this._id}}" class="btn btn-warning my-1 mx-1">Edit</a>
             <form action="/admin/models/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
