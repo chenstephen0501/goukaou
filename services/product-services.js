@@ -189,9 +189,9 @@ const productServices = {
         text: 'Hello world?',
         html: output
       })
-      console.log("Message sent: %s", info.messageId);
-      console.log(info)
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
+      // console.log("Message sent: %s", info.messageId);
+      // console.log(info)
+      // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
       return cb(null, { msg_success: msg_success })
     } catch (err) {
       cb(err)
