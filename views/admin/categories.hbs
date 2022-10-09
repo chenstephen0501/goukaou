@@ -1,5 +1,5 @@
 <div class="row admin-categories-page">
-  <div class="col-11 m-auto">
+  <div class="col-8 m-auto">
     {{> admin-tabs route='categories'}}
     {{#if category}}
     <form class="row my-3" action="/admin/categories/{{category._id}}?_method=PUT" method="POST">
@@ -30,7 +30,8 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">CategoryName</th>
+          {{!-- <th scope="col">CategoryName</th> --}}
+          <th scope="col">Name</th>
           <th scope="col">Name_CHT</th>
           <th scope="col">CreatedAt</th>
           <th scope="col"></th>
