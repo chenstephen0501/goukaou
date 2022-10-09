@@ -36,6 +36,7 @@ db.once('open', async () => {
         modelId: model._id,
         sampleImg: `https://loremflickr.com/300/200/girl/?random=${Math.floor(Math.random() * 100)}`,
          imgUrl,
+        createdAt: faker.date.past()
       }
     }))
     console.log('ProductTest created is done.')

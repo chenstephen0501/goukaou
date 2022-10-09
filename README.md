@@ -1,28 +1,32 @@
 # GOUKAOU 產品網站
-GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 Heroku， 目前為 2.0 版，也把各個路由的以以 RESTFul API 方式先開出來，以便專案轉為前後端分離方調整。
+GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 Heroku， 目前為 2.0 版，也把各個路由的以RESTFul API 方式開出來，以便專案轉為前後端分離方便調整。
 ## 專案緣起
-  專案緣自於身邊有在玩COS朋友，其中一位有在開工作坊，工作坊希望將己經完成的作品給玩家觀賞，以便玩家更能了解在COSPLAY也有另一個區塊的族群，也能了解不一樣的二次元文化。
+專案緣自於身邊有在玩COS朋友，其中一位有在開工作坊，工作坊希望將己經完成的作品給玩家觀賞，以便玩家更能了解在COSPLAY也有另一個區塊的族群，也能了解不一樣的二次元文化。<br>
+
 #### 產品首頁
 ***
-[遠端heroku首頁](https://goukaou-test.herokuapp.com/products)<br>
+[遠端heroku首頁](https://goukaou.herokuapp.com/products)<br>
 ![restaurant-image]('https://goukaou-test.herokuapp.com/products')
 
 #### 後台登入頁
-***
-[遠端heroku後台登入頁](https://goukaou-test.herokuapp.com/admin/login)<br>
+
+[遠端heroku後台登入頁](https://goukaou.herokuapp.com/admin/login)<br>
 ![restaurant-image]('https://goukaou-test.herokuapp.com/products')
 
 ## 功能介紹
-***
+
 ### <2.0版>
+***
   #### [後台管理者]
-- 後台管理者需要先登入才能進行操作。  
+- 後台管理者需要先登入才能進行操作。
 - 可以瀏覽全部產品，也可以新增、修改、刪除、瀏覽特定一筆產品。
 - 可以瀏覽全部模型，也可以新增、修改、刪除、瀏覽特定一筆模型。
 - 可以瀏覽全部類別，也可以新增、修改、刪除、瀏覽特定一筆類別。
   #### [使用者]
 - 使用者可以瀏覽所有產品。
 - 使用者可以依據自己的需求發送信件給工作室，以便後續討論作品細節、價格。
+## API 範例
+- [正在銷售產品]('https://goukaou.herokuapp.com/api/products/mask-onsale')
 ## 啓動方式
 - 將專案 clone 到本地端
   https://github.com/Steavn-Chen/goukaou-test
