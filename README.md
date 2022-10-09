@@ -26,7 +26,7 @@ GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 
 - 使用者可以瀏覽所有產品。
 - 使用者可以依據自己的需求發送信件給工作室，以便後續討論作品細節、價格。
 ## API 範例
-- [正在銷售產品]('https://goukaou.herokuapp.com/api/products/mask-onsale')
+- [正在銷售產品](https://goukaou.herokuapp.com/api/products/mask-onsale)
 ## 啓動方式
 - 將專案 clone 到本地端
   https://github.com/Steavn-Chen/goukaou-test
