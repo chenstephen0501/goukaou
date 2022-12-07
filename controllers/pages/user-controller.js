@@ -8,15 +8,16 @@ const userController = {
     res.render('login')
   },
   login: passport.authenticate('local', {
-    successRedirect: '/',
+    successReturnToOrRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: true,
+    keepSessionInfo: true
   }),
   logout: (req, res, next) => {
     req.logout()
     req.flash('success_messages', '成功登出')
     return res.redirect('/login')
-  }, 
+  },
   registerPage: (req, res) => {
     res.render('register')
   },
