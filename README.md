@@ -5,12 +5,12 @@ GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 
 
 #### 產品首頁
 ***
-[遠端heroku首頁](https://goukaou.herokuapp.com/products)<br>
+[遠端GCP首頁](https://goukaou-uvt2peadbq-uw.a.run.app)<br>
 ![restaurant-image](public/image/%E7%94%A2%E5%93%81%E9%A6%96%E9%A0%81.PNG)
 
 #### 後台登入頁
 
-[遠端heroku後台登入頁](https://goukaou.herokuapp.com/admin/login)<br>
+[遠端GCP後台登入頁](https://goukaou-uvt2peadbq-uw.a.run.app/admin/login)<br>
 ![restaurant-image](public/image/%E5%BE%8C%E5%8F%B0%E7%99%BB%E5%85%A5%E9%A0%81%E9%9D%A2.PNG)
 
 ## 功能介紹
