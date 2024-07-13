@@ -1,7 +1,7 @@
-# GOUKAOU 產品網站
-GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 Heroku， 目前為 2.0 版，也把各個路由的以RESTFul API 方式開出來，以便專案轉為前後端分離方便調整。
+# GOUKAOU 偶人工作坊產品網站 
+GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，使用 Docker 打包後，部署於 GCP 目前為 2.0 版，並把各個路由以RESTFul API 方式開出來，以便專案轉為前後端分離方便調整。
 ## 專案緣起
-專案緣自於身邊有在玩COS朋友，其中一位有在開工作坊，工作坊希望將己經完成的作品給玩家觀賞，以便玩家更能了解在COSPLAY也有另一個區塊的族群，也能了解不一樣的二次元文化。<br>
+專案緣自於身邊有在玩 COS 的朋友，其中一位在開工作坊，工作坊將完成的作品展示給玩家，讓玩家了解到除了 COSPLAY 外，也有另一種方式扮演自己心愛的角色，透過這種方式也能了解不一樣的二次元文化。<br>
 
 #### 產品首頁
 ***
@@ -76,6 +76,7 @@ GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，部署於 
 - passport-jwt 4.0.0
 - jsonwebtoken 8.5.1
 - mongoose 5.12.15
+
 
 
 
