@@ -27,7 +27,7 @@ GOUKAOU 是一個使用 Node.js + Express + mongodb 建立的專案，使用 Doc
 - [正在銷售產品](https://goukaou-uvt2peadbq-uw.a.run.app/api/products/mask-onsale)
 ## 啓動方式
 - 將專案 clone 到本地端
-  https://github.com/Steavn-Chen/goukaou-test
+  https://github.com/chenstephen0501/goukaou.git
 
 - 進入到專案資料夾<br>
   cd goukaou
